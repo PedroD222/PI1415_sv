@@ -11,12 +11,13 @@ namespace wwonlineapi
 {
     /*interface wweatheronline
     {
-        string BASE_URL = "http://api.worldweatheronline.com/free/v2/past-weather.ashx";
+        readonly string BASE_URL = "http://api.worldweatheronline.com/free/v2/past-weather.ashx";
     }*/
 
     class Program
     {
-
+        private static string BASE_URL = "http://api.worldweatheronline.com/free/v2/past-weather.ashx";
+        private static string key = "key=";
         private static string [] argsname = {"-local", "-startdate", "-enddate"};
         /*
         static void AddRepos(List<Repo> list, IRestResponse source, IDeserializer deserializer)
@@ -181,12 +182,16 @@ namespace wwonlineapi
             if (args.Length < 1)
             {
                 Console.WriteLine("Falta Cidade");
+                Console.ReadKey();
                 return;
             }
             int ind = 0;
             local = extractParams(args[ind], ind++);
             if (local.Length == 0)
+            {
+                Console.ReadKey();
                 return;
+            }
             startdate = extractParams(args[ind], ind++);
             if (startdate.Length == 0)
                 startdate = getActualDate();
