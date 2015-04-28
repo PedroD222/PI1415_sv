@@ -9,13 +9,15 @@ using RestSharp.Deserializers;
 
 namespace wwonlineapi
 {
-    interface wweatheronline
+    /*interface wweatheronline
     {
-        string BASE_URL = "http://api.worldweatheronline.com/free/v2/past-weather.ashx";
-    }
+        readonly string BASE_URL = "http://api.worldweatheronline.com/free/v2/past-weather.ashx";
+    }*/
+
     class Program
     {
-
+        private static string BASE_URL = "http://api.worldweatheronline.com/free/v2/past-weather.ashx";
+        private static string key = "key=";
         private static string [] argsname = {"-local", "-startdate", "-enddate"};
         /*
         static void AddRepos(List<Repo> list, IRestResponse source, IDeserializer deserializer)
@@ -180,18 +182,22 @@ namespace wwonlineapi
             if (args.Length < 1)
             {
                 Console.WriteLine("Falta Cidade");
+                Console.ReadKey();
                 return;
             }
             int ind = 0;
             local = extractParams(args[ind], ind++);
             if (local.Length == 0)
+            {
+                Console.ReadKey();
                 return;
+            }
             startdate = extractParams(args[ind], ind++);
             if (startdate.Length == 0)
-                startdate= "";
+                startdate = getActualDate();
             enddate = extractParams(args[ind], ind);
             if (enddate.Length == 0)
-                enddate = "";
+                enddate = getActualDate();
 
             /*Directory.CreateDirectory("org");
             Directory.CreateDirectory("contrib");
@@ -218,6 +224,13 @@ namespace wwonlineapi
             Console.WriteLine("Completed all tasks.");
             Console.Read();*/
            // return 0;
+        }
+
+        private static string getActualDate()
+        {
+            string datePatt = @"yyyy/MM/dd tt";
+            DateTime dispDt = DateTime.Now;
+            return dispDt.ToString(datePatt);
         }
 
         private static string extractParams(string args, int i)
