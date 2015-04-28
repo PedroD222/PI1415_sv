@@ -9,15 +9,12 @@ using RestSharp.Deserializers;
 
 namespace wwonlineapi
 {
-    /*interface wweatheronline
-    {
-        readonly string BASE_URL = "http://api.worldweatheronline.com/free/v2/past-weather.ashx";
-    }*/
 
     class Program
     {
-        private static string BASE_URL = "http://api.worldweatheronline.com/free/v2/past-weather.ashx";
-        private static string key = "key=";
+        private static string BASE_URL = "http://api.worldweatheronline.com/";
+        private static string NAME_REQUEST = "free/v2/past-weather.ashx";
+        private static string key = "61a7c1d77101b83979c5fb4a299ef";
         private static string [] argsname = {"-local", "-startdate", "-enddate"};
         /*
         static void AddRepos(List<Repo> list, IRestResponse source, IDeserializer deserializer)
@@ -96,20 +93,7 @@ namespace wwonlineapi
             generateHtml(org, languages, collabs);
 
             Console.WriteLine("Finished " + org.Login);
-        }*/
-
-
-
-
-        private static void AddRequestHeaders(RestRequest orgRequest)
-        {
-            orgRequest.AddHeader("host", "api.github.com");
-            orgRequest.AddHeader("User-Agent", "36864");
-            orgRequest.AddHeader("Authorization", "token 6cc637fc4c44405fab41ea4f837cef12d5bb9996");
-        }
-
-        
-
+        }*/    
        
         /*private static void generateHtml(Org org, Dictionary<string, int> languages, Dictionary<string, int> collabs)
         {
@@ -198,32 +182,38 @@ namespace wwonlineapi
             enddate = extractParams(args[ind], ind);
             if (enddate.Length == 0)
                 enddate = getActualDate();
-
-            /*Directory.CreateDirectory("org");
-            Directory.CreateDirectory("contrib");
-
+            
             RestClient client = new RestClient(BASE_URL);
             List<Task> tasks = new List<Task>();
-            HtmlDocument index = new HtmlDocument();
-            index.Load(BASE_HTML_INDEX);
-
+            
             JsonDeserializer jsdes = new JsonDeserializer();
-            foreach (string orgname in args)
-            {
+            
                 //Org org = new Org();
-                RestRequest orgRequest = new RestRequest("orgs/" + orgname);
-                AddRequestHeaders(orgRequest);
-                HttpHelper orgHelper = new HttpHelper(client, orgRequest, response => org = jsdes.Deserialize<Org>(response));
-                orgHelper.ExecuteRequest();
+            RestRequest orgRequest = new RestRequest(NAME_REQUEST);
+            orgRequest.AddParameter("key", key);
+            orgRequest.AddParameter("date", startdate);
+            orgRequest.AddParameter("enddate", enddate);
+            orgRequest.AddParameter("q", local);
+            client.ExecuteAsync(orgRequest, response =>
+            {
+                if (response.ErrorMessage != null)
+                {
+                    Console.WriteLine(response.ErrorMessage);
+                    Console.WriteLine(response);
+                    return;
+                }
+                //this.HandleResponse(response);
+            });
+                //HttpHelper orgHelper = new HttpHelper(client, orgRequest, response => org = jsdes.Deserialize<Org>(response));
+                //orgHelper.ExecuteRequest();
                 //tasks.Add(Task.Run(() => GenerateOrgPage(org, client, index, jsdes)));
                 //add org to index page
-                index.DocumentNode.SelectSingleNode("//div[@name=\"orglist\"]").AppendChild(BootstrapUtils.GenerateOrgLink(org));
-            }
-            index.Save(File.CreateText("index.html"));
-            Task.WaitAll(tasks.ToArray());
-            Console.WriteLine("Completed all tasks.");
-            Console.Read();*/
-           // return 0;
+                //index.DocumentNode.SelectSingleNode("//div[@name=\"orglist\"]").AppendChild(BootstrapUtils.GenerateOrgLink(org));
+            
+            
+            //Task.WaitAll(tasks.ToArray());
+            //Console.WriteLine("Completed all tasks.");
+            Console.Read();
         }
 
         private static string getActualDate()
