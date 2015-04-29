@@ -7,7 +7,7 @@ using RestSharp;
 //using HtmlAgilityPack;
 using RestSharp.Deserializers;
 
-namespace wwonlineapi
+namespace WWonlineapi
 {
 
     class Program
@@ -16,7 +16,8 @@ namespace wwonlineapi
         private static string NAME_REQUEST = "free/v2/past-weather.ashx";
         private static string key = "61a7c1d77101b83979c5fb4a299ef";
         private static string [] argsname = {"-local", "-startdate", "-enddate"};
-       
+
+        private static List<Weather> weatherlist;
         static void Main(string[] args)
         {
             string local, enddate, startdate;
@@ -42,19 +43,26 @@ namespace wwonlineapi
             
             RestClient client = new RestClient(BASE_URL);
             //List<Task> tasks = new List<Task>();
-            
+            RestRequest tempRequest;
+            IRestResponse<RootObject> resp;
             JsonDeserializer jsdes = new JsonDeserializer();
+            int nrequests = getNumberRequest(startdate, enddate);
+            for (int i = 0; i < nrequests; i++)
+            {
+                tempRequest = getWeatherResp(local, startdate, enddate);
+                resp = client.Execute<RootObject>(tempRequest);
+                if (weatherlist == null)
+                    weatherlist = resp.Data.data.weather;
+                else
+                    weatherlist.Concat(resp.Data.data.weather);
+            }
             
-                //Org org = new Org();
-            RestRequest tempRequest = new RestRequest(NAME_REQUEST);
-            tempRequest.AddParameter("key", key);
-            tempRequest.AddParameter("date", startdate);
-            tempRequest.AddParameter("enddate", enddate);
-            tempRequest.AddParameter("q", local);
-            tempRequest.AddParameter("format", "json");
-            
+            HistogrameTemps htemps = new HistogrameTemps(weatherlist);
+             /*
+            RootObject r = null;
             client.ExecuteAsync(tempRequest, response =>
             {
+                r = jsdes.Deserialize<RootObject>(response);
                 if (response.ErrorMessage != null)
                 {
                     Console.WriteLine(response.ErrorMessage);
@@ -63,10 +71,29 @@ namespace wwonlineapi
                 }
                 //this.HandleResponse(response);
             });
-                
+            while (r == null);*/
             
             //Console.WriteLine("Completed all tasks.");
             Console.Read();
+        }
+
+        private static int getNumberRequest(string startdate, string enddate)
+        {
+            DateTime init = Convert.ToDateTime(startdate);
+            DateTime final = Convert.ToDateTime(enddate);
+            TimeSpan count = final.Subtract(init);
+            return 0;
+        }
+
+        private static RestRequest getWeatherResp(string local, string startdate, string enddate)
+        {
+            RestRequest tempRequest = new RestRequest(NAME_REQUEST, Method.GET);
+            tempRequest.AddParameter("key", key);
+            tempRequest.AddParameter("date", startdate);
+            tempRequest.AddParameter("enddate", enddate);
+            tempRequest.AddParameter("q", local);
+            tempRequest.AddParameter("format", "json");
+            return tempRequest;
         }
 
         private static string getActualDate()
