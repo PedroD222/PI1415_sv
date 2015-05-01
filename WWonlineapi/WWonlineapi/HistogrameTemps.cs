@@ -22,22 +22,21 @@ namespace WWonlineapi
         public HistogrameTemps(List<Weather> weatherList)
         {
             this.weatherList = weatherList;
-            maxtemps = new Dictionary<string,int>;
-            mintemps = new Dictionary<string,int>;
+            maxtemps = new Dictionary<string,int>();
+            mintemps = new Dictionary<string,int>();
         }
 
         public void countTemps()
         {
-            int auxtemp;
             foreach (Weather w in weatherList)
             {
                 if (maxtemps.ContainsKey(w.maxtempC))
-                    maxtemps.TryGetValue(w.maxtempC,auxtemp );
+                    maxtemps[w.maxtempC]++;
                 else
                     maxtemps.Add(w.maxtempC,1);
 
                 if (mintemps.ContainsKey(w.mintempC))
-                    mintemps.
+                    mintemps[w.mintempC]++;
                 else
                     mintemps.Add(w.mintempC,1);
             }

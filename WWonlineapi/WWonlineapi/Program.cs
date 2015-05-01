@@ -42,6 +42,7 @@ namespace WWonlineapi
                 enddate = getActualDate();
             
             RestClient client = new RestClient(BASE_URL);
+            
             //List<Task> tasks = new List<Task>();
             RestRequest tempRequest;
             IRestResponse<RootObject> resp;
