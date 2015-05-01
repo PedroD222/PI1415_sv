@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
-//using HtmlAgilityPack;
 using RestSharp.Deserializers;
 
 namespace WWonlineapi
@@ -46,8 +45,9 @@ namespace WWonlineapi
             //List<Task> tasks = new List<Task>();
             RestRequest tempRequest;
             IRestResponse<RootObject> resp;
-            JsonDeserializer jsdes = new JsonDeserializer();
+            //JsonDeserializer jsdes = new JsonDeserializer();
             int nrequests = getNumberRequest(startdate, enddate);
+            //nrequests = 1;
             for (int i = 0; i < nrequests; i++)
             {
                 tempRequest = getWeatherResp(local, startdate, enddate);
@@ -59,6 +59,11 @@ namespace WWonlineapi
             }
             
             HistogrameTemps htemps = new HistogrameTemps(weatherlist);
+
+            Console.WriteLine("Local :"+ local);
+            Console.WriteLine("Start Date :" + startdate);
+            Console.WriteLine("End Date :" + enddate);
+            //htemps.drawHistogrs();
              /*
             RootObject r = null;
             client.ExecuteAsync(tempRequest, response =>
@@ -73,8 +78,9 @@ namespace WWonlineapi
                 //this.HandleResponse(response);
             });
             while (r == null);*/
-            
+
             //Console.WriteLine("Completed all tasks.");
+            Console.WriteLine("Press and key to exit...");
             Console.Read();
         }
 

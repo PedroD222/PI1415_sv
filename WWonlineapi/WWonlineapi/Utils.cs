@@ -62,33 +62,5 @@ namespace WWonlineapi
 
             return dates;
         }
-
-        static int preDraw(Dictionary<string, int> m)
-        {
-            int big = 0;
-            foreach (KeyValuePair<string, int> lang in m)
-            {
-                big = lang.Key.Length;
-                if (big < lang.Key.Length)
-                    big = lang.Key.Length;
-            }
-            return big;
-        }
-
-        public static void drawHistograme(Dictionary<string, int> dictio)
-        {
-            string lineHist;
-            int big = preDraw(dictio);
-            foreach (KeyValuePair<string, int> lang in dictio)
-            {
-                lineHist = lang.Key.PadRight(big) + ": ";
-                for (int i = lang.Value; i > 0; i--)
-                    lineHist += '*';
-
-                lineHist = lineHist.PadRight(lang.Value, ' ');
-                //lineHist += "";
-                Console.WriteLine(lineHist);
-            }
-        }
     }
 }
