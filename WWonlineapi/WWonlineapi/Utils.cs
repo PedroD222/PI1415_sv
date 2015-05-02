@@ -30,7 +30,7 @@ namespace WWonlineapi
         public static int getNumberOfDaysBetweenDates(String initialDate, String endDate) {
             DateTime initial = Convert.ToDateTime(initialDate);
             DateTime end = Convert.ToDateTime(endDate);
-            TimeSpan count = initial.Subtract(end);
+            TimeSpan count = end.Subtract(initial);
             return count.Days;
         }
 
@@ -39,9 +39,10 @@ namespace WWonlineapi
             List<IntervalDates> dates = new List<IntervalDates>();
             DateTime initial = Convert.ToDateTime(initialDate);
             DateTime end = Convert.ToDateTime(endDate);
+            fillDictionary();
             do
             {
-                if (initial.Month - end.Month > 0)
+                if (end.Month - initial.Month > 0)
                 {
                     int daysInMonth;
                     if (monthDays.TryGetValue(initial.Month, out daysInMonth))

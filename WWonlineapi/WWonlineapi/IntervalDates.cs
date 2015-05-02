@@ -8,8 +8,8 @@ namespace WWonlineapi
 {
     public class IntervalDates
     {
-        String initialDate;
-        String endDate;
+        public String initialDate;
+        public String endDate;
 
         public IntervalDates(String initialDate, String endDate) 
         { 

@@ -7,29 +7,20 @@ namespace WWonlineapi
 {
     class HistogrameTemps
     {
-        private Dictionary<String, int> maxtemps
-        {
-            get { return maxtemps; }
-            set{}
-        }
-        private Dictionary<String, int> mintemps
-        {
-            get { return mintemps; }
-            set{}
-        }
-        private Dictionary<String, int> medtemps
-        {
-            get { return medtemps; }
-            set { }
-        }
+        private SortedDictionary<string, int> maxtemps;
+
+        private SortedDictionary<string, int> mintemps;
+
+        private SortedDictionary<string, int> medtemps;
+
         private List<Weather> weatherList;
 
         public HistogrameTemps(List<Weather> weatherList)
         {
             this.weatherList = weatherList;
-            maxtemps = new Dictionary<string,int>();
-            mintemps = new Dictionary<string,int>();
-            medtemps = new Dictionary<string, int>();
+            maxtemps = new SortedDictionary<string,int>();
+            mintemps = new SortedDictionary<string,int>();
+            medtemps = new SortedDictionary<string, int>();
         }
 
         public void countTemps()
@@ -53,14 +44,14 @@ namespace WWonlineapi
         {
             foreach (Hourly h in w.hourly)
             {
-                if (medtemps.ContainsKey(w.mintempC))
+                if (medtemps.ContainsKey(h.tempC))
                     medtemps[h.tempC]++;
                 else
                     medtemps.Add(h.tempC, 1);
             }
         }
 
-        private int preDraw(Dictionary<string, int> m)
+        private int preDraw(SortedDictionary<string, int> m)
         {
             int big = 0;
             foreach (KeyValuePair<string, int> lang in m)
@@ -72,7 +63,7 @@ namespace WWonlineapi
             return big;
         }
 
-        private void drawHistograme(Dictionary<string, int> dictio)
+        private void drawHistograme(SortedDictionary<string, int> dictio)
         {
             string lineHist;
             int big = preDraw(dictio);

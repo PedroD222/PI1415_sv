@@ -42,20 +42,22 @@ namespace WWonlineapi
             
             RestClient client = new RestClient(BASE_URL);
             
-            //List<Task> tasks = new List<Task>();
+            List<Task> tasks = new List<Task>();
             RestRequest tempRequest;
             IRestResponse<RootObject> resp;
             //JsonDeserializer jsdes = new JsonDeserializer();
-            int nrequests = getNumberRequest(startdate, enddate);
-            //nrequests = 1;
-            for (int i = 0; i < nrequests; i++)
+            int ndays = Utils.getNumberOfDaysBetweenDates(startdate, enddate);
+            List<IntervalDates> intervaledates = Utils.getDatesForRequest(startdate, enddate, ndays);
+            foreach(IntervalDates date in intervaledates)
             {
-                tempRequest = getWeatherResp(local, startdate, enddate);
+                tempRequest = getWeatherResp(local, date.initialDate, date.endDate);
                 resp = client.Execute<RootObject>(tempRequest);
-                if (weatherlist == null)
+                if (weatherlist == null){
                     weatherlist = resp.Data.data.weather;
+                    local = resp.Data.data.request.First().query;
+                } 
                 else
-                    weatherlist.Concat(resp.Data.data.weather);
+                    weatherlist.AddRange(resp.Data.data.weather);
             }
             
             HistogrameTemps htemps = new HistogrameTemps(weatherlist);
@@ -63,33 +65,11 @@ namespace WWonlineapi
             Console.WriteLine("Local :"+ local);
             Console.WriteLine("Start Date :" + startdate);
             Console.WriteLine("End Date :" + enddate);
-            //htemps.drawHistogrs();
-             /*
-            RootObject r = null;
-            client.ExecuteAsync(tempRequest, response =>
-            {
-                r = jsdes.Deserialize<RootObject>(response);
-                if (response.ErrorMessage != null)
-                {
-                    Console.WriteLine(response.ErrorMessage);
-                    Console.WriteLine(response);
-                    return;
-                }
-                //this.HandleResponse(response);
-            });
-            while (r == null);*/
+            htemps.drawHistogrs();
 
-            //Console.WriteLine("Completed all tasks.");
+            Console.WriteLine("Completed all tasks.");
             Console.WriteLine("Press and key to exit...");
             Console.Read();
-        }
-
-        private static int getNumberRequest(string startdate, string enddate)
-        {
-            DateTime init = Convert.ToDateTime(startdate);
-            DateTime final = Convert.ToDateTime(enddate);
-            TimeSpan count = final.Subtract(init);
-            return 0;
         }
 
         private static RestRequest getWeatherResp(string local, string startdate, string enddate)
@@ -100,6 +80,7 @@ namespace WWonlineapi
             tempRequest.AddParameter("enddate", enddate);
             tempRequest.AddParameter("q", local);
             tempRequest.AddParameter("format", "json");
+            tempRequest.AddParameter("tp", "24");
             return tempRequest;
         }
 
