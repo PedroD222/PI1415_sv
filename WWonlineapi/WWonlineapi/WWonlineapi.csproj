@@ -48,6 +48,7 @@
     <Compile Include="Data.cs" />
     <Compile Include="HistogrameTemps.cs" />
     <Compile Include="HourlyWeather.cs" />
+    <Compile Include="HttpHelper.cs" />
     <Compile Include="IntervalDates.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

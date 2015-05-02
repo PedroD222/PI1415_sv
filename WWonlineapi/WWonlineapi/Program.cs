@@ -15,7 +15,6 @@ namespace WWonlineapi
         private static string NAME_REQUEST = "free/v2/past-weather.ashx";
         private static string key = "61a7c1d77101b83979c5fb4a299ef";
         private static string [] argsname = {"-local", "-startdate", "-enddate"};
-
         private static List<Weather> weatherlist;
         static void Main(string[] args)
         {
@@ -30,36 +29,45 @@ namespace WWonlineapi
             local = extractParams(args[ind], ind++);
             if (local.Length == 0)
             {
+                Console.WriteLine("Falta o local.");
+                Console.WriteLine("Press and key to exit...");
                 Console.ReadKey();
                 return;
             }
             startdate = extractParams(args[ind], ind++);
             if (startdate.Length == 0)
-                startdate = getActualDate();
+                startdate = Utils.getActualDate();
             enddate = extractParams(args[ind], ind);
             if (enddate.Length == 0)
-                enddate = getActualDate();
+                enddate = Utils.getActualDate();
             
             RestClient client = new RestClient(BASE_URL);
-            
-            List<Task> tasks = new List<Task>();
+            weatherlist = new List<Weather>();
             RestRequest tempRequest;
-            IRestResponse<RootObject> resp;
-            //JsonDeserializer jsdes = new JsonDeserializer();
+            //IRestResponse<RootObject> resp;
+            
+            if (Utils.validateDate(startdate))
+                return; 
+            if (Utils.validateDate(enddate))
+                return;
             int ndays = Utils.getNumberOfDaysBetweenDates(startdate, enddate);
-            List<IntervalDates> intervaledates = Utils.getDatesForRequest(startdate, enddate, ndays);
-            foreach(IntervalDates date in intervaledates)
+            List<IntervalDates> intervaldates = Utils.getDatesForRequest(startdate, enddate, ndays);
+            List<Task> tasks = new List<Task>(intervaldates.Count);
+            foreach(IntervalDates date in intervaldates)
             {
                 tempRequest = getWeatherResp(local, date.initialDate, date.endDate);
-                resp = client.Execute<RootObject>(tempRequest);
+                HttpHelper ht = new HttpHelper(client, tempRequest, null);
+                tasks.Add(Task.Run(() => addlistWeather(ht)));
+                /*resp = client.Execute<RootObject>(tempRequest);
                 if (weatherlist == null){
                     weatherlist = resp.Data.data.weather;
                     local = resp.Data.data.request.First().query;
                 } 
                 else
-                    weatherlist.AddRange(resp.Data.data.weather);
+                    weatherlist.AddRange(resp.Data.data.weather);*/
             }
-            
+            Task.WaitAll(tasks.ToArray());
+
             HistogrameTemps htemps = new HistogrameTemps(weatherlist);
 
             Console.WriteLine("Local :"+ local);
@@ -67,7 +75,6 @@ namespace WWonlineapi
             Console.WriteLine("End Date :" + enddate);
             htemps.drawHistogrs();
 
-            Console.WriteLine("Completed all tasks.");
             Console.WriteLine("Press and key to exit...");
             Console.Read();
         }
@@ -84,11 +91,10 @@ namespace WWonlineapi
             return tempRequest;
         }
 
-        private static string getActualDate()
+        private static void addlistWeather(HttpHelper http) 
         {
-            string datePatt = @"yyyy/MM/dd tt";
-            DateTime dispDt = DateTime.Now;
-            return dispDt.ToString(datePatt);
+            IRestResponse<RootObject> resp = http.ExecuteRequest();
+            weatherlist.AddRange(resp.Data.data.weather);
         }
 
         private static string extractParams(string args, int i)

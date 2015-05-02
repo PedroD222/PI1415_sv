@@ -11,6 +11,25 @@ namespace WWonlineapi
         public static Dictionary<int, int> monthDays = new Dictionary<int,int>();
         public static String DATE_FORMAT = @"yyyy/MM/dd tt";
 
+        public static bool validateDate(string date)
+        {
+            int ndays = Utils.getNumberOfDaysBetweenDates(date, Utils.getActualDate());
+            if (ndays > 90)
+            {
+                Console.WriteLine("Data Invalida " + date);
+                Console.WriteLine("Press and key to exit...");
+                Console.Read();
+                return false;
+            }
+            return true;
+        }
+
+        public static string getActualDate()
+        {
+            DateTime dispDt = DateTime.Now;
+            return dispDt.ToString(DATE_FORMAT);
+        }
+
         public static void fillDictionary()
         {
             monthDays.Add(1,31);
