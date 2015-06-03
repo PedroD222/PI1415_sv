@@ -119,3 +119,21 @@ return boxarts.reduce(function(larg,cur){
 							return larg
    						return cur;
 					}).map(function(n){return n.url;});
+					
+					
+					
+exercicio 20
+return movieLists.
+		concatMap(function(movieList) {
+      return movieList.videos.map(function(v){
+                                  return {id : v.id,
+                                         title : v.title
+                                         boxart: v.boxarts.reduce(function(small,cur){
+                                                                    var smalldim = small.width * small.height;
+                                                                    var curdim = cur.width * cur.height;
+                                                                    if (smalldim<curdim)
+                                                                       return small;
+                                                                    return cur;
+                                                        }).map(function(n){return n.url});
+                                          }})
+                    })
