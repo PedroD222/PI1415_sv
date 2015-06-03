@@ -137,3 +137,6 @@ return movieLists.
                                                         }).map(function(n){return n.url});
                                           }})
                     })
+
+exercicio 21
+videoIdAndBookmarkIdPairs.push({videoId : videos[counter].id, bookmarkId : bookmarks[counter].id})
