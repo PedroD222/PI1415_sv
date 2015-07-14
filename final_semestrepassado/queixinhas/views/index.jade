@@ -1,0 +1,14 @@
+extends layout
+include ./utils.jade
+
+block content
+	div.container-float
+		div.row(style='margin-top: 100px')
+			div.col-md-5
+				h3(style='background-color: lightgreen; padding: 5px') O que é o Queixinhas Na Net?
+				p nao sei o que é mas gosto muito
+				h3(style='margin-top: 80px; background-color: lightgreen; padding: 5px') Como funcionar com o Queixinhas Na Net
+				p fazes uma coisinhas, clicas nuns botões, e já está
+			div.col-md-2
+			div.col-md-4(style='border: 1px solid #CCA300')
+				+lista(queixas, 'Queixinhas mais recentes')

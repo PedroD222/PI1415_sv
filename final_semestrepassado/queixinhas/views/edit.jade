@@ -1,0 +1,25 @@
+﻿extends layout
+include ./utils.jade
+
+block content
+	div.container-float
+		div.row(style='margin-top: 100px')
+			div.col-md-5
+				div.row
+					form(action='/queixinhas/#{queixa.id}/edit', method='post')
+						h3 Titulo
+						textarea.form-control(type='text', placeholder='Titulo', name='title', style='resize: none', required) #{queixa.titulo}
+						//p(style='clear: both') #{queixa.titulo}
+						h4 Descrição
+						if !queixa.descricao || !queixa.descricao.length
+							textarea.form-control(type='text', placeholder='Descrição', name='desc', style='resize: none')
+						else
+							textarea.form-control(type='text', placeholder='Descrição', name='desc', style='resize: none') #{queixa.descricao}
+						div.checkbox(style='margin-top: 20px')
+							label
+								input(type='checkbox', name='closed') 
+								p Fechar queixinha
+						button.btn.btn-default Confirmar
+						
+//name ='closed'
+//queixa.fechada

@@ -1,0 +1,21 @@
+extends layout
+include ./utils.jade
+
+block content
+	div.container-float
+		div.row(style='margin-top: 100px')
+			div.col-md-5(style='left:25%')
+				+lista(queixas, 'Todas as Queixinhas')
+				div(style='float: right')
+					if total > 1
+						ul.pagination
+							if page > 1
+								li
+									a(href='/queixinhas?page=' + (+page-1))
+										span.glyphicon.glyphicon-arrow-left
+							if total > page
+								li
+									a(href='/queixinhas?page=' + (+page+1))
+										span.glyphicon.glyphicon-arrow-right
+										
+//queixas, total, user, page

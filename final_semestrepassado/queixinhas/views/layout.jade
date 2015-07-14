@@ -1,0 +1,86 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/css/bootstrap.css')
+		script(src='/js/bootstrap.js')
+		style.
+			.mybutton{
+				border-radius: 10px;
+				border: hidden;
+			}
+			.outbutton:hover{
+				color: white;
+				background-color: #CC0000;
+			}
+			.minivotebtn{
+				font-size: 10px;
+				padding: 2px;
+				padding-right: 5px;
+				padding-left: 5px;
+				color: white;
+			}
+		script.
+			function upvotebtn(id, voto){
+				if voto === 0
+					document.voteform.action = '/' + id + '/upvote/'
+					return true
+					//return '/' + id + '/upvote'
+				if voto === 1
+					document.voteform.action = '/' + id + '/unvote/'
+					return true
+					//return '/' + id + '/unvote'
+			}
+			function downvotebtn(id, voto){
+				if voto === 0
+					document.voteform.action = '/' + id + '/downvote/'
+					//return '/' + id + '/downvote'
+				if voto === -1
+					document.voteform.action = '/' + id + '/unvote/'
+					//return '/' + id + '/unvote'
+			}
+	body
+		//header
+		nav.navbar.navbar-fixed-top.row(style='background-color: lightblue; height: 20px')
+			div.container
+				//left side header
+				div.navbar-header
+					//title
+					button.navbar-toggle(type='button')
+					a(class='navbar-brand', href='/', style='color: black')= title
+					//routing list
+					ul.nav.navbar-nav
+						if user && user.username
+							li
+								a(href='/queixinhas/dashboard') Dashboard
+						li
+							a(href='/queixinhas') Lista
+						if user && user.username
+							li
+								a(href='/queixinhas/new') Nova Queixinha
+				//right side header
+				div.navbar-form.navbar-right
+					if !user || !user.username
+						//login/sign-up
+						form(action='/login', method='post')
+							div.form-group
+								input.form-control(type='text', placeholder='Nome', name='username', required)
+							div.form-group
+								input.form-control(type='password', placeholder='Password', name='password', required)
+							button(class='btn btn-default', type='submit') Entrar
+							a(class='btn btn-success mybutton', href='/register', role='button', style='margin-left: 50px') Registar
+						a(class ='btn', href='/recover') Esqueceu a sua password?
+					else
+						//logout
+						form(action='/logout', method='post')
+							p(style='display: inline') Bem-Vindo #{user.username}
+							div.form-group
+								button(class='btn btn-default mybutton outbutton') <strong>Sair</strong>
+						
+		block content
+		
+		//div.container
+			//footer(style='position: absolute; bottom: 0px; width: 100%; align: center')
+				//div.container
+					//p Copyright by Miguel Serejo, Pedro Duarte & André Luz
