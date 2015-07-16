@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="85d12775-3c9a-4e50-88f6-30879e30c4fd" name="Default" comment="" />
+    <list default="true" id="85d12775-3c9a-4e50-88f6-30879e30c4fd" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/clx - chelas xl/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/clx - chelas xl/routes/clx.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/clx - chelas xl/views/index.jade" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/clx - chelas xl/routes/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="OLX Chelas.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -22,7 +28,62 @@
     <favorites_list name="OLX Chelas" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/clx - chelas xl/routes/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#41#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.jade" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/clx - chelas xl/views/index.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/clx - chelas xl/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clx.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/clx - chelas xl/routes/clx.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.637138">
+              <caret line="24" column="3" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
+              <folding>
+                <element signature="e#0#41#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -31,6 +92,16 @@
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/clx - chelas xl/routes/index.js" />
+        <option value="$PROJECT_DIR$/clx - chelas xl/views/index.jade" />
+        <option value="$PROJECT_DIR$/clx - chelas xl/app.js" />
+        <option value="$PROJECT_DIR$/clx - chelas xl/routes/clx.js" />
+      </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
@@ -69,17 +140,19 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="OLX Chelas" />
+              <option name="myItemId" value="CLX - Chelas LX" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="OLX Chelas" />
+              <option name="myItemId" value="CLX - Chelas LX" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -89,7 +162,7 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="OLX Chelas" />
+              <option name="myItemId" value="CLX - Chelas LX" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -101,210 +174,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OLX Chelas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="FullScreen" value="false" />
     <property name="last_opened_file_path" value="D:/Git/Git/cmd/git.exe" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\My Disk Paste\ISEL\6 ano\SV\PI\Git\PI1415_sv\PF\clx - chelas xl\public" />
       <recent name="D:\My Disk Paste\ISEL\6 ano\SV\PI\Git\PI1415_sv\PF\clx - chelas xl" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../ficha2/exerc1to18_20to23_25.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/create/create.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/create/createCategQueixinha.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/create/createCategoria.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/create/createComentario.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/create/createQueixinha.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/create/createQueixinhaUtilizador.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/create/createUtilizador.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/create/createVotacao.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/create/trgCountVotosandupNotif.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/create/trgNotfCmt.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/ea/ea.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/ea/ea.vsdx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/insertCategoria.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/queixinhabd.backup</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/queixinhanoroles.backup</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/select.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/bd/testtrg.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/app.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/auth.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/config.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/dbUtility.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/dbaccess.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/insert.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/insertOnServer.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/log.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/package.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/css/bootstrap-theme.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/css/bootstrap-theme.css.map</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/css/bootstrap-theme.min.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/css/bootstrap.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/css/bootstrap.css.map</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/css/bootstrap.min.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/css/style.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/fonts/glyphicons-halflings-regular.eot</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/fonts/glyphicons-halflings-regular.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/fonts/glyphicons-halflings-regular.ttf</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/fonts/glyphicons-halflings-regular.woff</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/fonts/glyphicons-halflings-regular.woff2</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/js/bootstrap.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/js/bootstrap.min.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/js/npm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/public/stylesheets/style.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/routes/index.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/routes/queixinhas.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/views/dashboard.jade</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/views/edit.jade</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/views/error.jade</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/views/index.jade</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/views/layout.jade</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/views/novaqueixinha.jade</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/views/queixinha.jade</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/views/queixinhas.jade</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/views/recover.jade</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/views/register.jade</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/queixinhas/views/utils.jade</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../final_semestrepassado/relatorio.docx</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../ficha2/exer3to14_17_18.js</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -569,12 +464,13 @@
       <updated>1436884334112</updated>
       <workItem from="1436884335650" duration="891000" />
       <workItem from="1436901725895" duration="111000" />
-      <workItem from="1436901948149" duration="2959000" />
+      <workItem from="1436901948149" duration="3265000" />
+      <workItem from="1437079344628" duration="4677000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3961000" />
+    <option name="totallyTimeSpent" value="8944000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -582,6 +478,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -601,6 +498,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296875" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -629,7 +527,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -637,7 +534,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -645,7 +541,45 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.76233184">
           <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clx - chelas xl/views/index.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clx - chelas xl/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clx - chelas xl/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clx - chelas xl/routes/clx.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.637138">
+          <caret line="24" column="3" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
