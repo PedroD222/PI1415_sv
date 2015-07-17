@@ -4,7 +4,7 @@
 
 var express = require('express');
 var router = express.Router();
-var db = require('.././dbaccess');
+//var db = require('.././dbaccess');
 var regex_single = /^\/\d+$/;
 var regex_list = /^\/(\?page=\d*|$)$/;
 

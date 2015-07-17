@@ -9,11 +9,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
-var auth = require('./auth');
+//var auth = require('./auth');
 var app = express();
-var pass = require('pwd');
+//var pass = require('pwd');
 
-var db = require('./dbaccess')
+//var db = require('./dbaccess')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,7 +43,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-auth(app);
+//auth(app);
 var route_idx = require('./routes/index');
 var route_clx = require('./routes/clx');
 app.use('/', route_idx);
