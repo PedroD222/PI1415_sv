@@ -1,0 +1,7 @@
+npm install -g express
+
+npm --save //adicionar ao package.json
+
+site do express com alguns cmds interessantes
+http://expressjs.com/starter/installing.html
+ 
