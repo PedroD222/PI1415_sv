@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85d12775-3c9a-4e50-88f6-30879e30c4fd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bd/create/CreateAnuncio.sql" afterPath="$PROJECT_DIR$/bd/create/CreateAnuncio.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bd/create/CreateAnuncioUtilizadorFavorito.sql" afterPath="$PROJECT_DIR$/bd/create/CreateAnuncioUtilizadorFavorito.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bd/create/CreateComentario.sql" afterPath="$PROJECT_DIR$/bd/create/CreateComentario.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="OLX Chelas.iws" />
@@ -518,7 +514,7 @@
       <workItem from="1437079344628" duration="4677000" />
       <workItem from="1437155752866" duration="4404000" />
       <workItem from="1437213894140" duration="12585000" />
-      <workItem from="1437242137369" duration="2487000" />
+      <workItem from="1437242137369" duration="2554000" />
     </task>
     <task id="LOCAL-00001" summary="Tables Creation">
       <created>1437242672100</created>
@@ -526,11 +522,17 @@
       <option name="project" value="LOCAL" />
       <updated>1437242672100</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changes to Sql Table Creation files">
+      <created>1437254335049</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1437254335049</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28420000" />
+    <option name="totallyTimeSpent" value="28487000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -577,7 +579,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Tables Creation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tables Creation" />
+    <MESSAGE value="Changes to Sql Table Creation files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to Sql Table Creation files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
