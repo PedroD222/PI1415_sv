@@ -1,0 +1,24 @@
+mixin lista(announc, listtitle)
+	div.container-float(style='height: 30px; weight: 100%; background-color: #CCA300')
+		h5(style='float: right; padding-right: 5px') #{listtitle}
+	div(style='clear: both; border: 1px solid #CCA300')
+		ul(style='list-style-type: none; padding-left: 0px; margin-right: 0px')
+			if announc
+				for a in announc
+					if(!a.fechada)
+						li(style='margin-bottom: 10px; border: 1px solid #CCA300')
+							a(href='/queixinhas/#{queixa.id}') #{queixa.titulo}
+							+likes(queixa)
+			else
+				li(style='color: gray') não há queixinhas
+				
+				
+mixin likes(a)
+	div(style='float: right')
+		form(name='voteform', method='/post')
+			button.btn.minivotebtn(type='button', style='background-color: green', onclick='upvotebtn(#{queixa.id}, #{queixa.voto})') #{queixa.votos_corretos}
+			button.btn.minivotebtn(type='button', style='background-color: red', onclick='downvotebtn(#{queixa.id}, #{queixa.voto})') #{queixa.votos_incorretos}
+
+				
+				
+//falta subscribe, queixa.isfollowing(true, false)

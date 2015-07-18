@@ -1,5 +1,5 @@
 extends layout
-include ./utils.jade
+//include ./utils.jade
 
 block content
 	div.container-float
@@ -10,25 +10,24 @@ block content
 				h3(style='margin-top: 80px; background-color: lightgreen; padding: 5px') Como funcionar com o CLX­ Chelas­LX?
 				h4(style='margin-top: 80px; background-color: lightgreen; padding: 5px') Se pretende comprar:
 				mixin TopicCom(text)
-					li #{text} 
+					li #{text}
 				ul#books
-					+TopicCom("Registar(Caso utilizador nao esteja registado)")
-					+TopicCom("Realizar o login")
-					+TopicCom("Procurar o produto que pretende")
-					+TopicCom("Avalie o melhor vendedor que venda o produto qe pretende")
-					+TopicCom("Entrar em contacto com o vendedor")
-					+TopicCom("Comprar")
-					+TopicCom("Opine sobre o vendedor para ajudar outros utilizadores a escolher com quem comprar")
+						+TopicCom("Registar(Caso utilizador nao esteja registado)")
+						+TopicCom("Realizar o login")
+						+TopicCom("Procurar o produto que pretende")
+						+TopicCom("Avalie o melhor vendedor que venda o produto qe pretende")
+						+TopicCom("Entrar em contacto com o vendedor")
+						+TopicCom("Comprar")
+						+TopicCom("Opine sobre o vendedor para ajudar outros utilizadores a escolher com quem comprar")
+
 				h4(style='margin-top: 80px; background-color: lightgreen; padding: 5px') Se pretende vender:
 				mixin TopicVen(text)
-					li #{text} 
+					li #{text}
 				ul#books
-					+TopicVen("Registar(Caso utilizador nao esteja registado)")
-					+TopicVen("Realizar o login")
-					+TopicVen("Escolher o que quer vender")
-					+TopicVen("Colocar o anuncio no local apropriado")
-					+TopicVen("Esperar comprador")
-					+TopicVen("Pode editar o seu anuncio")
-					+TopicVen("Cancelar o seu proprio anuncio")
-					+TopicVen("Responder a comentarios no seus anuncios publicados")
-					+TopicVen("Vender")
+							+TopicVen("Registar(Caso utilizador nao esteja registado)")
+							+TopicVen("Realizar o login")
+							+TopicVen("Procurar o produto que pretende")
+							+TopicVen("Avalie o melhor vendedor que venda o produto qe pretende")
+							+TopicVen("Entrar em contacto com o vendedor")
+							+TopicVen("Comprar")
+							+TopicVen("Opine sobre o vendedor para ajudar outros utilizadores a escolher com quem comprar")

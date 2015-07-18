@@ -4,7 +4,7 @@ html
 		title= title
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(rel='stylesheet', href='/css/bootstrap.css')
-		script(src='/js/bootstrap.js')
+		//script(src='/js/bootstrap.js')
 		style.
 			.mybutton{
 				border-radius: 10px;
@@ -21,25 +21,7 @@ html
 				padding-left: 5px;
 				color: white;
 			}
-		script.
-			function upvotebtn(id, voto){
-				if voto === 0
-					document.voteform.action = '/' + id + '/upvote/'
-					return true
-					//return '/' + id + '/upvote'
-				if voto === 1
-					document.voteform.action = '/' + id + '/unvote/'
-					return true
-					//return '/' + id + '/unvote'
-			}
-			function downvotebtn(id, voto){
-				if voto === 0
-					document.voteform.action = '/' + id + '/downvote/'
-					//return '/' + id + '/downvote'
-				if voto === -1
-					document.voteform.action = '/' + id + '/unvote/'
-					//return '/' + id + '/unvote'
-			}
+
 	body
 		//header
 		nav.navbar.navbar-fixed-top.row(style='background-color: lightblue; height: 20px')
@@ -53,12 +35,12 @@ html
 					ul.nav.navbar-nav
 						if user && user.username
 							li
-								a(href='/queixinhas/dashboard') Dashboard
+								a(href='/announcements/dashboard') Dashboard
 						li
-							a(href='/queixinhas') Lista
+							a(href='/announcements') Lista
 						if user && user.username
 							li
-								a(href='/queixinhas/new') Nova Queixinha
+								a(href='/announcements/new') Novo Anúncio
 				//right side header
 				div.navbar-form.navbar-right
 					if !user || !user.username
@@ -83,4 +65,4 @@ html
 		//div.container
 			//footer(style='position: absolute; bottom: 0px; width: 100%; align: center')
 				//div.container
-					//p Copyright by Miguel Serejo, Pedro Duarte & André Luz
+					//p Copyright by João de Deus & Pedro Duarte
