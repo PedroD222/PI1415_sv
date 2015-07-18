@@ -12,7 +12,6 @@ var session = require('express-session');
 //var auth = require('./auth');
 var app = express();
 //var pass = require('pwd');
-
 //var db = require('./dbaccess')
 
 // view engine setup
