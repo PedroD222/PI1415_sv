@@ -1,7 +1,7 @@
 /**
  * Created by Pedro on 18-07-2015.
  */
-
+    //to run console: SET DEBUG=todonanet,express:* & nodemon server.js
 var debug = require('debug')('clxchelas');
 var app = require('./app');
 
