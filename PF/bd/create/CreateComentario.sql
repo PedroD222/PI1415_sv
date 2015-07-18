@@ -1,9 +1,10 @@
--- Table: Comentario
+﻿-- Table: Comentario
 -- DROP TABLE Comentario
+--CREATE SEQUENCE Comentario_Id_seq;
 CREATE TABLE Comentario
 (
-  id int NOT NULL DEFAULT nextval('"Comentario_Id_seq"'::regclass),
-  id_anuncio int NOT NULL DEFAULT nextval('"Comentario_Id_anuncio_seq"'::regclass),
+  id int NOT NULL DEFAULT nextval('Comentario_Id_seq'::regclass),
+  id_anuncio int NOT NULL,
   comentario char(140) NOT NULL,
   username char(50) NOT NULL,
   CONSTRAINT "pkComentario" PRIMARY KEY (id, id_anuncio),
