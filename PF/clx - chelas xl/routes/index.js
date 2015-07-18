@@ -9,4 +9,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     //eventually will do something useful
+    //return next();
 });
+
+module.exports = router;

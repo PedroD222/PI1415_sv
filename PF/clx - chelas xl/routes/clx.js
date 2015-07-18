@@ -22,4 +22,7 @@ router.use(function(req, res, next) {
 
 router.get('/', function(req, res, next) {
     //something will be done here!!!
+
 });
+
+module.exports = router;
