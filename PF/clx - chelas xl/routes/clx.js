@@ -27,25 +27,25 @@ router.get('/', function(req, res, next) {
 
 // change
 router.get('/dashboard', function(req, res, next) {
-    db.getQueixinhasUtilizador(req.user.username, function(err, queixasbyuser){
+    db.getAnnouncUser(req.user.username, function(err, annUser){
         if(err) {
             if(err.message !== 'RECORD NOT FOUND')
                 return next(err);
         }
-        db.getQueixinhasbyIntUser(req.user.username, function(err, interest){
+        db.getAnnouncFavoriteUser(req.user.username, function(err, favorite){
             if(err) {
                 if(err.message !== 'RECORD NOT FOUND')
                     return next(err);
             }
-            if(queixasbyuser)
+            /*if(annUser)
                 queixasbyuser.forEach(function(value){
                     value.isfollowing = true;
                 });
-            if(interest)
+            if(favorite)
                 interest.forEach(function(value){
                     value.isfollowing = true;
-                });
-            return res.render('dashboard', {user: req.user, queixasuser:queixasbyuser, queixasinterested:interest});
+                });*/
+            return res.render('dashboard', {user: req.user, annUser : annUser, annFavorite : favorite});
         });
     });
 });
@@ -62,19 +62,17 @@ router.post('/new', function(req, res, next) {
         descricao: req.body.desc,
         titulo: req.user.titulo,
         cidade: req.body.cidade,
-        categorias: req.body.categorias
+        categoria: req.body.categoria,
+        vendedor : req.body.vend
     };
-    if(queixa.titulo === '') {
+    if(anuncio.titulo === '') {
         return res.redirect('back');
     }
-    if(queixa.descricao === '') {
-        queixa.descricao = null;
-    }
-    console.log(queixa);
+    console.log(anuncio);
     db.newAnnounc(anuncio, function(err, an) {
         if(err) return next(err);
         console.log(an);
-        return res.redirect('/queixinhas/' + an.id);
+        return res.redirect('/anuncios/' + an.id);
     });
 });
 
@@ -83,7 +81,7 @@ router.get('/:id', function(req, res, next) {
     db.getUser(req.user.username, function(err, user) {
         if(err && err.message !== 'RECORD NOT FOUND') return next(err);
         db.getAnnounc(req.params.id, function(err, ann){
-            if(err && err.message !== 'RECORD NOT FOUND') return res.redirect('/queixinhas');
+            if(err && err.message !== 'RECORD NOT FOUND') return res.redirect('/anuncios');
             if(user && ann)
             //falta
                 db.isfollowing(user.username, ann.id, function(err){
@@ -101,7 +99,7 @@ router.get('/:id', function(req, res, next) {
 router.get('/:id/edit', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann){
         if(err) return next(err);
-        if(ann.autor !== req.user.username)	return res.redirect('/queixinhas/' + req.params.id);
+        if(ann.autor !== req.user.username)	return res.redirect('/anuncios/' + req.params.id);
         if(err) return next(err);
         db.getUser(req.user.username, function(err, user){
             if(err) return next(err);
@@ -131,22 +129,19 @@ router.post('/:id/edit', function(req, res, next) {
                 ann.fechada = true;
             else
                 ann.fechada = false;*/
-            queixa.titulo = queixaEdit.titulo;
-            queixa.descricao = queixaEdit.descricao;
-            queixa.categorias = queixaEdit.categorias;
+            anuncio.titulo = anuncioEdit.titulo;
+            anuncio.descricao = anuncioEdit.descricao;
+            anuncio.categorias = anuncioEdit.categoria;
 
-            if(queixa.descricao === '') {
-                queixa.descricao = null;
-            }
             /*db.updatequeixinha(queixa, function(err){
                 if(err) return next(err);
             });*/
             var commenttext = 'Esta queixinha foi editada por '+user.username;
-            var comment = {idqueixinha: ann.id, comentario:commenttext, username:user.username};
+            var comment = {idann: ann.id, comentario:commenttext, username:user.username};
             db.newComment(comment, function(err){
                 if(err) return next(err);
             });
-            return res.redirect('/queixinhas');
+            return res.redirect('/anuncios');
         });
     });
 });

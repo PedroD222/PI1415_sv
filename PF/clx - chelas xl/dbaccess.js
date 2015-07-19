@@ -31,6 +31,14 @@ access.getAnnounc = function (id, cb) {
 	
 };
 
+acess.getAnnouncUser = function(user, cb){
+	
+};
+
+acess.getAnnouncFavoriteUser = function(user, cb){
+	
+};
+
 access.getUser = function (name, cb){
 	
 };
