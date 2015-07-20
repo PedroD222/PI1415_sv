@@ -8,10 +8,10 @@ block content
 				h3(style='background-color: lightgreen; padding: 5px') O que é o CLX­ Chelas­LX?
 				p E um site de internet onde podemos comprar e vendar produtos
 				h3(style='margin-top: 80px; background-color: lightgreen; padding: 5px') Como funcionar com o CLX­ Chelas­LX?
-				h4(style='margin-top: 80px; background-color: lightgreen; padding: 5px') Se pretende comprar:
+				h4 Se pretende comprar:
 				mixin TopicCom(text)
 					li #{text}
-				ul#b
+				ul#buy
 						+TopicCom("Registar(Caso utilizador nao esteja registado)")
 						+TopicCom("Realizar o login")
 						+TopicCom("Procurar o produto que pretende")
@@ -20,10 +20,10 @@ block content
 						+TopicCom("Comprar")
 						+TopicCom("Opine sobre o vendedor para ajudar outros utilizadores a escolher com quem comprar")
 
-				h4(style='margin-top: 80px; background-color: lightgreen; padding: 5px') Se pretende vender:
+				h4 Se pretende vender:
 				mixin TopicVen(text)
 					li #{text}
-				ul#books
+				ul#sell
 							+TopicVen("Registar(Caso utilizador nao esteja registado)")
 							+TopicVen("Realizar o login")
 							+TopicVen("Procurar o produto que pretende")

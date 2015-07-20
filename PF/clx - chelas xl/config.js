@@ -2,7 +2,7 @@ var configs = {
     "development": {
         getConnString: function()
         {
-            return "postgres://queixinhauser:queixinhas2015@localhost/queixinhadb";
+            return "postgres://ClxSuperUser:clx@localhost/PF - PI";
         }
     }
 }
