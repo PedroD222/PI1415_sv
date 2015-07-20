@@ -14,7 +14,7 @@ router.use(function(req, res, next) {
     if(!regex_single.test(req.url) && !regex_list.test(req.url)){
         if(!req.user.username){
             console.log('REDIRECTING');
-            return res.redirect('/anuncios');
+            return res.redirect('/announcements');
         }
     }
     return next();
@@ -72,7 +72,7 @@ router.post('/new', function(req, res, next) {
     db.newAnnounc(anuncio, function(err, an) {
         if(err) return next(err);
         console.log(an);
-        return res.redirect('/anuncios/' + an.id);
+        return res.redirect('/announcements/' + an.id);
     });
 });
 
@@ -99,7 +99,7 @@ router.get('/:id', function(req, res, next) {
 router.get('/:id/edit', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann){
         if(err) return next(err);
-        if(ann.autor !== req.user.username)	return res.redirect('/anuncios/' + req.params.id);
+        if(ann.autor !== req.user.username)	return res.redirect('/announcements/' + req.params.id);
         if(err) return next(err);
         db.getUser(req.user.username, function(err, user){
             if(err) return next(err);
@@ -141,7 +141,7 @@ router.post('/:id/edit', function(req, res, next) {
             db.newComment(comment, function(err){
                 if(err) return next(err);
             });
-            return res.redirect('/anuncios');
+            return res.redirect('/announcements');
         });
     });
 });

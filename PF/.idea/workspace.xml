@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85d12775-3c9a-4e50-88f6-30879e30c4fd" name="Default" comment="">
-<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clx - chelas xl/routes/clx.js" afterPath="$PROJECT_DIR$/clx - chelas xl/routes/clx.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clx - chelas xl/views/index.jade" afterPath="$PROJECT_DIR$/clx - chelas xl/views/index.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clx - chelas xl/routes/index.js" afterPath="$PROJECT_DIR$/clx - chelas xl/routes/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clx - chelas xl/package.json" afterPath="$PROJECT_DIR$/clx - chelas xl/package.json" />
-=======
->>>>>>> b173e52e81ea25121098dbd3b89a23d21b2826f4
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="OLX Chelas.iws" />
@@ -35,16 +32,11 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clx - chelas xl/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state vertical-scroll-proportion="0.0">
-<<<<<<< HEAD
+
               <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-=======
-=======
             <state vertical-scroll-proportion="0.019058296">
->>>>>>> cba0ab9707be4a411fa6cdbf3826a473497ccd48
+
               <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
->>>>>>> b173e52e81ea25121098dbd3b89a23d21b2826f4
               <folding>
                 <element signature="e#0#41#0" expanded="false" />
               </folding>
@@ -52,7 +44,7 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
+
       <file leaf-file-name="CreateAnuncio.sql" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bd/create/CreateAnuncio.sql">
           <provider selected="true" editor-type-id="text-editor">
@@ -117,8 +109,6 @@
           </provider>
         </entry>
       </file>
-=======
->>>>>>> cba0ab9707be4a411fa6cdbf3826a473497ccd48
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -145,12 +135,10 @@
         <option value="$PROJECT_DIR$/clx - chelas xl/views/layout.jade" />
         <option value="$PROJECT_DIR$/clx - chelas xl/views/utils.jade" />
         <option value="$PROJECT_DIR$/clx - chelas xl/routes/index.js" />
-<<<<<<< HEAD
         <option value="$PROJECT_DIR$/clx - chelas xl/views/index.jade" />
         <option value="$PROJECT_DIR$/clx - chelas xl/routes/clx.js" />
-=======
         <option value="$PROJECT_DIR$/bd/create/CreateAnuncio.sql" />
->>>>>>> b173e52e81ea25121098dbd3b89a23d21b2826f4
+
       </list>
     </option>
   </component>
@@ -544,9 +532,7 @@
       <workItem from="1436901948149" duration="3265000" />
       <workItem from="1437079344628" duration="4677000" />
       <workItem from="1437155752866" duration="4404000" />
-<<<<<<< HEAD
       <workItem from="1437213894140" duration="17863000" />
-=======
       <workItem from="1437213894140" duration="12585000" />
       <workItem from="1437242137369" duration="5124000" />
     </task>
@@ -555,7 +541,6 @@
       <option name="number" value="00001" />
       <option name="project" value="LOCAL" />
       <updated>1437242672100</updated>
->>>>>>> b173e52e81ea25121098dbd3b89a23d21b2826f4
     </task>
     <task id="LOCAL-00002" summary="Changes to Sql Table Creation files">
       <created>1437254335049</created>
@@ -573,15 +558,8 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <option name="totallyTimeSpent" value="31211000" />
-=======
     <option name="totallyTimeSpent" value="28487000" />
->>>>>>> b173e52e81ea25121098dbd3b89a23d21b2826f4
-=======
-    <option name="totallyTimeSpent" value="31057000" />
->>>>>>> cba0ab9707be4a411fa6cdbf3826a473497ccd48
+
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -798,16 +776,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clx - chelas xl/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="e#0#41#0" expanded="false" />
           </folding>
-=======
-        <state vertical-scroll-proportion="0.7151052">
-          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
->>>>>>> b173e52e81ea25121098dbd3b89a23d21b2826f4
         </state>
       </provider>
     </entry>
@@ -850,7 +823,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clx - chelas xl/dbaccess.js">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
           <folding />
@@ -858,33 +830,17 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/clx - chelas xl/routes/clx.js">
-=======
-        <state vertical-scroll-proportion="0.4764574">
-          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PF.iml">
->>>>>>> cba0ab9707be4a411fa6cdbf3826a473497ccd48
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state vertical-scroll-proportion="0.74835527">
           <caret line="70" column="32" selection-start-line="70" selection-start-column="32" selection-end-line="70" selection-end-column="32" />
-=======
         <state vertical-scroll-proportion="0.0">
-<<<<<<< HEAD
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
->>>>>>> b173e52e81ea25121098dbd3b89a23d21b2826f4
           <folding>
             <element signature="e#0#41#0" expanded="false" />
           </folding>
-=======
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
->>>>>>> cba0ab9707be4a411fa6cdbf3826a473497ccd48
         </state>
       </provider>
     </entry>

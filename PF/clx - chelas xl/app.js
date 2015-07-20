@@ -46,7 +46,7 @@ app.use(function(req, res, next) {
 var route_idx = require('./routes/index');
 var route_clx = require('./routes/clx');
 app.use('/', route_idx);
-app.use('/anuncios', route_clx);
+app.use('/announcements', route_clx);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
