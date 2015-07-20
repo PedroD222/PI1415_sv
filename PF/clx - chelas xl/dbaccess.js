@@ -127,26 +127,86 @@ access.getUserbyEmail = function (email, cb){
         }, cb);
 };
 
+access.getCategoria = function (d, cb){
+    db.SelectOne("SELECT designacao FROM Categoria Where designacao = "+d ,
+        function (row) {
+            return new access.categoria( row.designacao);
+        }, cb);
+};
+
 access.getComentAnnounc = function (id, cb){
-	//return comentarios de anuncio id
-		
+	db.SelectSome("SELECT id_comentario, id_anuncio, comentario, username FROM Comentario Where id_anuncio = "+id ,
+        function (row) {
+            return new access.coment( row.id_anuncio, row.comentario, row.username, row.id_comentario);
+        }, cb);
 };
 
 //funcoes pa criar objects na BD. Chamar callback com o objecto criado
 access.newAnnounc = function(announc, cb){
-	
+    var params = [announc.titulo, announc.descricao, announc.username, announc.categoria, false];
+
+    db.ExecuteQuery("INSERT into Anuncio (titulo, descricao, username, categoria, fechada) values($1, $2, $3, $4, $5) returning id",
+        params,
+        function(err, id) {
+            if (err)
+                return cb(err, null);
+
+            access.getCategoria(announc.categoria,
+                        function (err, c){
+                            if (err)
+                                return cb(err, null);
+                            if (c == undefined)
+                                newCategoria(announc.categoria, function(err) {
+                                    if (err)
+                                        return cb(err, null)
+                                });
+                            });
+            announc.id = id.id;
+            return cb(null, announc);
+        });
 };
 
 access.newUser = function(user, cb){
-	
+    var params = [user.username, user.hash, user.salt, user.email, user.gestor];
+    db.ExecuteQuery("INSERT into utilizador(username, hash, salt, email, gestor) values($1, $2, $3, $4, $5)",
+        params,
+        function(err) {
+            if (err)
+                return cb(err);
+
+            return cb(null, user);
+        });
 };
 
 access.newCategoria = function(designacao, cb){
-	
+    var params = [ designacao];
+    db.ExecuteQuery("INSERT into categoria (designacao) values( $1 )",
+        params,
+        function(err) {
+            if (err)
+                return cb(err);
+
+            return cb(null, designacao);
+        });
 };
 
 access.newComment = function(comment, cb){
-	
+    var params = [comment.id_an, comment.comentario, comment.username];
+
+    db.ExecuteQuery("INSERT into Comentario (id_anuncio, comentario, username) values($1, $2) returning id_c",
+        params,
+        function(err, id) {
+            if (err)
+                return cb(err, null);
+
+            access.getAnnounc(comment.id_an,
+                    function (err, c){
+                        if (err)
+                            return cb(err, null);
+                    });
+            comment.idc = id.id_c;
+            return cb(null, comment);
+        });
 };
 
 module.exports = access;
