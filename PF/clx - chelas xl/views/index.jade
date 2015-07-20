@@ -2,32 +2,37 @@ extends layout
 //include ./utils.jade
 
 block content
-	div.container-float
-		div.row(style='margin-top: 100px')
-			div.col-md-5
-				h3(style='background-color: lightgreen; padding: 5px') O que é o CLX­ Chelas­LX?
-				p E um site de internet onde podemos comprar e vendar produtos
-				h3(style='margin-top: 80px; background-color: lightgreen; padding: 5px') Como funcionar com o CLX­ Chelas­LX?
-				h4 Se pretende comprar:
-				mixin TopicCom(text)
-					li #{text}
-				ul#buy
-						+TopicCom("Registar(Caso utilizador nao esteja registado)")
-						+TopicCom("Realizar o login")
-						+TopicCom("Procurar o produto que pretende")
-						+TopicCom("Avalie o melhor vendedor que venda o produto qe pretende")
-						+TopicCom("Entrar em contacto com o vendedor")
-						+TopicCom("Comprar")
-						+TopicCom("Opine sobre o vendedor para ajudar outros utilizadores a escolher com quem comprar")
 
-				h4 Se pretende vender:
-				mixin TopicVen(text)
-					li #{text}
-				ul#sell
-							+TopicVen("Registar(Caso utilizador nao esteja registado)")
-							+TopicVen("Realizar o login")
-							+TopicVen("Procurar o produto que pretende")
-							+TopicVen("Avalie o melhor vendedor que venda o produto qe pretende")
-							+TopicVen("Entrar em contacto com o vendedor")
-							+TopicVen("Comprar")
-							+TopicVen("Opine sobre o vendedor para ajudar outros utilizadores a escolher com quem comprar")
+    div.container-float(style='margin-top: 50px')
+        div.row
+            div.col-md-5
+                h3(style='background-color: lightgreen; padding: 5px') O que é o Chelas LX?
+                p Estas interessado em ver-te livre de coisas velhas em casa?
+                p E ainda queres fazer dinheiro com isso? Este é o teu site!!!
+                p Andas a procura de bons negocios?
+                p E nao sabes onde? Estas no sitio certo!!!
+
+                h3(style='margin-top: 80px; background-color: lightgreen; padding: 5px') Como funcionar com o CLX­ Chelas­LX?
+                h4 Se pretende comprar:
+                mixin TopicCom(text)
+                    li #{text}
+                ul#buy
+                    +TopicCom("Registar(Caso utilizador nao esteja registado - Carregar Login/Registar >> Registar)")
+                    +TopicCom("Realizar o Login(Carregar Login/Registar)")
+                    +TopicCom("Procurar o produto que pretende")
+                    +TopicCom("Avalie o melhor vendedor que venda o produto que pretende")
+                    +TopicCom("Entrar em contacto com o vendedor")
+                    +TopicCom("Comprar")
+                    +TopicCom("Opine sobre o vendedor para ajudar outros utilizadores a escolher com quem comprar")
+
+                h4 Se pretende vender:
+                mixin TopicVen(text)
+                    li #{text}
+                ul#sell
+                    +TopicVen("Registar(Caso utilizador nao esteja registado - Carregar Login/Registar >> Registar)")
+                    +TopicVen("Realizar o Login(Carregar Login/Registar)")
+                    +TopicVen("Procurar o produto que pretende")
+                    +TopicVen("Avalie o melhor vendedor que venda o produto que pretende")
+                    +TopicVen("Entrar em contacto com o vendedor")
+                    +TopicVen("Comprar")
+                    +TopicVen("Opine sobre o vendedor para ajudar outros utilizadores a escolher com quem comprar")
