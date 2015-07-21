@@ -1,0 +1,35 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: black;
+    padding: 25px 50px;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+h3{
+    background-color: lightgreen;
+    padding: 5px;
+}
+
+#index-containerFluid-div{
+    margin-top: 50px;
+}
+
+#layout-nav-bar {
+    background-color: lightblue;
+    height:9vh;
+}
+
+#layout-nav-bar-space{
+    float: left;
+    padding: 2%;
+}
+
+#loginReg-containerFluid-div{
+    width : 60%;
+    margin-top: 10%;
+}
