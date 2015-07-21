@@ -95,14 +95,14 @@ access.getAnnouncs = function (page, cb){
 };
 
 access.getAnnounc = function (id, cb) {
-    db.SelectOne("SELECT id, titulo, descricao, username, pontuacao_anuncio, fechado, categoria FROM Anuncio Where id = "+id ,
+    db.SelectOne("SELECT id, titulo, descricao, username, pontuacao_anuncio, fechado, categoria FROM Anuncio Where id = $1", [id] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.pontuacao_anuncio, row.id);
         }, cb);
 };
 
 access.getAnnouncUser = function(user, cb){
-    db.SelectSome("SELECT username, email, gestor , hash, salt FROM Anuncio Where usernane = "+user ,
+    db.SelectSome("SELECT username, email, gestor , hash, salt FROM Anuncio Where usernane = $1", [user] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.pontuacao_anuncio, row.id);
         }, cb);
@@ -110,35 +110,35 @@ access.getAnnouncUser = function(user, cb){
 
 access.getAnnouncFavoriteUser = function(user, cb){
     db.SelectSome("SELECT id, titulo, descricao, username, pontuacao_anuncio, fechado, categoria FROM Anuncio inner join " +
-                "AnuncioUtilizadorFavorito on (Anuncio.id = id_anuncio ) Where AnuncioUtilizadorFavorito.usernane = "+user ,
+                "AnuncioUtilizadorFavorito on (Anuncio.id = id_anuncio ) Where AnuncioUtilizadorFavorito.usernane = $1", [user] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.pontuacao_anuncio, row.id);
         }, cb);
 };
 
 access.getUser = function (name, cb){
-    db.SelectOne("SELECT username, email, gestor, hash, salt FROM Utilizador Where username = "+name ,
+    db.SelectOne("SELECT username, email, gestor, hash, salt FROM utilizador Where username = $1", [name] ,
         function (row) {
             return new access.user( row.username, row.email, row.gestor, row.hash, row.salt);
         }, cb);
 };
 
 access.getUserbyEmail = function (email, cb){
-    db.SelectOne("SELECT username, email, gestor, hash, salt FROM Utilizador Where email = "+email ,
+    db.SelectOne("SELECT username, email, gestor, hash, salt FROM Utilizador Where email = $1", [email] ,
         function (row) {
             return new access.user( row.username, row.email, row.gestor, row.hash, row.salt);
         }, cb);
 };
 
 access.getCategoria = function (d, cb){
-    db.SelectOne("SELECT designacao FROM Categoria Where designacao = "+d ,
+    db.SelectOne("SELECT designacao FROM Categoria Where designacao = $1", [d] ,
         function (row) {
             return new access.categoria( row.designacao);
         }, cb);
 };
 
 access.getComentAnnounc = function (id, cb){
-	db.SelectSome("SELECT id_comentario, id_anuncio, comentario, username FROM Comentario Where id_anuncio = "+id ,
+	db.SelectSome("SELECT id_comentario, id_anuncio, comentario, username FROM Comentario Where id_anuncio = $1", [id] ,
         function (row) {
             return new access.coment( row.id_anuncio, row.comentario, row.username, row.id_comentario);
         }, cb);
