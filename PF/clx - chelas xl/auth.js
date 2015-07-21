@@ -50,7 +50,13 @@ module.exports = function(app)
 		if(req.user.username) return res.redirect('/');
 		return res.render('register', {user: req.user});
 	});
-	
+
+	app.get('/loginReg', function (req, res, next) {
+		if(req.user.username) return res.redirect('/');
+		//return res.render('LoginReg', {user: req.user});
+		return res.render('LoginReg');
+	});
+
 	app.post('/register', function (req, res, next) {
 		if(req.user.username) return res.redirect('/');
 		if(req.body.username === '' || req.body.password === '' || req.body.email === '') {

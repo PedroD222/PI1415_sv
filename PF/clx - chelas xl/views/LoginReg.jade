@@ -2,14 +2,17 @@
    Created by João on 20/07/2015.
 extends layout
 
-div(style= "padding:20px")
-   if !user || !user.username
-      //login/sign-up
-      form(action='/login', method='post')
-         div.form-group
-            input.form-control(type='text', placeholder='Nome', name='username', required)
-         div.form-group
-            input.form-control(type='password', placeholder='Password', name='password', required)
-         button(class='btn btn-default', type='submit') Entrar
-         a(class='btn btn-success mybutton', href='/register', role='button', style='margin-left: 50px') Registar
-      a(class ='btn', href='/recover') Esqueceu a sua password?
+block content
+
+   div.container-fluid(style='width : 60%;  margin-top: 10% ')
+      div.panel.panel-info
+
+            if !user || !user.username
+                     form(action='/login', method='post')
+                        div.form-group
+                           input.form-control(type='text', placeholder='Nome', name='username', required)
+                        div.form-group
+                           input.form-control(type='password', placeholder='Password', name='password', required)
+                        button(class='btn btn-default', type='submit') Entrar
+                        a(class='btn btn-success mybutton', href='/register', role='button', style='margin-left: 50px') Registar
+                     a(class ='btn', href='/recover') Esqueceu a sua password?
