@@ -22,8 +22,8 @@ access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, po
     this.categoria = categoria;
     this.fechado = fechado;
     this.pont = pont;
-
 }
+
 /*CREATE TABLE Utilizador
  (
  username char(50) NOT NULL,
@@ -39,6 +39,7 @@ access.user = function utilizador(username, email, gestor, hash, salt)
     this.hash = hash;
     this.salt = salt;
 }
+
 /*
 * CREATE TABLE Comentario
  (
@@ -53,6 +54,7 @@ access.comment = function comentario(id_an, coment, username, idc)
     this.username = username;
     this.idc = idc;
 }
+
 /*CREATE TABLE Categoria
  (
  designacao char(20) NOT NULL,
@@ -71,6 +73,7 @@ access.favorito = function (user, id_an){
     this.username = user;
     this.id_an = id_an;
 }
+
 /*
  CREATE TABLE Anuncio
  (
@@ -173,7 +176,6 @@ access.newUser = function(user, cb){
         function(err) {
             if (err)
                 return cb(err);
-
             return cb(null, user);
         });
 };
@@ -192,7 +194,6 @@ access.newCategoria = function(designacao, cb){
 
 access.newComment = function(comment, cb){
     var params = [comment.id_an, comment.comentario, comment.username];
-
     db.ExecuteQuery("INSERT into Comentario (id_anuncio, comentario, username) values($1, $2) returning id_c",
         params,
         function(err, id) {
@@ -204,6 +205,7 @@ access.newComment = function(comment, cb){
                         if (err)
                             return cb(err, null);
                     });
+
             comment.idc = id.id_c;
             return cb(null, comment);
         });

@@ -3,7 +3,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var db = require('./dbaccess');
 var pass = require('pwd');
 var mailer = require('nodemailer');
-var mailInfo = require('./config').getEmailInfo();
+var mailInfo = require('./config').getConnString();
 var crypto = require('crypto');
 
 passport.use(new LocalStrategy(function(username, password, done){
@@ -82,7 +82,7 @@ module.exports = function(app)
 		if(req.user.username) return res.redirect('/');
 		return res.render('recover');
 	});
-	
+	/*
 	app.post('/recover', function(req, res, next) {
 		if(req.user.username) return res.redirect('/');
 		if(req.body.email === '' || req.body.username === ''){
@@ -116,7 +116,7 @@ module.exports = function(app)
 				});
 			});
 		});
-	});
+	});*/
 
     app.get('/logout', function(req, res, next) {
       req.logout();

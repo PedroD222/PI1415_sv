@@ -1,0 +1,24 @@
+passport-local
+Passport strategy for authenticating with a username and password.
+
+This module lets you authenticate using a username and password in your Node.js applications.
+By plugging into Passport, local authentication can be easily and unobtrusively integrated into any application 
+or framework that supports Connect-style middleware, including Express.
+
+passport
+app.js — vim
+passport.authenticate('twitter');('facebook');('google');('linkedin');('github');
+Passport is authentication middleware for Node.js. 
+Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based web application. 
+A comprehensive set of strategies support authentication using a username and password, Facebook, Twitter, and more.
+
+crypto
+The crypto module offers a way of encapsulating secure credentials to be used as part of a secure HTTPS net or http connection.
+
+nodemailer-noiconv 
+Easy to use module to send e-mails, supports unicode and SSL/TLS, with dependency only on mimelib-noiconv
+Nodemailer
+Nodemailer is an easy to use module to send e-mails with Node.JS (using SMTP or sendmail) and it's Unicode friendly - You can use any characters you like.
+
+pwd 
+Hash and compare passwords with pbkdf2
