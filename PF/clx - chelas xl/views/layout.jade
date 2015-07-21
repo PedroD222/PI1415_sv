@@ -2,51 +2,30 @@ doctype html
 html
     head
         title= title
-        //link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel='stylesheet', href='/css/bootstrap.css')
-        //script(src='/js/bootstrap.js')
-        style.
-            .mybutton {
-                border-radius: 10px;
-                border: hidden;
-            }
-
-            .outbutton:hover {
-                color: white;
-                background-color: #CC0000;
-            }
-
-            .minivotebtn {
-                font-size: 10px;
-                padding: 2px;
-                padding-right: 5px;
-                padding-left: 5px;
-                color: white;
-            }
-
+        link(rel='stylesheet', href='/css/style.css')
     body
-        //header
-        nav.navbar.navbar-fixed-top.row(style='background-color: lightblue; height: 20px')
-            div.container
-                //left side header
-                div.navbar-header
-                    //title
-                    button.navbar-toggle(type='button')
-                    a(class='navbar-brand', href='/', style='color: black; padding: 25px 50px')= title + ' - Home Page'
-                    a(class='navbar-brand', href='/loginReg', style='color: black; padding: 25px 50px') Login/Registar
-                    a(href='/announcements', style= 'color: black; padding: 25px 50px') Lista
-                    if user && user.username
-                        li
-                            a(href='/announcements/dashboard', style= 'color: black; padding: 25px 50px') Dashboard
-                            a(href='/announcements/new', style= 'color: black; padding: 25px 50px') Novo Anúncio
-                            form(action='/logout', method='post')
-                            p(style='display: inline') Bem-Vindo #{user.username}
-                            div.form-group
-                                button(class='btn btn-default mybutton outbutton') <strong>Sair</strong>
+        div()
+            nav.navbar.navbar-fixed-top.row(id = 'nav-bar')
+                div.container-fluid
+                    //left side header
+                    div.navbar-header(id='nav-bar-space')
+                        //title
+                        a(class='navbar-brand', href='/')= title + ' - Home Page'
+                        a(class='navbar-brand', href='/loginReg') Login/Registar
+                        a(class='navbar-brand', href='/announcements') Lista
+                        if user && user.username
+                            li
+                                a(href='/announcements/dashboard') Dashboard
+                                a(href='/announcements/new') Novo Anúncio
+                                form(action='/logout', method='post')
+                                p(style='display: inline') Bem-Vindo #{user.username}
+                                div.form-group
+                                    button(class='btn btn-default mybutton outbutton') <strong>Sair</strong>
 
         block content
 
         div.container
-            footer(style='position: absolute; bottom: 0px; width: 100%; align: center')
+            footer
                 div.container
                     p Copyright by João de Deus & Pedro Duarte
