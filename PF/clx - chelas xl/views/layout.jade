@@ -12,7 +12,7 @@ html
                     div.navbar-header(id='layout-nav-bar-space')
                         //title
                         a(class='navbar-brand', href='/')= title + ' - Home Page'
-                        if !user || user.username
+                        if !user || !user.username
                             a(class='navbar-brand', href='/loginReg') Login/Registar
                         a(class='navbar-brand', href='/announcements') Lista
                         if user && user.username

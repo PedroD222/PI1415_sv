@@ -4,7 +4,7 @@
 
 var express = require('express');
 var router = express.Router();
-//var db = require('.././dbaccess');
+var db = require('.././dbaccess');
 var regex_single = /^\/\d+$/;
 var regex_list = /^\/(\?page=\d*|$)$/;
 
@@ -37,14 +37,7 @@ router.get('/dashboard', function(req, res, next) {
                 if(err.message !== 'RECORD NOT FOUND')
                     return next(err);
             }
-            /*if(annUser)
-                queixasbyuser.forEach(function(value){
-                    value.isfollowing = true;
-                });
-            if(favorite)
-                interest.forEach(function(value){
-                    value.isfollowing = true;
-                });*/
+
             return res.render('dashboard', {user: req.user, annUser : annUser, annFavorite : favorite});
         });
     });
