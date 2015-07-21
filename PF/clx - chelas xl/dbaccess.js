@@ -102,7 +102,7 @@ access.getAnnounc = function (id, cb) {
 };
 
 access.getAnnouncUser = function(user, cb){
-    db.SelectSome("SELECT username, email, gestor , hash, salt FROM Anuncio Where usernane = $1", [user] ,
+    db.SelectSome("SELECT username, email, gestor , hash, salt FROM Anuncio Where username = $1", [user] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.pontuacao_anuncio, row.id);
         }, cb);
@@ -110,7 +110,7 @@ access.getAnnouncUser = function(user, cb){
 
 access.getAnnouncFavoriteUser = function(user, cb){
     db.SelectSome("SELECT id, titulo, descricao, username, pontuacao_anuncio, fechado, categoria FROM Anuncio inner join " +
-                "AnuncioUtilizadorFavorito on (Anuncio.id = id_anuncio ) Where AnuncioUtilizadorFavorito.usernane = $1", [user] ,
+                "AnuncioUtilizadorFavorito on (Anuncio.id = id_anuncio ) Where AnuncioUtilizadorFavorito.username = $1", [user] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.pontuacao_anuncio, row.id);
         }, cb);

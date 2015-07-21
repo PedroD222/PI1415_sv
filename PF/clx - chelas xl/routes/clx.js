@@ -28,6 +28,7 @@ router.get('/', function(req, res, next) {
 // change
 router.get('/dashboard', function(req, res, next) {
     db.getAnnouncUser(req.user.username, function(err, annUser){
+        console.log("User dash" + req.user);
         if(err) {
             if(err.message !== 'RECORD NOT FOUND')
                 return next(err);
@@ -37,7 +38,8 @@ router.get('/dashboard', function(req, res, next) {
                 if(err.message !== 'RECORD NOT FOUND')
                     return next(err);
             }
-
+            console.log("annUser "+annUser);
+            console.log("annFavor "+favorite);
             return res.render('dashboard', {user: req.user, annUser : annUser, annFavorite : favorite});
         });
     });
