@@ -170,7 +170,8 @@ access.newAnnounc = function(announc, cb){
 };
 
 access.newUser = function(user, cb){
-    var params = [user.username, user.hash, user.salt, user.email, user.gestor];
+
+    var params = [user.username, user.hash, user.salt, user.email, false];
     db.ExecuteQuery("INSERT into utilizador(username, hash, salt, email, gestor) values($1, $2, $3, $4, $5)",
         params,
         function(err) {

@@ -76,7 +76,7 @@ module.exports = function(app)
 				req.login(user, function(err){
 					console.log(err);
 					if(err) return res.redirect('/');
-					return res.redirect('/anuncios/dashboard');
+					return res.redirect('/announcements/dashboard');
 			});
 		});
 		});

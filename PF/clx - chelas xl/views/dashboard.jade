@@ -2,12 +2,11 @@ extends layout
 include ./utils.jade
 
 block content
-	div.container-float
+	div.container-fluid
 		div.row(style='margin-top: 100px')
 			div.col-md-5
-				//user queixinhas table
-				+lista(queixasuser, 'Minhas Queixinhas')
+				+lista(annUser, 'Os Meus Anuncios')
 			div.col-md-1
 			div.col-md-5
 				//followes queixinhas table
-				+lista(queixasinterested, 'Queixinhas Favoritas')
+				+lista(annFavorite, 'Anuncios Favoritos')

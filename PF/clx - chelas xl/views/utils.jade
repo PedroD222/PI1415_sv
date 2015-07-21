@@ -1,5 +1,5 @@
 mixin lista(announc, listtitle)
-	div.container-float(style='height: 30px; weight: 100%; background-color: #CCA300')
+	div.container-fluid(style='height: 30px; weight: 100%; background-color: #CCA300')
 		h5(style='float: right; padding-right: 5px') #{listtitle}
 	div(style='clear: both; border: 1px solid #CCA300')
 		ul(style='list-style-type: none; padding-left: 0px; margin-right: 0px')
@@ -7,10 +7,10 @@ mixin lista(announc, listtitle)
 				for a in announc
 					if(!a.fechada)
 						li(style='margin-bottom: 10px; border: 1px solid #CCA300')
-							a(href='/queixinhas/#{queixa.id}') #{queixa.titulo}
-							+likes(queixa)
+							a(href='/announcements/#{a.id}') #{a.titulo}
+							//+likes(queixa)
 			else
-				li(style='color: gray') não há queixinhas
+				li(style='color: gray') não há anuncios
 				
 				
 mixin likes(a)

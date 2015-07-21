@@ -53,7 +53,7 @@ router.get('/dashboard', function(req, res, next) {
 
 router.get('/new', function(req, res, next) {
     console.log('GOT TO NEW');
-    return res.render('novoanuncio', { user: req.user});
+    return res.render('newannouncement', { user: req.user});
 });
 //falta guardar foto
 router.post('/new', function(req, res, next) {
@@ -87,10 +87,10 @@ router.get('/:id', function(req, res, next) {
                 db.isfollowing(user.username, ann.id, function(err){
                     /*if(!err) queixa.isfollowing = true;
                     else queixa.isfollowing = false;*/
-                    return res.render('Anuncio', {Announ: ann, user: user});
+                    return res.render('announcement', {Announ: ann, user: user});
                 });
             else
-                return res.render('Anuncio', {Announ: ann, user:user});
+                return res.render('announcement', {Announ: ann, user:user});
         });
     });
 });

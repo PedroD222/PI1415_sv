@@ -22,7 +22,7 @@ router.get('/', function home(req, res, next) {
     return res.render('index', { title: 'CLX - Chelas' });
 });
 
-router.get('/', function home(req, res, next) {
+/*router.get('/', function home(req, res, next) {
 
     if (!req.user)
         db.getUser(req.user.username, function(err, user){
@@ -35,7 +35,7 @@ router.get('/', function home(req, res, next) {
             return res.render('index', { user: req.user });
         });
     return res.render('index', { title: 'CLX - Chelas' });
-});
+});*/
 
 
 module.exports = router;
