@@ -4,9 +4,16 @@ extends layout
 
 block content
 
-   div.container-fluid(id='loginReg-containerFluid-div')
-      div.panel.panel-info
+    div.container-fluid(id='loginReg-containerFluid-title-div')
+        h1 Registo ou Login Chelas LX
+        mixin TopicInfo(text)
+            li #{text}
+        ul#info
+            +TopicInfo("Faca aqui o Registo caso ainda nao seja utilizador.")
+            +TopicInfo("Pode fazer login caso ja tenha conta registada.")
 
+    div.container-fluid(id='loginReg-containerFluid-div')
+      div.panel.panel-info
             if !user || !user.username
                      form(action='/login', method='post')
                         div.form-group

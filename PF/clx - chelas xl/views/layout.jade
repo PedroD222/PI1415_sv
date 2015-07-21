@@ -12,7 +12,8 @@ html
                     div.navbar-header(id='layout-nav-bar-space')
                         //title
                         a(class='navbar-brand', href='/')= title + ' - Home Page'
-                        a(class='navbar-brand', href='/loginReg') Login/Registar
+                        if !user || user.username
+                            a(class='navbar-brand', href='/loginReg') Login/Registar
                         a(class='navbar-brand', href='/announcements') Lista
                         if user && user.username
                             li
@@ -25,7 +26,5 @@ html
 
         block content
 
-        div.container
-            footer
-                div.container
-                    p Copyright by João de Deus & Pedro Duarte
+        footer(class='footer')
+                p(id='footer-text') Copyright by João de Deus & Pedro Duarte
