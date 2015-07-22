@@ -164,7 +164,7 @@ access.getComentAnnounc = function (id, cb){
         }, cb);
 };
 //row.username n existe e onnome da tabela n se poe TODO atençao
-acess.getPontuacaoUtil = function (username, cb){
+access.getPontuacaoUtil = function (username, cb){
     db.SelectSome("SELECT username, pontuacao FROM PontuacaoUtilizador where username = $1", [username],
     function (row) {
         return new access.pontuacaoUtil(row.username, row.pontuacao);
