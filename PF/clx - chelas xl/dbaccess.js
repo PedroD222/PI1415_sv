@@ -175,7 +175,7 @@ access.getPontuacaoUtil = function (username, cb){
 access.newAnnounc = function(announc, cb){
     var params = [announc.titulo, announc.descricao, announc.username, announc.categoria, false];
 
-    db.ExecuteQuery("INSERT into Anuncio (titulo, descricao, username, categoria, fechada) values($1, $2, $3, $4, $5) returning id",
+    db.ExecuteQuery("INSERT into Anuncio (titulo, descricao, username, categoria, fechado) values($1, $2, $3, $4, $5) returning id",
         params,
         function(err, id) {
             if (err)

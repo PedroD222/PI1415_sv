@@ -74,9 +74,9 @@ router.post('/new', function(req, res, next) {
         preco: req.body.preco,
         descricao: req.body.desc,
         titulo: req.user.titulo,
-        cidade: req.body.cidade,
+        cidade: req.body.localizacao,
         categoria: req.body.categoria,
-        vendedor : req.body.vend
+        vendedor : req.user.username
     };
     if(anuncio.titulo === '') {
         return res.redirect('back');
