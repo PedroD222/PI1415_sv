@@ -8,16 +8,16 @@ mixin lista(announc, listtitle)
 					if(!a.fechada)
 						li(style='margin-bottom: 10px; border: 1px solid #CCA300')
 							a(href='/announcements/#{a.id}') #{a.titulo}
-							//+likes(queixa)
+							+likes(a)
 			else
-				li(style='color: gray') não há anuncios
+				li(style='color: gray') Não Há Anúncios
 				
 				
 mixin likes(a)
 	div(style='float: right')
 		form(name='voteform', method='/post')
-			button.btn.minivotebtn(type='button', style='background-color: green', onclick='upvotebtn(#{queixa.id}, #{queixa.voto})') #{queixa.votos_corretos}
-			button.btn.minivotebtn(type='button', style='background-color: red', onclick='downvotebtn(#{queixa.id}, #{queixa.voto})') #{queixa.votos_incorretos}
+			button.btn.minivotebtn(type='button', style='background-color: green', onclick='upvotebtn(#{a.id}, #{a.pont})') #{a.pont}
+			button.btn.minivotebtn(type='button', style='background-color: red', onclick='downvotebtn(#{a.id}, #{a.pont})') #{a.pont}
 
 				
 				

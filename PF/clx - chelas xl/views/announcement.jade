@@ -1,47 +1,48 @@
 extends layout
 include ./utils.jade
-
+//comments, user, Announ
 block content
 	div.container-float
 		div.row(style='margin-top: 100px')
 			div.col-md-5
 				div.row
 					h3 Titulo
-					p(style='clear: both') #{queixa.titulo}
+					p(style='clear: both') #{Announ.titulo}
 					h4 Descrição
-					if !queixa.descricao || !queixa.descricao.length
+					if !Announ.descricao || !Announ.descricao.length
 						p(style='color: gray') Sem Descrição
 					else
-						p(style='clear: both') #{queixa.descricao}
+						p(style='clear: both') #{Announ.descricao}
 					div.container-fluid(style='margin-top: 50px')
 						if user && user.username
 							div.col-md-6
-								if !queixa.isfollowing
-									div.col-md-6
-										form(action='/queixinhas/#{queixa.id}/subscribe', method='post')
+								//TODO subscribe e unsubscribe
+								//if !queixa.isfollowing
+								div.col-md-6
+										form(action='/announcements/#{Announ.id}/subscribe', method='post')
 											button.btn.btn-default Subscrever
-								else
-									div.col-md-6
-										form(action='/queixinhas/#{queixa.id}/unsubscribe', method='post')
+								//else
+								div.col-md-6
+										form(action='/announcements/#{Announ.id}/unsubscribe', method='post')
 											button.btn.btn-default Cancelar
-								if user.gestor || user.username === queixa.autor
+								if user.gestor || user.username === Announ.vendedor
 									div.col-md-6
-										form(action='/queixinhas/#{queixa.id}/edit', method='get')
+										form(action='/announcements/#{Announ.id}/edit', method='get')
 											button.btn.btn-default.inline Editar
 							div.col-md-6
-								+likes(queixa)
+								+likes(Announ)
 			div.col-md-1
 			div.col-md-5
 				div.row
 					ul(style='list-style-type: none')
 						li.row
-							for cm in queixa.comnt
+							for cm in comments
 								div.col-md-3
 									p #{cm.username}
 								div.col-md-9
 									p #{cm.comentario}
 						li.row
-							form(action='/queixinhas/#{queixa.id}/comment', method='post')
+							form(action='/announcements/#{Announ.id}/comment', method='post')
 								textarea.form-control(type='text', placeholder='Comentário', name='comment', style='resize: none', required)
 								button.btn.btn-default.mybutton(style='float: right') Comentar
 						li

@@ -96,11 +96,10 @@ router.get('/:id', function(req, res, next) {
         db.getAnnounc(req.params.id, function(err, ann){
             if(err && err.message !== 'RECORD NOT FOUND') return res.redirect('/anuncios');
             if(user && ann)
-            //falta
-                db.isfollowing(user.username, ann.id, function(err){
-                    /*if(!err) queixa.isfollowing = true;
-                    else queixa.isfollowing = false;*/
-                    return res.render('announcement', {Announ: ann, user: user});
+                db.getComentAnnounc(req.params.id, function(err, cmts){
+                   if (err)
+                       return next(err);
+                    return res.render('announcement', {Announ: ann, user:user, comments : cmts});
                 });
             else
                 return res.render('announcement', {Announ: ann, user:user});
@@ -158,6 +157,40 @@ router.post('/:id/edit', function(req, res, next) {
         });
     });
 });
+//TODO
+/*router.post('/:id/comment', function(req, res, next) {
+    db.getAnnounc(req.params.id, function(err, ann) {
+        if(err) return next(err);
+        db.getUser(req.user.username, function(err, user) {
+            if(!user.vendedor && ann.autor !== req.user.username) return res.redirect('back');
+            var anuncioEdit = new db.anuncio();
+            anuncioEdit = {
+                id:null,
+                titulo:req.body.title,
+                descricao:req.body.desc,
+                autor:req.user
 
+            };
+            console.log(anuncioEdit);
+            if(anuncioEdit.titulo = "") {
+                return res.render('back');
+            }
+            if(anuncioEdit.fechada === 'on')
+                ann.fechada = true;
+            else
+                ann.fechada = false;
+            anuncio.titulo = anuncioEdit.titulo;
+            anuncio.descricao = anuncioEdit.descricao;
+            anuncio.categoria = anuncioEdit.categoria;
+
+            var commenttext = 'Este anuncio foi editado por '+user.username;
+            var comment = {idann: ann.id, comentario:commenttext, username:user.username};
+            db.newComment(comment, function(err){
+                if(err) return next(err);
+            });
+            return res.redirect('/announcements');
+        });
+    });
+});*/
 
 module.exports = router;
