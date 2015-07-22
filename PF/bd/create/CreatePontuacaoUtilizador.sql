@@ -1,4 +1,4 @@
-﻿CREATE SEQUENCE PontuacaoUtilizador_ID_seq;
+﻿--CREATE SEQUENCE PontuacaoUtilizador_ID_seq;
 
 CREATE TABLE PontuacaoUtilizador(
 	id integer NOT NULL DEFAULT nextval('PontuacaoUtilizador_ID_seq'::regclass),

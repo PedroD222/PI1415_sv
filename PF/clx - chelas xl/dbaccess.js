@@ -74,6 +74,19 @@ access.favorito = function (user, id_an){
     this.id_an = id_an;
 }
 
+/*CREATE TABLE PontuacaoUtilizador(
+    id integer NOT NULL DEFAULT nextval('PontuacaoUtilizador_ID_seq'::regclass),
+username char(50) not null,
+    pontacao int not null,
+    CONSTRAINT "fkUsername_PontuacaoUtilizador"
+FOREIGN KEY (username) REFERENCES Utilizador (username)
+MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
+)*/
+acess.pontuacaoUtil = function(username, pontuacao, id){
+    this.username = username;
+    this.pontuacao = pontuacao;
+    this.id = id;
+}
 /*
  CREATE TABLE Anuncio
  (
@@ -150,6 +163,13 @@ access.getComentAnnounc = function (id, cb){
             return new access.coment( row.id_anuncio, row.comentario, row.username, row.id_comentario);
         }, cb);
 };
+
+acess.getPontuacaoUtil = function (username, cb){
+    db.SelectSome("SELECT pontuacao FROM username = $1", [username],
+    function (row) {
+        return new access.pontuacaoUtil(row.username, row.pontuacao);
+    }, cb);
+}
 
 //funcoes pa criar objects na BD. Chamar callback com o objecto criado
 access.newAnnounc = function(announc, cb){
