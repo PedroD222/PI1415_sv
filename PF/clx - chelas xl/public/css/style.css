@@ -27,6 +27,11 @@ h3{
 #layout-nav-bar-space{
     float: left;
     padding: 2%;
+    width: 100%;
+}
+
+#layout-li-button-logout{
+    margin-left: 30%;
 }
 
 #loginReg-containerFluid-title-div{
@@ -42,7 +47,7 @@ h3{
 }
 
 .footer{
-    position:absolute;
+    position:fixed;
     bottom:0;
     width:95%;
     background-color: lightblue;

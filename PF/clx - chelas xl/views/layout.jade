@@ -24,13 +24,11 @@ html
                                     li
                                         a(class='navbar-brand',href='/announcements/new') Novo Anúncio
                                     li
-                                        div.btn-group
-                                            button.btn.dropdown-toggle(type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Bem-Vindo, #{user.username}
-                                                span.caret
-                                            ul.dropdown-menu
-                                                    li
-                                                        a(href='/logout')
-                                                            strong Sair
+                                        p(class='navbar-text') Bem-Vindo, #{user.username}
+                                    li
+                                        form(action='/logout', method='post')
+                                            button(id='layout-li-button-logout', class='btn btn-default', type='submit') Sair
+
 
         block content
 
