@@ -21,28 +21,46 @@ router.use(function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-    //something will be done here!!!
-
+    var page = 1;
+    if(req.query.page){
+        if(req.user.username)
+            page = req.query.page;
+    }
+    db.getAnnouncs(page, function(err, listann){
+        if (err)
+            return next(err);
+        db.getCountAnnounc(function(err, c) {
+            if (err)
+                return next(err);
+            return res.render('announcements', {user: req.user, list : listann, total : c, page : page});
+        });
+    });
 });
 
-// change
 router.get('/dashboard', function(req, res, next) {
-    db.getAnnouncUser(req.user.username, function(err, annUser){
-        console.log("User dash" + req.user);
+
+    /*db.getUser(req.user.username, function(err, user){
         if(err) {
             if(err.message !== 'RECORD NOT FOUND')
                 return next(err);
-        }
-        db.getAnnouncFavoriteUser(req.user.username, function(err, favorite){
+        }*/
+        db.getAnnouncUser(req.user.username, function(err, annUser){
+            console.log("User dash" + req.user);
             if(err) {
                 if(err.message !== 'RECORD NOT FOUND')
                     return next(err);
             }
-            console.log("annUser "+annUser);
-            console.log("annFavor "+favorite);
-            return res.render('dashboard', {user: req.user, annUser : annUser, annFavorite : favorite});
+            db.getAnnouncFavoriteUser(req.user.username, function(err, favorite){
+                if(err) {
+                    if(err.message !== 'RECORD NOT FOUND')
+                        return next(err);
+                }
+                console.log("annUser "+annUser);
+                console.log("annFavor "+favorite);
+                return res.render('dashboard', {user: req.user, annUser : annUser, annFavorite : favorite});
+            });
         });
-    });
+    //});
 });
 
 

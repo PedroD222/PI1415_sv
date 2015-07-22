@@ -101,15 +101,22 @@ access.getAnnounc = function (id, cb) {
         }, cb);
 };
 
+access.getCountAnnounc = function ( cb) {
+    db.SelectOne("SELECT Count(id) as contagem FROM Anuncio ", [] ,
+        function (row) {
+            return row.contagem;
+        }, cb);
+};
+
 access.getAnnouncUser = function(user, cb){
-    db.SelectSome("SELECT username, email, gestor , hash, salt FROM Anuncio Where username = $1", [user] ,
+    db.SelectSome("SELECT username, id, titulo, descricao, pontuacao_anuncio, categoria, fechado FROM Anuncio Where username = $1", [user] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.pontuacao_anuncio, row.id);
         }, cb);
 };
 
 access.getAnnouncFavoriteUser = function(user, cb){
-    db.SelectSome("SELECT id, titulo, descricao, username, pontuacao_anuncio, fechado, categoria FROM Anuncio inner join " +
+    db.SelectSome("SELECT id, titulo, descricao, Anuncio.username, pontuacao_anuncio, fechado, categoria FROM Anuncio inner join " +
                 "AnuncioUtilizadorFavorito on (Anuncio.id = id_anuncio ) Where AnuncioUtilizadorFavorito.username = $1", [user] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.pontuacao_anuncio, row.id);

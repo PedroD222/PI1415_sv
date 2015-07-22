@@ -5,24 +5,32 @@ html
         link(rel='stylesheet', href='/css/bootstrap.css')
         link(rel='stylesheet', href='/css/style.css')
     body
-        div()
+        div
             nav.navbar.navbar-fixed-top.row(id = 'layout-nav-bar')
                 div.container-fluid
-                    //left side header
-                    div.navbar-header(id='layout-nav-bar-space')
-                        //title
-                        a(class='navbar-brand', href='/')= title + ' - Home Page'
-                        if !user || !user.username
-                            a(class='navbar-brand', href='/loginReg') Login/Registar
-                        a(class='navbar-brand', href='/announcements') Lista
-                        if user && user.username
-                            li
-                                a(href='/announcements/dashboard') Dashboard
-                                a(href='/announcements/new') Novo Anúncio
-                                form(action='/logout', method='post')
-                                p(style='display: inline') Bem-Vindo #{user.username}
-                                div.form-group
-                                    button(class='btn btn-default mybutton outbutton') <strong>Sair</strong>
+                        //left side header
+                        div.navbar-header(id='layout-nav-bar-space')
+                            ul.nav.navbar-nav
+                                li
+                                    a(class='navbar-brand', href='/')= title + ' - Home Page'
+                                if !user
+                                    li
+                                        a(class='navbar-brand', href='/loginReg') Login/Registar
+                                li
+                                    a(class='navbar-brand', href='/announcements') Lista
+                                if user && user.username
+                                    li
+                                        a(class='navbar-brand',href='/announcements/dashboard') Dashboard
+                                    li
+                                        a(class='navbar-brand',href='/announcements/new') Novo Anúncio
+                                    li
+                                        div.btn-group
+                                            button.btn.dropdown-toggle(type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Bem-Vindo, #{user.username}
+                                                span.caret
+                                            ul.dropdown-menu
+                                                    li
+                                                        a(href='/logout')
+                                                            strong Sair
 
         block content
 

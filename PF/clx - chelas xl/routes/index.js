@@ -8,18 +8,17 @@ var db = require('../dbaccess');
 
 /* GET home page. */
 router.get('/', function home(req, res, next) {
-
-    if (!req.user)
-        db.getUser(req.user.username, function(err, user){
-            if(err) {
-                if(err.message !== 'RECORD NOT FOUND')
-                    return next(err);
-
-            }
-
-            return res.render('index', { user: req.user });
-        });
-    return res.render('index', { title: 'CLX - Chelas' });
+    db.getUser(req.user.username, function(err, user){
+        if(err) {
+            if(err.message !== 'RECORD NOT FOUND')
+                return next(err);
+        }
+        /*if (req.user.username) {
+            console.log("USER345" + req.user);
+            return res.render('index', {title: 'CLX - Chelas'});
+        }*/
+        return res.render('index', { user: user, title: 'CLX - Chelas' });
+    });
 });
 
 /*router.get('/', function home(req, res, next) {
