@@ -82,7 +82,7 @@ username char(50) not null,
 FOREIGN KEY (username) REFERENCES Utilizador (username)
 MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
 )*/
-acess.pontuacaoUtil = function(username, pontuacao, id){
+access.pontuacaoUtil = function(username, pontuacao, id){
     this.username = username;
     this.pontuacao = pontuacao;
     this.id = id;
@@ -163,9 +163,9 @@ access.getComentAnnounc = function (id, cb){
             return new access.coment( row.id_anuncio, row.comentario, row.username, row.id_comentario);
         }, cb);
 };
-
+//row.username n existe e onnome da tabela n se poe TODO atençao
 acess.getPontuacaoUtil = function (username, cb){
-    db.SelectSome("SELECT pontuacao FROM username = $1", [username],
+    db.SelectSome("SELECT username, pontuacao FROM PontuacaoUtilizador where username = $1", [username],
     function (row) {
         return new access.pontuacaoUtil(row.username, row.pontuacao);
     }, cb);
