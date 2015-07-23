@@ -157,7 +157,7 @@ router.post('/:id/edit', function(req, res, next) {
 });
 
 router.post('/find', function(req, res, next){
-
+    db.getAnuncioByFilter()
 });
 
 //TODO

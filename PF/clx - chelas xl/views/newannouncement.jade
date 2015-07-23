@@ -9,17 +9,17 @@ block content
     div.container-fluid
         div.panel.panel-info(id='annoucements-margin-top')
             form(action='/announcements/new', method='post')
-                div.form-group
-                    textarea.form-control(id='newannouncements-div', type='text', placeholder='Título', name='titulo', required)
-                div.form-group
-                    textarea.form-control(id='newannouncements-div', type='text', placeholder='Descrição', name='desc', required)
-                div.form-group
-                    textarea.form-control(id='newannouncements-div',type='text', placeholder='Categoria', name='categoria', required)
-                div.form-group
-                    textarea.form-control(id='newannouncements-div',type='text', placeholder='Localização', name='localizacao', required)
-                div.form-group
-                    textarea.form-control(id='newannouncements-div',type='text', placeholder='Preço', name='preco', required)
-                div.form-group
+                div.form-group(id='newannouncements-div')
+                    textarea.form-control(type='text', placeholder='Título', name='titulo', required)
+                div.form-group(id='newannouncements-div')
+                    textarea.form-control(type='text', placeholder='Descrição', name='desc', required)
+                div.form-group(id='newannouncements-div')
+                    textarea.form-control(type='text', placeholder='Categoria', name='categoria', required)
+                div.form-group(id='newannouncements-div')
+                    textarea.form-control(type='text', placeholder='Localização', name='localizacao', required)
+                div.form-group(id='newannouncements-div')
+                    textarea.form-control(type='text', placeholder='Preço', name='preco', required)
+                div.form-group(id='newannouncements-div')
                     label(id='newannouncement-label') Imagem:
                     input.form-control(type='file', placeholder='Imagem', name='imagem')
                 button(class='btn btn-success', type='submit') Submeter

@@ -173,22 +173,10 @@ access.getPontuacaoUtil = function (username, cb){
     }, cb);
 }
 
-access.getAnuncioByLocalizacao = function (localizacao, cb){
-    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio where localizacao = $1", [localizacao],
-        function (row) {
-            return new access.newAnnounc(row.titulo, row.descricao, row.vendedor, row.categoria, row.fechado, row.preco, row.localizacao);
-        }, cb);
-}
-
-access.getAnuncioByTitulo = function (titulo, cb){
-    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio where titulo like _$1_ or titulo like $2%", [titulo, titulo],
-        function (row) {
-            return new access.newAnnounc(row.titulo, row.descricao, row.vendedor, row.categoria, row.fechado, row.preco, row.localizacao);
-        }, cb);
-}
-
-access.getAnuncioByCategoria = function (categoria, cb){
-    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio where titulo = $1", [categoria],
+access.getAnuncioByFilter = function (localizacao, titulo, categoria,  cb){
+    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao " +
+                  "FROM anuncio " +
+                  "WHERE localizacao = $1 AND (titulo like _$2_ or titulo like $3%) AND categoris = $4", [localizacao, titulo, titulo, categoria],
         function (row) {
             return new access.newAnnounc(row.titulo, row.descricao, row.vendedor, row.categoria, row.fechado, row.preco, row.localizacao);
         }, cb);
