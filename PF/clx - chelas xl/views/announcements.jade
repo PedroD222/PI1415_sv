@@ -2,25 +2,31 @@ extends layout
 include ./utils.jade
 
 block content
-	form(action='/login', method='post')
-		div.form-group
-			input.form-control(type='text', placeholder='Procurar', name='search', required)
-		button(class='btn btn-default', type='submit') Procurar
 
-	div.container-float
-		div.row(style='margin-top: 100px')
-			div.col-md-5(style='left:25%')
-				+lista(list, 'Todos os Anuncios')
-				div(style='float: right')
-					if total > 1
-						ul.pagination
-							if page > 1
-								li
-									a(href='/announcements?page=' + (+page-1))
-										span.glyphicon.glyphicon-arrow-left
-							if total > page
-								li
-									a(href='/announcements?page=' + (+page+1))
-										span.glyphicon.glyphicon-arrow-right
-										
+    div.container-fluid(id='announcementsFilter-containerFluid-div')
+        form(action='/find', method='post')
+            div.form-group
+                input.form-control(type='text', placeholder='Qual a categoria?', name='searchCat')
+            div.form-group
+                input.form-control(type='text', placeholder='O que procura?', name='searchTitle')
+            div.form-group
+                input.form-control(type='text', placeholder='Onde procura?', name='searchPlace')
+            button(class='btn btn-default', type='submit') Procurar
+
+    div.container-float
+        div.row(id='annoucements-table')
+            div.col-md-5(id='annoucements-table-col')
+                +lista(list)
+                div(style='float: right')
+                    if total > 1
+                        ul.pagination
+                            if page > 1
+                                li
+                                    a(href='/announcements?page=' + (+page - 1))
+                                        span.glyphicon.glyphicon-arrow-left
+                            if total > page
+                                li
+                                    a(href='/announcements?page=' + (+page + 1))
+                                        span.glyphicon.glyphicon-arrow-right
+
 //list, user, page
