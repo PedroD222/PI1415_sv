@@ -46,6 +46,20 @@ h3{
     margin-right: 10%;
 }
 
+#announcementsFilter-containerFluid-div{
+    margin-top: 5%;
+    margin-left: 35%;
+    margin-right: 10%;
+}
+
+#annoucements-table-col{
+    left: 25%;
+}
+
+#annoucements-table{
+    margin-top: 5%
+}
+
 .footer{
     position:fixed;
     bottom:0;
