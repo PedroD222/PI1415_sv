@@ -88,21 +88,25 @@ router.post('/new', function(req, res, next) {
         return res.redirect('/announcements/' + an.id);
     });
 });
-
+//TODO cmts
 router.get('/:id', function(req, res, next) {
     if(!req.user) req.user.username = '';
     db.getUser(req.user.username, function(err, user) {
         if(err && err.message !== 'RECORD NOT FOUND') return next(err);
         db.getAnnounc(req.params.id, function(err, ann){
             if(err && err.message !== 'RECORD NOT FOUND') return res.redirect('/announcements');
-            if(user && ann)
-                db.getComentAnnounc(req.params.id, function(err, cmts){
-                   if (err)
-                       return next(err);
+            //if(user && ann)
+            db.getComentAnnounc(req.params.id, function(err, cmts){
+                    console.log("Comments");
+                    if (err){
+                        if (err.message !== 'RECORD NOT FOUND')
+                            return next(err);
+                        cmts = [];
+                    }
                     return res.render('announcement', {Announ: ann, user:user, comments : cmts});
                 });
-            else
-                return res.render('announcement', {Announ: ann, user:user});
+            /*else
+                return res.render('announcement', {Announ: ann, user:user});*/
         });
     });
 });
@@ -124,14 +128,16 @@ router.post('/:id/edit', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann) {
         if(err) return next(err);
         db.getUser(req.user.username, function(err, user) {
-            if(!user.vendedor && ann.autor !== req.user.username) return res.redirect('back');
+            if(!user.username && ann.vendedor !== req.user.username) return res.redirect('back');
             var anuncioEdit = new db.anuncio();
             anuncioEdit = {
-                id:null,
-                titulo:req.body.title,
-                descricao:req.body.desc,
-                autor:req.user
-
+                id          : null,
+                titulo      : req.body.titulo,
+                descricao   : req.body.desc,
+                vendedor    : req.user,
+                preco       : req.body.preco,
+                cidade      : req.body.localizacao,
+                categoria   : req.body.categoria
             };
             console.log(anuncioEdit);
             if(anuncioEdit.titulo = "") {
@@ -145,9 +151,7 @@ router.post('/:id/edit', function(req, res, next) {
             anuncio.descricao = anuncioEdit.descricao;
             anuncio.categorias = anuncioEdit.categoria;
 
-            /*db.updatequeixinha(queixa, function(err){
-                if(err) return next(err);
-            });*/
+
             var commenttext = 'Este anuncio foi editado por '+user.username;
             var comment = {idann: ann.id, comentario:commenttext, username:user.username};
             db.newComment(comment, function(err){

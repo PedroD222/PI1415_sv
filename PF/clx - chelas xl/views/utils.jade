@@ -5,10 +5,10 @@ mixin lista(announc, listtitle)
 		ul(style='list-style-type: none; padding-left: 0px; margin-right: 0px')
 			if announc
 				for a in announc
-					if(!a.fechada)
+					if(!a.fechado)
 						li(style='margin-bottom: 10px; border: 1px solid #CCA300')
 							a(href='/announcements/#{a.id}') #{a.titulo}
-							+likes(a)
+							//+likes(a)
 			else
 				li(style='color: gray') Não Há Anúncios
 				
