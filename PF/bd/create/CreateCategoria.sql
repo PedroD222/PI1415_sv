@@ -1,4 +1,4 @@
--- Table: Categoria
+﻿-- Table: Categoria
 -- DROP TABLE Categoria
 CREATE TABLE Categoria
 (

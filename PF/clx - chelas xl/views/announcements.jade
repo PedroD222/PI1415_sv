@@ -2,6 +2,11 @@ extends layout
 include ./utils.jade
 
 block content
+	form(action='/login', method='post')
+		div.form-group
+			input.form-control(type='text', placeholder='Procurar', name='search', required)
+		button(class='btn btn-default', type='submit') Procurar
+
 	div.container-float
 		div.row(style='margin-top: 100px')
 			div.col-md-5(style='left:25%')
