@@ -2,20 +2,22 @@
 
 block content
 
-    div.container-fluid()
+    div.container-fluid
         div.panel.panel-info(style='margin-top: 100px')
             form(action='/announcements/new', method='post')
                 div.form-group
-                    textarea.form-control(id='', type='text', placeholder='Título', name='titulo', style='resize: none', required)
+                    textarea.form-control(id='newannouncements-div', type='text', placeholder='Título', name='titulo', required)
                 div.form-group
-                    textarea.form-control(id='', type='text', placeholder='Descrição', name='desc', style='resize: none', required)
+                    textarea.form-control(id='newannouncements-div', type='text', placeholder='Descrição', name='desc', required)
                 div.form-group
-                    textarea.form-control(id='',type='text', placeholder='Categoria', name='categoria', style='resize: none', required)
+                    textarea.form-control(id='newannouncements-div',type='text', placeholder='Categoria', name='categoria', required)
                 div.form-group
-                    textarea.form-control(id='',type='text', placeholder='Localização', name='localizacao', style='resize: none', required)
+                    textarea.form-control(id='newannouncements-div',type='text', placeholder='Localização', name='localizacao', required)
                 div.form-group
-                    textarea.form-control(id='',type='text', placeholder='Preço', name='preco', style='resize: none', required)
+                    textarea.form-control(id='newannouncements-div',type='text', placeholder='Preço', name='preco', required)
+                div.form-group
+                    label(id='newannouncements-label') Imagem:
+                    input.form-control(type='file', placeholder='Imagem', name='imagem')
                 button(class='btn btn-success', type='submit') Submeter
-                //div.form-group
-                    input.form-form-control(id='',type='file', placeholder='Imagem', name='imagem')
+
 

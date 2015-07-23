@@ -173,6 +173,27 @@ access.getPontuacaoUtil = function (username, cb){
     }, cb);
 }
 
+access.getAnuncioByLocalizacao = function (localizacao, cb){
+    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio where localizacao = $1", [localizacao],
+        function (row) {
+            return new access.newAnnounc(row.titulo, row.descricao, row.vendedor, row.categoria, row.fechado, row.preco, row.localizacao);
+        }, cb);
+}
+
+access.getAnuncioByTitulo = function (titulo, cb){
+    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio where titulo like _$1_ or titulo like $2%", [titulo, titulo],
+        function (row) {
+            return new access.newAnnounc(row.titulo, row.descricao, row.vendedor, row.categoria, row.fechado, row.preco, row.localizacao);
+        }, cb);
+}
+
+access.getAnuncioByCategoria = function (categoria, cb){
+    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio where titulo = $1", [categoria],
+        function (row) {
+            return new access.newAnnounc(row.titulo, row.descricao, row.vendedor, row.categoria, row.fechado, row.preco, row.localizacao);
+        }, cb);
+}
+
 //funcoes pa criar objects na BD. Chamar callback com o objecto criado
 access.newAnnounc = function(announc, cb){
     var params = [announc.titulo, announc.desc, announc.vendedor, announc.categoria, announc.preco, false, announc.localizacao];

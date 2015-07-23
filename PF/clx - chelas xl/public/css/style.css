@@ -59,6 +59,13 @@ h3{
 #annoucements-table{
     margin-top: 5%
 }
+#newannouncements-div{
+    resize: none;
+}
+
+#newannouncements-label{
+    font-weight: bold;
+}
 
 .footer{
     position:fixed;

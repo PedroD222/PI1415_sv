@@ -161,6 +161,11 @@ router.post('/:id/edit', function(req, res, next) {
         });
     });
 });
+
+router.post('/find', function(req, res, next){
+
+});
+
 //TODO
 /*router.post('/:id/comment', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann) {
