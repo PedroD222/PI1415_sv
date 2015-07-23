@@ -56,14 +56,19 @@ h3{
     left: 25%;
 }
 
-#annoucements-table{
-    margin-top: 5%
+#annoucements-margin-top{
+    margin-top: 2%
 }
-#newannouncements-div{
+
+#newannouncement-div{
     resize: none;
 }
 
-#newannouncements-label{
+#newannouncement-containerFluid-title-div{
+    margin-top: 10%;
+}
+
+#newannouncement-label{
     font-weight: bold;
 }
 

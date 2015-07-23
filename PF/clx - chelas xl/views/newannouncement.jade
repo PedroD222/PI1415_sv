@@ -2,8 +2,12 @@
 
 block content
 
+    div.container-fluid(id='annoucements-margin-top')
+        h4 Dados para Colocar um anuncio no Chelas LX
+
+
     div.container-fluid
-        div.panel.panel-info(style='margin-top: 100px')
+        div.panel.panel-info(id='annoucements-margin-top')
             form(action='/announcements/new', method='post')
                 div.form-group
                     textarea.form-control(id='newannouncements-div', type='text', placeholder='Título', name='titulo', required)
@@ -16,7 +20,7 @@ block content
                 div.form-group
                     textarea.form-control(id='newannouncements-div',type='text', placeholder='Preço', name='preco', required)
                 div.form-group
-                    label(id='newannouncements-label') Imagem:
+                    label(id='newannouncement-label') Imagem:
                     input.form-control(type='file', placeholder='Imagem', name='imagem')
                 button(class='btn btn-success', type='submit') Submeter
 
