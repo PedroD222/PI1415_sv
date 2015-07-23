@@ -198,7 +198,7 @@ access.getAnuncioByCategoria = function (categoria, cb){
 access.newAnnounc = function(announc, cb){
     var params = [announc.titulo, announc.desc, announc.vendedor, announc.categoria, announc.preco, false, announc.localizacao];
 
-    db.ExecuteQuery("INSERT into Anuncio (titulo, descricao, username, categoria, preco, fechado) values($1, $2, $3, $4, $5, $6, $7) returning id",
+    db.ExecuteQuery("INSERT into Anuncio (titulo, descricao, username, categoria, preco, fechado, localizacao) values($1, $2, $3, $4, $5, $6, $7) returning id",
         params,
         function(err, id) {
             if (err)

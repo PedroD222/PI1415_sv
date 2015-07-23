@@ -70,14 +70,8 @@ router.get('/new', function(req, res, next) {
 });
 //falta guardar foto
 router.post('/new', function(req, res, next) {
-    var anuncio = {
-        preco: req.body.preco,
-        descricao: req.body.desc,
-        titulo: req.body.titulo,
-        cidade: req.body.localizacao,
-        categoria: req.body.categoria,
-        vendedor : req.user.username
-    };
+    var anuncio = new db.anuncio(req.body.titulo, req.body.desc,req.user.username,req.body.categoria, false,req.body.preco, req.body.localizacao);
+
     if(anuncio.titulo === '') {
         return res.redirect('back');
     }
