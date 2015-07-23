@@ -94,7 +94,7 @@ router.get('/:id', function(req, res, next) {
     db.getUser(req.user.username, function(err, user) {
         if(err && err.message !== 'RECORD NOT FOUND') return next(err);
         db.getAnnounc(req.params.id, function(err, ann){
-            if(err && err.message !== 'RECORD NOT FOUND') return res.redirect('/anuncios');
+            if(err && err.message !== 'RECORD NOT FOUND') return res.redirect('/announcements');
             if(user && ann)
                 db.getComentAnnounc(req.params.id, function(err, cmts){
                    if (err)

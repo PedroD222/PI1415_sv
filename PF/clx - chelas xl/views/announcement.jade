@@ -9,10 +9,7 @@ block content
 					h3 Titulo
 					p(style='clear: both') #{Announ.titulo}
 					h4 Descrição
-					if !Announ.descricao || !Announ.descricao.length
-						p(style='color: gray') Sem Descrição
-					else
-						p(style='clear: both') #{Announ.descricao}
+						p(style='clear: both') #{Announ.desc}
 					div.container-fluid(style='margin-top: 50px')
 						if user && user.username
 							div.col-md-6

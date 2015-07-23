@@ -158,9 +158,9 @@ access.getCategoria = function (d, cb){
 };
 
 access.getComentAnnounc = function (id, cb){
-	db.SelectSome("SELECT id_comentario, id_anuncio, comentario, username FROM Comentario Where id_anuncio = $1", [id] ,
+	db.SelectSome("SELECT id, id_anuncio, comentario, username FROM Comentario Where id_anuncio = $1", [id] ,
         function (row) {
-            return new access.coment( row.id_anuncio, row.comentario, row.username, row.id_comentario);
+            return new access.coment( row.id_anuncio, row.comentario, row.username, row.id);
         }, cb);
 };
 //row.username n existe e onnome da tabela n se poe TODO atençao
@@ -173,7 +173,7 @@ access.getPontuacaoUtil = function (username, cb){
 
 //funcoes pa criar objects na BD. Chamar callback com o objecto criado
 access.newAnnounc = function(announc, cb){
-    var params = [announc.titulo, announc.desc, announc.vendedor, announc.categoria, false, announc.preco];
+    var params = [announc.titulo, announc.desc, announc.vendedor, announc.categoria, announc.preco, false];
 
     db.ExecuteQuery("INSERT into Anuncio (titulo, descricao, username, categoria, preco, fechado) values($1, $2, $3, $4, $5, $6) returning id",
         params,
@@ -222,7 +222,7 @@ access.newCategoria = function(designacao, cb){
 
 access.newComment = function(comment, cb){
     var params = [comment.id_an, comment.comentario, comment.username];
-    db.ExecuteQuery("INSERT into Comentario (id_anuncio, comentario, username) values($1, $2) returning id_c",
+    db.ExecuteQuery("INSERT into Comentario (id_anuncio, comentario, username) values($1, $2) returning id",
         params,
         function(err, id) {
             if (err)
@@ -234,7 +234,7 @@ access.newComment = function(comment, cb){
                             return cb(err, null);
                     });
 
-            comment.idc = id.id_c;
+            comment.idc = id.id;
             return cb(null, comment);
         });
 };
