@@ -10,7 +10,12 @@ request.post({url : uri, form: myJSONObject}, function (error, response, body){
     console.log(response);
 });
 
-//TODO LOGIN
+var login = {'username' : usernamec, 'password' : myJSONObject.password}
+var uriLogin = "http://localhost:3000/loginReg";
+request.post({url : uriLogin, form: login}, function (error, response, body){
+    console.log(error);
+    console.log(response);
+});
 
 /*
  titulo char(140) NOT NULL,

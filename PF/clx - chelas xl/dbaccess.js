@@ -13,7 +13,7 @@ CREATE TABLE Anuncio
  fechado boolean NOT NULL,
  categoria char(20)
  )*/
-access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, pont, id)
+access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, id)
 {
 	this.id = id;
     this.titulo = titulo;
@@ -21,7 +21,6 @@ access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, po
     this.vendedor = vendedor;
     this.categoria = categoria;
     this.fechado = fechado;
-    this.pont = pont;
 }
 
 /*CREATE TABLE Utilizador
@@ -101,16 +100,16 @@ access.pontuacaoUtil = function(username, pontuacao, id){
 access.getAnnouncs = function (page, cb){
 	//return lista de anuncios, pagina page
     var offset = (page-1) * 10;
-	db.SelectAll("SELECT id, titulo, descricao, username, pontuacao_anuncio, fechado, categoria FROM Anuncio ORDER BY id DESC LIMIT 10 OFFSET "+offset ,
+	db.SelectAll("SELECT id, titulo, descricao, username, fechado, categoria FROM Anuncio ORDER BY id DESC LIMIT 10 OFFSET "+offset ,
     function (row) {
-        return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.pontuacao_anuncio, row.id);
+        return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.id);
     }, cb);
 };
 
 access.getAnnounc = function (id, cb) {
-    db.SelectOne("SELECT id, titulo, descricao, username, pontuacao_anuncio, fechado, categoria FROM Anuncio Where id = $1", [id] ,
+    db.SelectOne("SELECT id, titulo, descricao, username, fechado, categoria FROM Anuncio Where id = $1", [id] ,
         function (row) {
-            return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.pontuacao_anuncio, row.id);
+            return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.id);
         }, cb);
 };
 
@@ -122,17 +121,17 @@ access.getCountAnnounc = function ( cb) {
 };
 
 access.getAnnouncUser = function(user, cb){
-    db.SelectSome("SELECT username, id, titulo, descricao, pontuacao_anuncio, categoria, fechado FROM Anuncio Where username = $1", [user] ,
+    db.SelectSome("SELECT username, id, titulo, descricao, categoria, fechado FROM Anuncio Where username = $1", [user] ,
         function (row) {
-            return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.pontuacao_anuncio, row.id);
+            return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.id);
         }, cb);
 };
 
 access.getAnnouncFavoriteUser = function(user, cb){
-    db.SelectSome("SELECT id, titulo, descricao, Anuncio.username, pontuacao_anuncio, fechado, categoria FROM Anuncio inner join " +
+    db.SelectSome("SELECT id, titulo, descricao, Anuncio.username, fechado, categoria FROM Anuncio inner join " +
                 "AnuncioUtilizadorFavorito on (Anuncio.id = id_anuncio ) Where AnuncioUtilizadorFavorito.username = $1", [user] ,
         function (row) {
-            return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.pontuacao_anuncio, row.id);
+            return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.id);
         }, cb);
 };
 
