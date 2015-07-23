@@ -9,13 +9,14 @@ request.post({url : uri, form: myJSONObject}, function (error, response, body){
     console.log(error);
     console.log(response);
 });
-
+console.log("LOGIN username");
 var login = {'username' : usernamec, 'password' : myJSONObject.password}
 var uriLogin = "http://localhost:3000/loginReg";
-request.post({url : uriLogin, form: login}, function (error, response, body){
-    console.log(error);
-    console.log(response);
-});
+request.get( uriLogin).auth( login.username, login.password, false);
+/*function (error, response, body){
+    console.log("Login "+error);
+    console.log("Login "+response);
+});*/
 
 /*
  titulo char(140) NOT NULL,
@@ -32,6 +33,6 @@ var ann = { 'titulo' : 'Cooler',
 
 var uriann = "http://localhost:3000/announcements/new";
 request.post({url : uriann, form: ann}, function (error, response, body){
-    console.log(error);
-    console.log(response);
+    console.log("Login"+error);
+    console.log("Login"+response);
 });

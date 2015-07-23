@@ -13,11 +13,12 @@ CREATE TABLE Anuncio
  fechado boolean NOT NULL,
  categoria char(20)
  )*/
-access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, id)
+access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, preco, id)
 {
 	this.id = id;
     this.titulo = titulo;
     this.desc = desc;
+    this.preco = preco;
     this.vendedor = vendedor;
     this.categoria = categoria;
     this.fechado = fechado;
@@ -172,9 +173,9 @@ access.getPontuacaoUtil = function (username, cb){
 
 //funcoes pa criar objects na BD. Chamar callback com o objecto criado
 access.newAnnounc = function(announc, cb){
-    var params = [announc.titulo, announc.descricao, announc.username, announc.categoria, false];
+    var params = [announc.titulo, announc.desc, announc.vendedor, announc.categoria, false, announc.preco];
 
-    db.ExecuteQuery("INSERT into Anuncio (titulo, descricao, username, categoria, fechado) values($1, $2, $3, $4, $5) returning id",
+    db.ExecuteQuery("INSERT into Anuncio (titulo, descricao, username, categoria, preco, fechado) values($1, $2, $3, $4, $5, $6) returning id",
         params,
         function(err, id) {
             if (err)

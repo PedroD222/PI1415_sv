@@ -26,7 +26,8 @@ passport.deserializeUser(function(username, done) {
   console.log("deserializeUser");
   db.getUser(username, function(err, user)
   {
-    if(err) return done(err);
+    if(err)
+		return done(err);
 
     user.isAuthenticated = true;	
 

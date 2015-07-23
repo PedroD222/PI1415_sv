@@ -73,7 +73,7 @@ router.post('/new', function(req, res, next) {
     var anuncio = {
         preco: req.body.preco,
         descricao: req.body.desc,
-        titulo: req.user.titulo,
+        titulo: req.body.titulo,
         cidade: req.body.localizacao,
         categoria: req.body.categoria,
         vendedor : req.user.username
