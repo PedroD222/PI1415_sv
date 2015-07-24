@@ -46,6 +46,12 @@ h3{
     margin-right: 10%;
 }
 
+.recover-margin-top{
+    margin-top: 15%;
+    margin-left: 20%;
+    margin-right: 10%;
+}
+
 #announcementsFilter-containerFluid-div{
     margin-top: 5%;
     margin-left: 35%;
@@ -62,6 +68,10 @@ h3{
 
 #newannouncement-div{
     resize: none;
+}
+
+#margin-button-recover{
+    margin-bottom: 2%;
 }
 
 #newannouncement-containerFluid-title-div{
