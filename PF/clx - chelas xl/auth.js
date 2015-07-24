@@ -4,7 +4,7 @@ var db = require('./dbaccess');
 var pass = require('pwd');
 //var mailer = require('nodemailer');
 var mailInfo = require('./config').getConnString();
-var crypto = require('crypto');
+//var crypto = require('crypto');
 
 passport.use(new LocalStrategy(function(username, password, done){
     db.getUser(username, function(err, user) {

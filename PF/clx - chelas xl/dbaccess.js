@@ -117,22 +117,22 @@ access.getAnnounc = function (id, cb) {
 };
 
 access.getCountAnnounc = function ( cb) {
-    db.SelectOne("SELECT Count(id) as contagem FROM Anuncio ", [] ,
+    db.SelectOne("SELECT Count(id) as contagem FROM Anuncio ", [],
         function (row) {
             return row.contagem;
         }, cb);
 };
 
-access.getAnnouncUser = function(user, cb){
-    db.SelectSome("SELECT username, id, titulo, descricao, categoria, fechado, preco, localizacao FROM Anuncio Where username = $1", [user] ,
+access.getAnnouncUser = function(username, cb){
+    db.SelectSome("SELECT username, id, titulo, descricao, categoria, fechado, preco, localizacao FROM Anuncio Where username = $1", [username] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.preco, row.localizacao, row.id);
         }, cb);
 };
 
-access.getAnnouncFavoriteUser = function(user, cb){
+access.getAnnouncFavoriteUser = function(username, cb){
     db.SelectSome("SELECT id, titulo, descricao, Anuncio.username, fechado, categoria, preco, localizacao FROM Anuncio inner join " +
-                "AnuncioUtilizadorFavorito on (Anuncio.id = id_anuncio ) Where AnuncioUtilizadorFavorito.username = $1", [user] ,
+                "AnuncioUtilizadorFavorito on (Anuncio.id = id_anuncio ) Where AnuncioUtilizadorFavorito.username = $1", [username] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado,row.preco, row.localizacao, row.id);
         }, cb);
@@ -152,8 +152,8 @@ access.getUserbyEmail = function (email, cb){
         }, cb);
 };
 
-access.getCategoria = function (d, cb){
-    db.SelectOne("SELECT designacao FROM Categoria Where designacao = $1", [d] ,
+access.getCategoria = function (desig, cb){
+    db.SelectOne("SELECT designacao FROM Categoria Where designacao = $1", [desig] ,
         function (row) {
             return new access.categoria( row.designacao);
         }, cb);
