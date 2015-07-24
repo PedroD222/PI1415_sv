@@ -40,7 +40,7 @@ h3{
     margin-right: 10%;
 }
 
-#loginReg-containerFluid-div{
+.loginReg-containerFluid-div{
     margin-top: 2%;
     margin-left: 35%;
     margin-right: 10%;
@@ -68,6 +68,12 @@ h3{
 
 #newannouncement-div{
     resize: none;
+}
+
+#register-containerFluid-div{
+    margin-top: 2%;
+    margin-left: 25%;
+    margin-right: 10%;
 }
 
 #margin-button-recover{

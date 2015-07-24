@@ -1,0 +1,26 @@
+//
+   Created by João on 24/07/2015.
+extends layout
+block content
+
+   div.container-fluid(id='loginReg-containerFluid-title-div')
+      h1 Registo no Chelas LX
+      mixin TopicInfo(text)
+         li #{text}
+      ul#info
+         +TopicInfo("Coloque o nome.")
+         +TopicInfo("Coloque o email.")
+         +TopicInfo("Coloque a password pretendida.")
+
+   div.container
+      div.col-md-offset-3.col-md-6
+         div.panel.panel-info(id='register-containerFluid-div')
+            div.panel-body
+               form(action='register', method='post')
+                  div
+                     input.form-control(type='text', placeholder='Nome', name='username', required)
+                  div
+                     input.form-control(type='email', placeholder='Email', name='email', required)
+                  div
+                     input.form-control(type='password', placeholder='Password', name='password', required)
+                  button(class='btn btn-success', type='submit') Confirmar
