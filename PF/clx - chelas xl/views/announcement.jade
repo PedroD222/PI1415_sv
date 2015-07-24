@@ -23,11 +23,11 @@ block content
                         if user && user.username
                             div.col-md-6
                                 //TODO subscribe e unsubscribe
-                                //if !queixa.isfollowing
+
                                 div.col-md-6
                                         form(action='/announcements/#{Announ.id}/subscribe', method='post')
                                             button.btn.btn-default Subscrever
-                                //else
+
                                 div.col-md-6
                                         form(action='/announcements/#{Announ.id}/unsubscribe', method='post')
                                             button.btn.btn-default Cancelar
