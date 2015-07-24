@@ -1,16 +1,20 @@
 extends layout
 
 block content
-	div(id='recover-margin-top')
-		h4 Recuperação da Password
-	div.container
-		div.col-md-offset-3.col-md-6
-			//tabela registo
-			div.panel.panel-info(id='recover-margin-top')
-				div.panel-body
-					form(action='/recover', method='post')
-						div(id='margin-button-recover')
-							input.form-control(type='text', placeholder='Nome', name='username', required)
-						div(id='margin-button-recover')
-							input.form-control(type='email', placeholder='Email', name='email', required)
-						button(class='btn btn-success', type='submit') Confirmar
+    div.container-fluid(id='loginReg-containerFluid-title-div')
+        h1 Recuperacao da Password
+        mixin TopicInfo(text)
+            li #{text}
+        ul#information
+            +TopicInfo("Coloque o nome de utilizador com que se registou.")
+            +TopicInfo("Coloque o email cde registo.")
+            +TopicInfo("Sera enviada a password para o seu email.")
+
+    div.container-fluid(id='loginReg-containerFluid-div')
+        div.panel.panel-info
+            form(action='/recover', method='post')
+                div
+                    input.form-control(type='text', placeholder='Nome', name='username', required)
+                div
+                    input.form-control(type='email', placeholder='Email', name='email', required)
+                button(class='btn btn-success', type='submit') Confirmar
