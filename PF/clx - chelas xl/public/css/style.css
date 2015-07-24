@@ -88,6 +88,27 @@ h3{
     font-weight: bold;
 }
 
+#edit-containerFluid-title-div{
+    margin-top: 3%;
+    margin-left: 35%;
+    margin-right: 10%;
+}
+
+#edit-containerFluid-title-div{
+    margin-top: 3%;
+    margin-left: 30%;
+    margin-right: 10%;
+}
+
+#edit-containerFluid-div{
+    margin-left: 40%;
+    margin-right: 10%;
+}
+
+.edit-textarea{
+    resize: none;
+}
+
 .footer{
     position:fixed;
     bottom:0;
