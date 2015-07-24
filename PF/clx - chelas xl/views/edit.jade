@@ -2,19 +2,41 @@
 include ./utils.jade
 //TODO add preço, local categoria and add photos
 block content
-	div.container-fluid
-		div.row(style='margin-top: 100px')
-			div.col-md-5
-				div.row
-					form(action='/announcements/#{Announ.id}/edit', method='post')
-						h3 Titulo
-						textarea.form-control(type='text', placeholder='Titulo', name='title', style='resize: none', required) #{Announ.titulo}
-						h4 Descrição
-						textarea.form-control(type='text', placeholder='Descrição', name='desc', style='resize: none') #{Announ.desc}
-						div.checkbox(style='margin-top: 20px')
-							label
-								input(type='checkbox', name='closed') 
-								p Fechar Anúncio
-						button.btn.btn-default Confirmar
+
+    div.container-fluid(id='edit-containerFluid-title-div')
+        h1 Editor de Anuncios do Chelas LX
+        h5 Pode alterar:
+        mixin TopicInfo(text)
+            li #{text}
+        ul#info
+            +TopicInfo("O titulo do anuncio.")
+            +TopicInfo("A sua descricao.")
+            +TopicInfo("O preco de venda.")
+            +TopicInfo("E ainda adicionar fotos.")
+
+    div.container-fluid(id='edit-containerFluid-div')
+        div.row
+            div.col-md-5
+                div.row
+                    form(action='/announcements/#{Announ.id}/edit', method='post')
+                        h4 Titulo
+                        textarea.form-control(class='edit-textarea', type='text', placeholder='Titulo', name='title', required) #{Announ.titulo}
+                        h4 Descrição
+                        textarea.form-control(class='edit-textarea', type='text', placeholder='Descrição', name='desc') #{Announ.desc}
+                        h4 Preco
+                        textarea.form-control(class='edit-textarea', type='text', placeholder='Preço', name='preco') #{Announ.preco}
+                        h4 Categoria
+                        textarea.form-control(class='edit-textarea', type='text', placeholder='Categoria', name='categoria') #{Announ.categoria}
+                        h4 Localicade
+                        textarea.form-control(class='edit-textarea', type='text', placeholder='Localização', name='localizacao') #{Announ.localizacao}
+                        h4 Fotos
+                        div.form-group
+                            label(id='newannouncement-label') Imagem:
+                            input.form-control(type='file', placeholder='Foto', name='fotos')
+                        div.checkbox
+                            label
+                                input(type='checkbox', name='closed')
+                                p Fechar Anúncio
+                        button.btn.btn-default Confirmar
 
 //Announ, user

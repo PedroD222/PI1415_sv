@@ -163,7 +163,10 @@ router.post('/:id/edit', function(req, res, next) {
 });
 
 router.post('/find', function(req, res, next){
-    db.getAnuncioByFilter()
+    db.getAnuncioByFilter(req.body.localizacao, req.body.titulo, req.body.categia, function(err, ann) {
+        if (err) return next(err);
+
+    })
 });
 
 //TODO
