@@ -16,6 +16,9 @@ block content
                     p(style='clear: both') #{Announ.categoria}
                     h4 Cidade
                     p(style='clear: both') #{Announ.localizacao}
+                    h4 Vendedor:
+                    h5
+                        p #{Announ.vendedor}
                     div.container-fluid(style='margin-top: 50px')
                         if user && user.username
                             div.col-md-6
@@ -44,8 +47,8 @@ block content
                                     p #{cm.username}
                                 div.col-md-9
                                     p #{cm.comentario}
+                    if user && user.username
                         li.row
                             form(action='/announcements/#{Announ.id}/comment', method='post')
                                 textarea.form-control(type='text', placeholder='Comentário', name='comment', style='resize: none', required)
                                 button.btn.btn-default.mybutton(style='float: right') Comentar
-                        li

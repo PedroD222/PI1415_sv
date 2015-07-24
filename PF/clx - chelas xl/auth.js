@@ -73,7 +73,8 @@ module.exports = function(app)
 			//user.gestor = false;
 			console.log(user);
 			db.newUser(user, function(err) {
-				if(err) return next(err);
+				if(err) return res.render('error', {error : err});
+                //next(err);
 				req.login(user, function(err){
 					console.log(err);
 					if(err) return res.redirect('/');
