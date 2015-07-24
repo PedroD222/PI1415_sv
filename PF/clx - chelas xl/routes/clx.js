@@ -110,8 +110,8 @@ router.get('/:id', function(req, res, next) {
 router.get('/:id/edit', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann){
         if(err) return next(err);
-        if(ann.autor !== req.user.username)	return res.redirect('/announcements/' + req.params.id);
-        if(err) return next(err);
+        if(ann.vendedor !== req.user.username)	return res.redirect('/announcements/' + req.params.id);
+        //if(err) return next(err);
         db.getUser(req.user.username, function(err, user){
             if(err) return next(err);
             return res.render('edit', { Announ : ann, user : user});
@@ -124,34 +124,39 @@ router.post('/:id/edit', function(req, res, next) {
         if(err) return next(err);
         db.getUser(req.user.username, function(err, user) {
             if(!user.username && ann.vendedor !== req.user.username) return res.redirect('back');
-            var anuncioEdit = new db.anuncio();
-            anuncioEdit = {
-                id          : null,
+
+            var anuncioEdit = {
+                id          : req.params.id,
                 titulo      : req.body.titulo,
-                descricao   : req.body.desc,
-                vendedor    : req.user,
+                desc        : req.body.desc,
                 preco       : req.body.preco,
-                cidade      : req.body.localizacao,
-                categoria   : req.body.categoria
+                localizacao : req.body.localizacao,
+                categoria   : req.body.categoria,
+                fechado     : req.body.closed
             };
+            //TODO ann exists
             console.log(anuncioEdit);
-            if(anuncioEdit.titulo = "") {
+            if(anuncioEdit.titulo == "" && anuncioEdit.desc == "" && anuncioEdit.categoria == ""
+                && anuncioEdit.localizacao == "" && anuncioEdit.preco == "") {
                 return res.render('back');
             }
-            /*if(anuncioEdit.fechada === 'on')
-                ann.fechada = true;
+            if(anuncioEdit.fechado === 'on')
+                ann.fechado = true;
             else
-                ann.fechada = false;*/
-            anuncio.titulo = anuncioEdit.titulo;
-            anuncio.descricao = anuncioEdit.descricao;
-            anuncio.categorias = anuncioEdit.categoria;
+                ann.fechado = false;
+            ann.titulo = anuncioEdit.titulo;
+            ann.desc = anuncioEdit.desc;
+            ann.categoria = anuncioEdit.categoria
+            ann.preco = anuncioEdit.preco;
+            ann.localizacao = anuncioEdit.localizacao
 
+            //TODO update
 
             var commenttext = 'Este anuncio foi editado por '+user.username;
-            var comment = {idann: ann.id, comentario:commenttext, username:user.username};
+            /*var comment = {idann: ann.id, comentario:commenttext, username:user.username};
             db.newComment(comment, function(err){
                 if(err) return next(err);
-            });
+            });*/
             return res.redirect('/announcements');
         });
     });

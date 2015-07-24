@@ -2,7 +2,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var db = require('./dbaccess');
 var pass = require('pwd');
-var mailer = require('nodemailer');
+//var mailer = require('nodemailer');
 var mailInfo = require('./config').getConnString();
 var crypto = require('crypto');
 

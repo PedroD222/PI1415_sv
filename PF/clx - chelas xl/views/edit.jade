@@ -1,25 +1,20 @@
 ﻿extends layout
 include ./utils.jade
-
+//TODO add preço, local categoria and add photos
 block content
-	div.container-float
+	div.container-fluid
 		div.row(style='margin-top: 100px')
 			div.col-md-5
 				div.row
-					form(action='/announcements/#{ann.id}/edit', method='post')
+					form(action='/announcements/#{Announ.id}/edit', method='post')
 						h3 Titulo
-						textarea.form-control(type='text', placeholder='Titulo', name='title', style='resize: none', required) #{queixa.titulo}
-
+						textarea.form-control(type='text', placeholder='Titulo', name='title', style='resize: none', required) #{Announ.titulo}
 						h4 Descrição
-						if !queixa.descricao || !queixa.descricao.length
-							textarea.form-control(type='text', placeholder='Descrição', name='desc', style='resize: none')
-						else
-							textarea.form-control(type='text', placeholder='Descrição', name='desc', style='resize: none') #{queixa.descricao}
+						textarea.form-control(type='text', placeholder='Descrição', name='desc', style='resize: none') #{Announ.desc}
 						div.checkbox(style='margin-top: 20px')
 							label
 								input(type='checkbox', name='closed') 
-								p Fechar queixinha
+								p Fechar Anúncio
 						button.btn.btn-default Confirmar
-						
-//name ='closed'
-//queixa.fechada
+
+//Announ, user
