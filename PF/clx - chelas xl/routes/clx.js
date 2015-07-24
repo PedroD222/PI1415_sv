@@ -153,17 +153,14 @@ router.post('/:id/edit', function(req, res, next) {
             //TODO update
 
             var commenttext = 'Este anuncio foi editado por '+user.username;
-            /*var comment = {idann: ann.id, comentario:commenttext, username:user.username};
-            db.newComment(comment, function(err){
-                if(err) return next(err);
-            });*/
+
             return res.redirect('/announcements');
         });
     });
 });
 
 router.post('/find', function(req, res, next){
-    db.getAnuncioByFilter(req.body.localizacao, req.body.titulo, req.body.categia, function(err, ann) {
+    db.getAnuncioByFilter(req.body.localizacao, req.body.titulo, req.body.categoria, function(err, ann) {
         if (err) return next(err);
 
     })

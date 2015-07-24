@@ -178,7 +178,7 @@ access.getAnuncioByFilter = function (localizacao, titulo, categoria,  cb){
                   "FROM anuncio " +
                   "WHERE localizacao = $1 AND (titulo like _$2_ or titulo like $3%) AND categoris = $4", [localizacao, titulo, titulo, categoria],
         function (row) {
-            return new access.anuncio(row.titulo, row.descricao, row.vendedor, row.categoria, row.fechado, row.preco, row.localizacao);
+            return new access.anuncio(row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.preco, row.localizacao, row.id);
         }, cb);
 }
 
