@@ -39,11 +39,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/dashboard', function(req, res, next) {
 
-    /*db.getUser(req.user.username, function(err, user){
-        if(err) {
-            if(err.message !== 'RECORD NOT FOUND')
-                return next(err);
-        }*/
         db.getAnnouncUser(req.user.username, function(err, annUser){
             console.log("User dash" + req.user);
             if(err) {
@@ -60,7 +55,6 @@ router.get('/dashboard', function(req, res, next) {
                 return res.render('dashboard', {user: req.user, annUser : annUser, annFavorite : favorite});
             });
         });
-    //});
 });
 
 
@@ -68,7 +62,8 @@ router.get('/new', function(req, res, next) {
     console.log('GOT TO NEW');
     return res.render('newannouncement', { user: req.user});
 });
-//falta guardar foto
+
+// TODO falta guardar foto
 router.post('/new', function(req, res, next) {
     var anuncio = new db.anuncio(req.body.titulo, req.body.desc,
         req.user.username,req.body.categoria, false, req.body.preco, req.body.localizacao);
@@ -83,6 +78,7 @@ router.post('/new', function(req, res, next) {
         return res.redirect('/announcements/' + an.id);
     });
 });
+
 //TODO cmts
 router.get('/:id', function(req, res, next) {
     if(!req.user) req.user.username = '';
@@ -111,7 +107,7 @@ router.get('/:id/edit', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann){
         if(err) return next(err);
         if(ann.vendedor !== req.user.username)	return res.redirect('/announcements/' + req.params.id);
-        //if(err) return next(err);
+
         db.getUser(req.user.username, function(err, user){
             if(err) return next(err);
             return res.render('edit', { Announ : ann, user : user});

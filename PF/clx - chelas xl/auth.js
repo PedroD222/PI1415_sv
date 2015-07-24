@@ -54,7 +54,6 @@ module.exports = function(app)
 
 	app.get('/loginReg', function (req, res, next) {
 		if(req.user.username) return res.redirect('/');
-		//return res.render('LoginReg', {user: req.user});
 		return res.render('LoginReg');
 	});
 
