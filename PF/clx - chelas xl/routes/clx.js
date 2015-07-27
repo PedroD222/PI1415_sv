@@ -159,8 +159,9 @@ router.post('/:id/edit', function(req, res, next) {
 });
 
 router.post('/find', function(req, res, next){
-    db.getAnuncioByFilter(req.body.searchPlace, req.body.searchTitle, req.body.searchCat, function(err, ann) {
+    db.getAnnounByFilter(req.body.searchPlace, req.body.searchTitle, req.body.searchCat, function(err, ann) {
         if (err) return next(err);
+        console.log("lista"+ list);
         return res.render('announcements',{list : ann, user : req.user});
     })
 });

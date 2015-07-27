@@ -173,7 +173,7 @@ access.getPontuacaoUtil = function (username, cb){
     }, cb);
 }
 
-access.getAnuncioByFilter = function (localizacao, titulo, categoria,  cb){
+access.getAnnounByFilter = function (localizacao, titulo, categoria,  cb){
     db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao " +
                   "FROM anuncio " +
                   "WHERE localizacao = $1 AND (titulo like _$2_ or titulo like $3%) AND categoris = $4", [localizacao, titulo, titulo, categoria],
