@@ -3,7 +3,15 @@
 block content
 
     div.container-fluid(id='annoucements-margin-top')
-        h4 Dados para Colocar um anuncio no Chelas LX
+        h1 Dados para Colocar um anuncio no Chelas LX
+        mixin TopicInfo(text)
+            li #{text}
+        ul#info
+            +TopicInfo("Preencha com um titulo adequado ao que quer vender.")
+            +TopicInfo("Coloque uma dercrição que descreva bem o seu produto.")
+            +TopicInfo("Categoria em que se insere o produto a vender.")
+            +TopicInfo("Local de venda do produto.")
+            +TopicInfo("Preco adequado a qualidade do produto.")
 
 
     div.container-fluid
