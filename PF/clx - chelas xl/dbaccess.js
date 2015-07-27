@@ -32,11 +32,11 @@ access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, pr
  gestor boolean NOT NULL,
  hash text NOT NULL,
  salt text NOT NULL,*/
-access.user = function utilizador(username, email, gestor, hash, salt)
+access.user = function utilizador(username, email, hash, salt)
 {
 	this.username = username;
     this.email = email;
-    this.gestor = gestor;
+    //this.gestor = gestor;
     this.hash = hash;
     this.salt = salt;
 }
@@ -139,16 +139,16 @@ access.getAnnouncFavoriteUser = function(username, cb){
 };
 
 access.getUser = function (name, cb){
-    db.SelectOne("SELECT username, email, gestor, hash, salt FROM utilizador Where username = $1", [name] ,
+    db.SelectOne("SELECT username, email, hash, salt FROM utilizador Where username = $1", [name] ,
         function (row) {
-            return new access.user( row.username, row.email, row.gestor, row.hash, row.salt);
+            return new access.user( row.username, row.email, row.hash, row.salt);
         }, cb);
 };
 
 access.getUserbyEmail = function (email, cb){
-    db.SelectOne("SELECT username, email, gestor, hash, salt FROM Utilizador Where email = $1", [email] ,
+    db.SelectOne("SELECT username, email, hash, salt FROM Utilizador Where email = $1", [email] ,
         function (row) {
-            return new access.user( row.username, row.email, row.gestor, row.hash, row.salt);
+            return new access.user( row.username, row.email, row.hash, row.salt);
         }, cb);
 };
 
@@ -210,8 +210,8 @@ access.newAnnounc = function(announc, cb){
 
 access.newUser = function(user, cb){
 
-    var params = [user.username, user.hash, user.salt, user.email, false];
-    db.ExecuteQuery("INSERT into utilizador(username, hash, salt, email, gestor) values($1, $2, $3, $4, $5)",
+    var params = [user.username, user.hash, user.salt, user.email];
+    db.ExecuteQuery("INSERT into utilizador(username, hash, salt, email) values($1, $2, $3, $4)",
         params,
         function(err) {
             if (err)
