@@ -4,7 +4,7 @@ include ./utils.jade
 block content
 
     div.container-fluid(id='announcementsFilter-containerFluid-div')
-        form(action='/find', method='post')
+        form(action='/announcements/find', method='post')
             div.form-group
                 input.form-control(type='text', placeholder='Qual a categoria?', name='searchCat')
             div.form-group

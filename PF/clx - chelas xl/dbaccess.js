@@ -250,5 +250,26 @@ access.newComment = function(comment, cb){
             return cb(null, comment);
         });
 };
+/*id          : req.params.id,
+ titulo      : req.body.titulo,
+ desc        : req.body.desc,
+ preco       : req.body.preco,
+ localizacao : req.body.localizacao,
+ categoria   : req.body.categoria,
+ fechado     : req.body.closed*/
+access.updateAnn = function(ann, cb){
+    var params = [ann.titulo, ann.desc, ann.categoria, ann.preco, ann.localizacao, ann.fechado, ann.id];
+    db.ExecuteQuery("update Anuncio set titulo = $1, descricao = $2, categoria = $3, preco = $4, localizacao = $5, fechado = $6 where id = $7",
+        params,
+        function(err, id) {
+            if (err)
+                return cb(err, null);
+            access.getAnnounc(ann.id, function (err, c){
+                    if (err)
+                        return cb(err, null);
+                });
+            return cb(null, ann);
+        });
+};
 
 module.exports = access;
