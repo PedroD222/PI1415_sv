@@ -109,6 +109,16 @@ h3{
     resize: none;
 }
 
+.buttons{
+    display:inline-block;
+}
+
+#announcement-comment{
+    resize: none;
+    width: 95%;
+    margin-left: 2%;
+}
+
 .footer{
     position:fixed;
     bottom:0;

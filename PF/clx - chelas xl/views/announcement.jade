@@ -2,11 +2,14 @@ extends layout
 include ./utils.jade
 //comments, user, Announ
 block content
+    div.container-fluid(id='annoucements-margin-top')
+        h1 Detalhes do Anuncio
+
     div.container-float
-        div.row(style='margin-top: 100px')
+        div.row(style='annoucements-margin-top')
             div.col-md-5
                 div.row
-                    h3 Título
+                    h4 Título
                     p(style='clear: both') #{Announ.titulo}
                     h4 Descrição
                     p(style='clear: both') #{Announ.desc}
@@ -17,26 +20,17 @@ block content
                     h4 Cidade
                     p(style='clear: both') #{Announ.localizacao}
                     h4 Vendedor:
-                    h5
-                        p #{Announ.vendedor}
-                    div.container-fluid(style='margin-top: 50px')
+                    p #{Announ.vendedor)
                         if user && user.username
-                            div.col-md-6
-                                //TODO subscribe e unsubscribe
+                            div
+                                form.buttons(action='/announcements/#{Announ.id}/subscribe', method='post')
+                                    button.btn.btn-default Subscrever
+                                form.buttons(action='/announcements/#{Announ.id}/unsubscribe', method='post')
+                                    button.btn.btn-default Cancelar Subscricao
+                                if user.username === Announ.vendedor
+                                    form.buttons(action='/announcements/#{Announ.id}/edit', method='get')
+                                        button.btn.btn-default.inline Editar
 
-                                div.col-md-6
-                                        form(action='/announcements/#{Announ.id}/subscribe', method='post')
-                                            button.btn.btn-default Subscrever
-
-                                div.col-md-6
-                                        form(action='/announcements/#{Announ.id}/unsubscribe', method='post')
-                                            button.btn.btn-default Cancelar
-                                if user.gestor || user.username === Announ.vendedor
-                                    div.col-md-6
-                                        form(action='/announcements/#{Announ.id}/edit', method='get')
-                                            button.btn.btn-default.inline Editar
-                            div.col-md-6
-                                +likes(Announ)
             div.col-md-1
             div.col-md-5
                 div.row
@@ -50,5 +44,5 @@ block content
                     if user && user.username
                         li.row
                             form(action='/announcements/#{Announ.id}/comment', method='post')
-                                textarea.form-control(type='text', placeholder='Comentário', name='comment', style='resize: none', required)
-                                button.btn.btn-default.mybutton(style='float: right') Comentar
+                                textarea.form-control(id='announcement-comment', type='text', placeholder='Comentário', name='comment', required)
+                                button.btn.btn-default.mybutton(style='float: right') +Comentar
