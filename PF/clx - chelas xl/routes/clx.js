@@ -148,7 +148,7 @@ router.post('/:id/edit', function(req, res, next) {
 
             db.updateAnn(ann,  function(err, ann){
                 if(err) return next(err);
-                return res.render('edit', { Announ : ann, user : user});
+                return res.redirect('/announcements/'+req.params.id);
             });
 
             var commenttext = 'Este anuncio foi editado por '+user.username;

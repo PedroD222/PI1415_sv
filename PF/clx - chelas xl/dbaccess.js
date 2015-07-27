@@ -162,7 +162,7 @@ access.getCategoria = function (desig, cb){
 access.getComentAnnounc = function (id, cb){
 	db.SelectSome("SELECT id, id_anuncio, comentario, username FROM Comentario Where id_anuncio = $1", [id] ,
         function (row) {
-            return new access.coment( row.id_anuncio, row.comentario, row.username, row.id);
+            return new access.comment( row.id_anuncio, row.comentario, row.username, row.id);
         }, cb);
 };
 //row.username n existe e onnome da tabela n se poe TODO atençao
@@ -176,7 +176,7 @@ access.getPontuacaoUtil = function (username, cb){
 access.getAnnounByFilter = function (localizacao, titulo, categoria,  cb){
     db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao " +
                   "FROM anuncio " +
-                  "WHERE localizacao = $1 AND (titulo like _$2_ or titulo like $3%) AND categoris = $4", [localizacao, titulo, titulo, categoria],
+                  "WHERE localizacao = $1 AND (titulo like _$2_ or titulo like $3%) AND categoria = $4", [localizacao, titulo, titulo, categoria],
         function (row) {
             return new access.anuncio(row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.preco, row.localizacao, row.id);
         }, cb);
@@ -234,7 +234,7 @@ access.newCategoria = function(designacao, cb){
 
 access.newComment = function(comment, cb){
     var params = [comment.id_an, comment.comentario, comment.username];
-    db.ExecuteQuery("INSERT into Comentario (id_anuncio, comentario, username) values($1, $2) returning id",
+    db.ExecuteQuery("INSERT into Comentario (id_anuncio, comentario, username) values($1, $2, $3) returning id",
         params,
         function(err, id) {
             if (err)
