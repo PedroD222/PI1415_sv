@@ -82,20 +82,21 @@ router.post('/new', function(req, res, next) {
 //TODO cmts
 router.get('/:id', function(req, res, next) {
     if(!req.user) req.user.username = '';
-    db.getUser(req.user.username, function(err, user) {
+    db.getUser(req.user.username, function(err, usr) {
         if(err && err.message !== 'RECORD NOT FOUND') return next(err);
         db.getAnnounc(req.params.id, function(err, ann){
             if(err && err.message !== 'RECORD NOT FOUND') return res.redirect('/announcements');
-            //if(user && ann)
+            //if( ann)
             db.getComentAnnounc(req.params.id, function(err, cmts){
-                    console.log("Comments");
+
                     if (err){
                         if (err.message !== 'RECORD NOT FOUND')
                             return next(err);
-                        cmts = [];
+                        //return res.render('announcement', {Announ: ann, user: req.user, comments : []});
                     }
-                    return res.render('announcement', {Announ: ann, user:user, comments : cmts});
-                });
+                    console.log("Comments"+cmts[0].coment);
+                    return res.render('announcement', {Announ: ann, user: req.user, comments : cmts});
+            });
             /*else
                 return res.render('announcement', {Announ: ann, user:user});*/
         });
