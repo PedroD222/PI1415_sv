@@ -130,7 +130,7 @@ access.getAnnouncUser = function(username, cb){
 
 access.getAnnouncFavoriteUser = function(username, cb){
     db.SelectSome("SELECT id, titulo, descricao, Anuncio.username, fechado, categoria, preco, localizacao FROM Anuncio inner join " +
-                "AnuncioUtilizadorFavorito on (Anuncio.id = id_anuncio ) Where AnuncioUtilizadorFavorito.username = $1", [username] ,
+                "AnuncioUtilizadorFavorito on Anuncio.id = id_anuncio Where AnuncioUtilizadorFavorito.username = $1", [username] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado,row.preco, row.localizacao, row.id);
         }, cb);
@@ -206,6 +206,14 @@ access.newAnnounc = function(announc, cb){
         });
 };
 
+access.newAnnouncFavorite = function(announc, user, cb){
+    var params = [announc.id, user.username];
+
+    db.ExecuteQuery("INSERT into anuncioutilizadorfavorito (id_anuncio, username) values($1, $2)",
+        params,
+         cb);
+};
+
 access.newUser = function(user, cb){
 
     var params = [user.username, user.hash, user.salt, user.email];
@@ -249,6 +257,14 @@ access.newComment = function(comment, cb){
 access.updateAnn = function(ann, cb){
     var params = [ann.titulo, ann.desc, ann.categoria, ann.preco, ann.localizacao, ann.fechado, ann.id];
     db.ExecuteQuery("UPDATE anuncio SET titulo = $1, descricao = $2, categoria = $3, preco = $4, localizacao = $5, fechado = $6 WHERE id = $7",
+        params,
+        cb);
+};
+
+access.delAnnounFavorite = function(announc, user, cb){
+    var params = [announc.id, user.username];
+
+    db.ExecuteQuery("delete from anuncioutilizadorfavorito where id_anuncio = $1 and username = $2",
         params,
         cb);
 };

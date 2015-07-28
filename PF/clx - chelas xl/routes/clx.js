@@ -85,19 +85,26 @@ router.get('/:id', function(req, res, next) {
         if(err && err.message !== 'RECORD NOT FOUND') return next(err);
         db.getAnnounc(req.params.id, function(err, ann){
             if(err && err.message !== 'RECORD NOT FOUND') return res.redirect('/announcements');
-            //if( ann)
-            db.getComentAnnounc(req.params.id, function(err, cmts){
 
+            db.getComentAnnounc(req.params.id, function(err, cmts){
                     if (err){
                         if (err.message !== 'RECORD NOT FOUND')
                             return next(err);
-                        //return res.render('announcement', {Announ: ann, user: req.user, comments : []});
                     }
-
-                    return res.render('announcement', {Announ: ann, user: req.user, comments : cmts});
+                    if (ann.vendedor !== req.user.username)
+                        db.getAnnouncFavoriteUser( req.user.username, function(err, favorites){
+                            if (err) {
+                                if (err.message !== 'RECORD NOT FOUND')
+                                    return next(err);
+                            }
+                            //TODO favorites
+                            if (favorites && favorites.username && favorites.id_anuncio)
+                                return res.render('announcement', {Announ: ann, user: req.user, comments : cmts, subscribed : true});
+                            else
+                                return res.render('announcement', {Announ: ann, user: req.user, comments : cmts, subscribed : false});
+                        });
+                    return res.render('announcement', {Announ: ann, user: req.user, comments : cmts, subscribed : false});
             });
-            /*else
-                return res.render('announcement', {Announ: ann, user:user});*/
         });
     });
 });
@@ -140,17 +147,35 @@ router.post('/:id/edit', function(req, res, next) {
                 anuncioEdit.fechado = true;
             else
                 anuncioEdit.fechado = false;
-
             db.updateAnn(anuncioEdit,  function(err, a) {
                 if (err) return next(err);
-                /*db.getComentAnnounc(anuncioEdit.id, function (err, cmts) {
-                    if (err)
-                        if (err.message !== 'RECORD NOT FOUND')
-                            return next(err);*/
                 return res.redirect('/announcements');
-                    /*if (a === 1)
-                        return res.render('announcement', { Announ : ann, comments : cmts, user : req.user});
-                });*/
+            });
+        });
+    });
+});
+
+router.post('/:id/subscribe', function(req, res, next) {
+    db.getAnnounc(req.params.id, function(err, ann) {
+        if(err) return next(err);
+        db.getUser(req.user.username, function(err, u) {
+            if (err) return next(err);
+            db.newAnnouncFavorite(ann, u, function(err, fav) {
+                if (err) return next(err);
+                return res.redirect('/'+ann.id);
+            });
+        });
+    });
+});
+
+router.post('/:id/unsubscribe', function(req, res, next) {
+    db.getAnnounc(req.params.id, function(err, ann) {
+        if(err) return next(err);
+        db.getUser(req.user.username, function(err, u) {
+            if (err) return next(err);
+            db.delAnnounFavorite(ann, u, function(err, f) {
+                if (err) return next(err);
+
             });
         });
     });
@@ -161,7 +186,7 @@ router.post('/find', function(req, res, next){
         if (err) return next(err);
         console.log("lista"+ list);
         return res.render('announcements',{list : ann, user : req.user});
-    })
+    });
 });
 
 router.post('/:id/comment', function(req, res, next) {
