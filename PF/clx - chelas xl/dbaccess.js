@@ -213,23 +213,14 @@ access.newUser = function(user, cb){
     var params = [user.username, user.hash, user.salt, user.email];
     db.ExecuteQuery("INSERT into utilizador(username, hash, salt, email) values($1, $2, $3, $4)",
         params,
-        function(err) {
-            if (err)
-                return cb(err);
-            return cb(null, user);
-        });
+        cb);
 };
 
 access.newCategoria = function(designacao, cb){
     var params = [ designacao];
     db.ExecuteQuery("INSERT into categoria (designacao) values( $1 )",
         params,
-        function(err) {
-            if (err)
-                return cb(err);
-
-            return cb(null, designacao);
-        });
+        cb);
 };
 
 access.newComment = function(comment, cb){
@@ -259,17 +250,9 @@ access.newComment = function(comment, cb){
  fechado     : req.body.closed*/
 access.updateAnn = function(ann, cb){
     var params = [ann.titulo, ann.desc, ann.categoria, ann.preco, ann.localizacao, ann.fechado, ann.id];
-    db.ExecuteQuery("update Anuncio set titulo = $1, descricao = $2, categoria = $3, preco = $4, localizacao = $5, fechado = $6 where id = $7",
+    db.ExecuteQuery("UPDATE anuncio SET titulo = $1, descricao = $2, categoria = $3, preco = $4, localizacao = $5, fechado = $6 WHERE id = $7",
         params,
-        function(err, id) {
-            if (err)
-                return cb(err, null);
-            access.getAnnounc(ann.id, function (err, c){
-                    if (err)
-                        return cb(err, null);
-                });
-            return cb(null, ann);
-        });
+        cb);
 };
 
 module.exports = access;

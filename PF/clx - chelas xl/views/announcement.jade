@@ -3,9 +3,9 @@ include ./utils.jade
 //comments, user, Announ
 block content
     div.container-fluid(id='annoucements-margin-top')
-        h1 Detalhes do Anuncio
+        h1 Detalhes do Anúncio
 
-    div.container-float
+    div.container-fluid
         div.row(style='annoucements-margin-top')
             div.col-md-5
                 div.row
@@ -33,32 +33,14 @@ block content
 
             div.col-md-1
             div.col-md-5
-
-                //div.row
-                    ul(style='list-style-type: none')
-                            //li.row
-                            for cm in comments
-                                li.row
-                                    div.col-md-3
-                                        p #{cm.username}
-                                    div.col-md-9
-                                        p #{cm.coment}
-                    div.panel.panel-default
-                        //div class="panel panel-default">
-                            <div class="panel-heading">Panel heading without title</div>
-                            <div class="panel-body">
-                            Panel content
-                            </div>
-                        //</div>
-                        //ul(style='list-style-type: none')
-                            li
-                        //each cm in comments
-                            div.panel-heading
-                                h5 #{cm.username}
-                            div.panel-body
-                               h5 #{cm.coment}
-                    if user && user.username
-                        li.row
-                                form(action='/announcements/#{Announ.id}/comment', method='post')
-                                    textarea.form-control(id='announcement-comment', type='text', placeholder='Comentário', name='comment', required)
-                                    button.btn.btn-default.mybutton(style='float: right') +Comentar
+                div.panel.panel-default
+                    each cm in comments
+                        div.panel-heading
+                            h5 #{cm.username}
+                        div.panel-body
+                           h5 #{cm.coment}
+                if user && user.username
+                    div.row
+                        form(action='/announcements/#{Announ.id}/comment', method='post')
+                            textarea.form-control(id='announcement-comment', type='text', placeholder='Comentário', name='comment', required)
+                            button.btn.btn-default.mybutton(style='float: right') +Comentar

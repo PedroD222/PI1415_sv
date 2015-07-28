@@ -79,7 +79,6 @@ router.post('/new', function(req, res, next) {
     });
 });
 
-//TODO cmts
 router.get('/:id', function(req, res, next) {
     if(!req.user) req.user.username = '';
     db.getUser(req.user.username, function(err, usr) {
@@ -94,7 +93,7 @@ router.get('/:id', function(req, res, next) {
                             return next(err);
                         //return res.render('announcement', {Announ: ann, user: req.user, comments : []});
                     }
-                    console.log("Comments"+cmts[0].coment);
+
                     return res.render('announcement', {Announ: ann, user: req.user, comments : cmts});
             });
             /*else
@@ -116,6 +115,7 @@ router.get('/:id/edit', function(req, res, next) {
     });
 });
 
+//redirect para a pagina do anuncio cm fzr
 router.post('/:id/edit', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann) {
         if(err) return next(err);
@@ -131,30 +131,27 @@ router.post('/:id/edit', function(req, res, next) {
                 categoria   : req.body.categoria,
                 fechado     : req.body.closed
             };
-
             console.log(anuncioEdit);
             if(anuncioEdit.titulo == "" && anuncioEdit.desc == "" && anuncioEdit.categoria == ""
                 && anuncioEdit.localizacao == "" && anuncioEdit.preco == "") {
                 return res.render('back');
             }
             if(anuncioEdit.fechado === 'on')
-                ann.fechado = true;
+                anuncioEdit.fechado = true;
             else
-                ann.fechado = false;
-            ann.titulo = anuncioEdit.titulo;
-            ann.desc = anuncioEdit.desc;
-            ann.categoria = anuncioEdit.categoria
-            ann.preco = anuncioEdit.preco;
-            ann.localizacao = anuncioEdit.localizacao
+                anuncioEdit.fechado = false;
 
-            db.updateAnn(ann,  function(err, ann){
-                if(err) return next(err);
-                return res.redirect('/announcements/'+req.params.id);
+            db.updateAnn(anuncioEdit,  function(err, a) {
+                if (err) return next(err);
+                /*db.getComentAnnounc(anuncioEdit.id, function (err, cmts) {
+                    if (err)
+                        if (err.message !== 'RECORD NOT FOUND')
+                            return next(err);*/
+                return res.redirect('/announcements');
+                    /*if (a === 1)
+                        return res.render('announcement', { Announ : ann, comments : cmts, user : req.user});
+                });*/
             });
-
-            var commenttext = 'Este anuncio foi editado por '+user.username;
-            console.log(commenttext);
-            return res.redirect('/announcements');
         });
     });
 });

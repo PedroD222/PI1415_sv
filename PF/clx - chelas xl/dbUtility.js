@@ -80,9 +80,9 @@ function dbExecuteQuery(query, queryParams, cb) {
             done();
             if(err) 
                 return cb( err);
+            console.log("Rows"+result.rowCount);
             if(result.rowCount != 1) 
                 return cb(new Error("Cannot executeQuery"), null);
-            //console.log(result.rows[0])
             cb(null, result.rows[0]);
         });
     });

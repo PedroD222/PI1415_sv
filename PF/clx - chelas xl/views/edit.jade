@@ -20,7 +20,7 @@ block content
                 div.row
                     form(action='/announcements/#{Announ.id}/edit', method='post')
                         h4 Titulo
-                        textarea.form-control(class='edit-textarea', type='text', placeholder='Titulo', name='title', required) #{Announ.titulo}
+                        textarea.form-control(class='edit-textarea', type='text', placeholder='Titulo', name='titulo', required) #{Announ.titulo}
                         h4 Descrição
                         textarea.form-control(class='edit-textarea', type='text', placeholder='Descrição', name='desc') #{Announ.desc}
                         h4 Preco
