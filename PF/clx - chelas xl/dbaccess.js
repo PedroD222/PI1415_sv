@@ -88,8 +88,7 @@ access.pontuacaoUtil = function(username, pontuacao, id){
     this.pontuacao = pontuacao;
     this.id = id;
 }
-/*
- CREATE TABLE Anuncio
+/*CREATE TABLE Anuncio
  (
  titulo char(140) NOT NULL,
  descricao char(140),
@@ -98,12 +97,11 @@ access.pontuacaoUtil = function(username, pontuacao, id){
  id int NOT NULL DEFAULT nextval('"anuncio_ID_seq"'::regclass),
  fechado boolean NOT NULL,
  categoria char(20)
- )
- function anuncio(titulo, desc, vendedor, categoria, fechado, preco, id)*/
+ ) function anuncio(titulo, desc, vendedor, categoria, fechado, preco, id)*/
 access.getAnnouncs = function (page, cb){
 	//return lista de anuncios, pagina page
     var offset = (page-1) * 10;
-	db.SelectAll("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM Anuncio ORDER BY id DESC LIMIT 10 OFFSET "+offset ,
+	db.SelectAll("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM Anuncio where fechado = false ORDER BY id DESC LIMIT 10 OFFSET "+offset ,
     function (row) {
         return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.preco, row.localizacao, row.id);
     }, cb);
