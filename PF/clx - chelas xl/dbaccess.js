@@ -151,7 +151,7 @@ access.getComentAnnounc = function (id, cb){
             return new access.comment( row.id_anuncio, row.comentario, row.username, row.id);
         }, cb);
 };
-//row.username n existe e onnome da tabela n se poe TODO atençao
+
 access.getPontuacaoUtil = function (username, cb){
     db.SelectSome("SELECT username, pontacao FROM PontuacaoUtilizador where username = $1", [username],
     function (row) {
@@ -175,18 +175,16 @@ access.getAnnounByFilter = function (localizacao, titulo, categoria,  cb){
 //funcoes pa criar objects na BD. Chamar callback com o objecto criado
 access.newAnnounc = function(announc, cb){
     var params = [announc.titulo, announc.desc, announc.vendedor, announc.categoria, announc.preco, false, announc.localizacao];
-
     db.ExecuteQuery("INSERT into Anuncio (titulo, descricao, username, categoria, preco, fechado, localizacao) values($1, $2, $3, $4, $5, $6, $7) returning id",
         params,
         function(err, id) {
             if (err)
                 return cb(err, null);
-
             access.getCategoria(announc.categoria,
                         function (err, c){
                             if (err)
                                 return cb(err, null);
-                            //TODO change
+                            //TODO
                             if (c == undefined)
                                 newCategoria(announc.categoria, function(err) {
                                     if (err)
