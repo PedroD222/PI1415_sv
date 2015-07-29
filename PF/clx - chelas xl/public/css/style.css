@@ -109,8 +109,18 @@ h3{
     resize: none;
 }
 
-.buttons{
+.buttons,.divs{
     display:inline-block;
+}
+
+.announcement-paragraph{
+    clear: both;
+}
+
+#announcement-classification{
+    resize: none;
+    width: 2%;
+    height: 2%;
 }
 
 #announcement-comment{
