@@ -165,9 +165,9 @@ access.getComentAnnounc = function (id, cb){
 };
 //row.username n existe e onnome da tabela n se poe TODO atençao
 access.getPontuacaoUtil = function (username, cb){
-    db.SelectSome("SELECT username, pontuacao FROM PontuacaoUtilizador where username = $1", [username],
+    db.SelectSome("SELECT username, pontacao FROM PontuacaoUtilizador where username = $1", [username],
     function (row) {
-        return new access.pontuacaoUtil(row.username, row.pontuacao);
+        return new access.pontuacaoUtil(row.username, row.pontacao);
     }, cb);
 }
 
@@ -205,6 +205,15 @@ access.newAnnounc = function(announc, cb){
             return cb(null, announc);
         });
 };
+
+access.newPontuser = function(user, pont, cb){
+    var params = [user.username, pont];
+
+    db.ExecuteQuery("INSERT into pontuacaoutilizador (username, pontacao) values($1, $2) returning id",
+        params,
+        cb);
+};
+
 
 access.newAnnouncFavorite = function(announc, user, cb){
     var params = [announc.id, user.username];

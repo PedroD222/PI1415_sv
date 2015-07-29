@@ -85,26 +85,35 @@ router.get('/:id', function(req, res, next) {
         if(err && err.message !== 'RECORD NOT FOUND') return next(err);
         db.getAnnounc(req.params.id, function(err, ann){
             if(err && err.message !== 'RECORD NOT FOUND') return res.redirect('/announcements');
-
-            db.getComentAnnounc(req.params.id, function(err, cmts){
-                    if (err){
+            db.getPontuacaoUtil(usr, function(err, ponts) {
+                if (err) {
+                    if (err.message !== 'RECORD NOT FOUND')
+                        return next(err);
+                    ponts = [];
+                }
+                var classificaton = 0;
+                ponts.forEach(function(p){classificaton += p.pontuacao});
+                classificaton = classificaton/ponts.length;
+                db.getComentAnnounc(req.params.id, function (err, cmts) {
+                    if (err) {
                         if (err.message !== 'RECORD NOT FOUND')
                             return next(err);
                         cmts = [];
                     }
-                    if (ann.vendedor !== req.user.username){
-                        db.getAnnouncFavoriteUser( req.user.username, function(err, favorites){
+                    if (ann.vendedor !== req.user.username) {
+                        db.getAnnouncFavoriteUser(req.user.username, function (err, favorites) {
                             if (err) {
                                 if (err.message !== 'RECORD NOT FOUND')
                                     return next(err);
                             }
                             if (favorites)
-                                return res.render('announcement', {Announ: ann, user: req.user, comments : cmts, subscribed : true});
+                                return res.render('announcement', { Announ: ann, user: req.user, comments: cmts, subscribed: true, classification : classificaton});
                             else
-                                return res.render('announcement', {Announ: ann, user: req.user, comments : cmts, subscribed : false});
+                                return res.render('announcement', {Announ: ann, user: req.user, comments: cmts, subscribed: false,classification : classificaton});
                         });
-                    }else
-                        return res.render('announcement', {Announ: ann, user: req.user, comments : cmts, subscribed : false});
+                    } else
+                        return res.render('announcement', { Announ: ann, user: req.user, comments: cmts, subscribed: false, classification : classificaton});
+                });
             });
         });
     });
@@ -174,6 +183,19 @@ router.post('/:id/unsubscribe', function(req, res, next) {
         db.getUser(req.user.username, function(err, u) {
             if (err) return next(err);
             db.delAnnounFavorite(ann, u, function(err, f) {
+                if (err) return next(err);
+                return res.redirect('/announcements/'+req.params.id);
+            });
+        });
+    });
+});
+
+router.post('/:id/classification', function(req, res, next) {
+    db.getAnnounc(req.params.id, function(err, ann) {
+        if(err) return next(err);
+        db.getUser(req.user.username, function(err, u) {
+            if (err) return next(err);
+            db.newPontuser(user, req.body.classificacao, function(err, u) {
                 if (err) return next(err);
                 return res.redirect('/announcements/'+req.params.id);
             });
