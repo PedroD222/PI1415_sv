@@ -1,7 +1,7 @@
 /**
  * Created by João on 16/07/2015.
  */
-
+var fs = require('fs');
 var express = require('express');
 var router = express.Router();
 var db = require('.././dbaccess');
@@ -71,11 +71,15 @@ router.post('/new', function(req, res, next) {
     if(anuncio.titulo === '') {
         return res.redirect('back');
     }
-    console.log(anuncio);
-    db.newAnnounc(anuncio, function(err, an) {
-        if(err) return next(err);
-        console.log(an);
-        return res.redirect('/announcements/' + an.id);
+    fs.readFile(req.body.imagem, function(err, data) {
+        if (err) return next(err);
+        console.log(data.toString());
+        //anuncio.foto = data.toString('ascii');
+        db.newAnnounc(anuncio, function (err, an) {
+            if (err) return next(err);
+            console.log(an);
+            return res.redirect('/announcements/' + an.id);
+        });
     });
 });
 
@@ -102,6 +106,7 @@ router.get('/:id', function(req, res, next) {
                             return next(err);
                         cmts = [];
                     }
+                    //TODO retirar if
                     if (ann.vendedor !== req.user.username) {
                         db.getAnnouncFavoriteUser(req.user.username, function (err, favorites) {
                             if (err) {
@@ -191,7 +196,7 @@ router.post('/:id/unsubscribe', function(req, res, next) {
         });
     });
 });
-
+//TODO
 router.post('/:id/classification', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann) {
         if(err) return next(err);
@@ -204,7 +209,7 @@ router.post('/:id/classification', function(req, res, next) {
         });
     });
 });
-
+//TODO find
 router.post('/find', function(req, res, next){
     //req.query.searchPlace, req.query.searchTitle, req.query.searchCat
     console.log("params"+req.body.searchPlace);

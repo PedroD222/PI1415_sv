@@ -13,7 +13,7 @@ CREATE TABLE Anuncio
  fechado boolean NOT NULL,
  categoria char(20)
  )*/
-access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, preco,localizacao, id)
+access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, preco,localizacao, id, foto)
 {
 	this.id = id;
     this.titulo = titulo;
@@ -23,6 +23,7 @@ access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, pr
     this.categoria = categoria;
     this.fechado = fechado;
     this.localizacao = localizacao;
+    this.foto = foto;
 }
 
 /*CREATE TABLE Utilizador
@@ -170,11 +171,15 @@ access.getPontuacaoUtil = function (username, cb){
         return new access.pontuacaoUtil(row.username, row.pontacao);
     }, cb);
 }
-
+//TODO
 access.getAnnounByFilter = function (localizacao, titulo, categoria,  cb){
-    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao " +
+ /*   db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao " +
                   "FROM anuncio " +
                   "WHERE localizacao = $1 AND (titulo like _$2_ or titulo like $3%) AND categoria = $4", [localizacao, titulo, titulo, categoria],
+        function (row) {
+            return new access.anuncio(row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.preco, row.localizacao, row.id);
+        }, cb);*/
+    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio WHERE localizacao = $1 ", [localizacao],
         function (row) {
             return new access.anuncio(row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.preco, row.localizacao, row.id);
         }, cb);
