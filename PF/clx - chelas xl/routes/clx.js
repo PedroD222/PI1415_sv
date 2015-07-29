@@ -88,17 +88,18 @@ router.get('/:id', function(req, res, next) {
     db.getUser(req.user.username, function(err, usr) {
         if(err && err.message !== 'RECORD NOT FOUND') return next(err);
         db.getAnnounc(req.params.id, function(err, ann){
-            if(err && err.message !== 'RECORD NOT FOUND') return res.redirect('/announcements');
-            db.getPontuacaoUtil(usr, function(err, ponts) {
+            if(err) return res.redirect('/announcements');
+            db.getPontuacaoUtil(ann.vendedor, function(err, ponts) {
+                console.log("user"+ann.username);
                 if (err) {
                     if (err.message !== 'RECORD NOT FOUND')
                         return next(err);
                     ponts = [];
                 }
-                var classification = 0;
-                ponts.forEach(function(p){classificaton += p.pontuacao});
-                if (classification!==0)
-                    classification = classification/ponts.length;
+                var valponts = 0;
+                ponts.forEach(function(p){valponts += p.pontuacao});
+                if (valponts!==0)
+                    valponts = valponts/ponts.length;
 
                 db.getComentAnnounc(req.params.id, function (err, cmts) {
                     if (err) {
@@ -106,20 +107,16 @@ router.get('/:id', function(req, res, next) {
                             return next(err);
                         cmts = [];
                     }
-                    //TODO retirar if
-                    if (ann.vendedor !== req.user.username) {
-                        db.getAnnouncFavoriteUser(req.user.username, function (err, favorites) {
-                            if (err) {
-                                if (err.message !== 'RECORD NOT FOUND')
-                                    return next(err);
-                            }
-                            if (favorites)
-                                return res.render('announcement', { Announ: ann, user: req.user, comments: cmts, subscribed: true, classification : classification});
-                            else
-                                return res.render('announcement', {Announ: ann, user: req.user, comments: cmts, subscribed: false,classification : classification});
-                        });
-                    } else
-                        return res.render('announcement', { Announ: ann, user: req.user, comments: cmts, subscribed: false, classification : classification});
+                    db.getAnnouncFavoriteUserAnn(req.user.username,req.params.id, function (err, favorites) {
+                        if (err) {
+                            if (err.message !== 'RECORD NOT FOUND')
+                                return next(err);
+                        }
+                        if (favorites)
+                            return res.render('announcement', { Announ: ann, user: req.user, comments: cmts, subscribed: true, classification : valponts});
+                        else
+                            return res.render('announcement', {Announ: ann, user: req.user, comments: cmts, subscribed: false,classification : valponts});
+                    });
                 });
             });
         });
@@ -196,13 +193,14 @@ router.post('/:id/unsubscribe', function(req, res, next) {
         });
     });
 });
-//TODO
+
 router.post('/:id/classification', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann) {
         if(err) return next(err);
-        db.getUser(req.user.username, function(err, u) {
+        db.getUser(ann.vendedor, function(err, u) {
             if (err) return next(err);
-            db.newPontuser(user, req.body.classificacao, function(err, u) {
+            console.log("Valor "+req.body.classbtn);
+            db.newPontuser(u, req.body.classbtn, function(err, u) {
                 if (err) return next(err);
                 return res.redirect('/announcements/'+req.params.id);
             });

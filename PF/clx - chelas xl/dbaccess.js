@@ -3,16 +3,14 @@ var db = require('./dbUtility');
 var access = {};
 
 /*
-CREATE TABLE Anuncio
- (
+CREATE TABLE Anuncio(
  titulo char(140) NOT NULL,
  descricao char(140),
  username char(50) NOT NULL,
  pontuacao_anuncio int,
  id int NOT NULL DEFAULT nextval('"anuncio_ID_seq"'::regclass),
  fechado boolean NOT NULL,
- categoria char(20)
- )*/
+ categoria char(20))*/
 access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, preco,localizacao, id, foto)
 {
 	this.id = id;
@@ -26,11 +24,9 @@ access.anuncio = function anuncio(titulo, desc, vendedor, categoria, fechado, pr
     this.foto = foto;
 }
 
-/*CREATE TABLE Utilizador
- (
+/*CREATE TABLE Utilizador(
  username char(50) NOT NULL,
  email char(50) NOT NULL,
- gestor boolean NOT NULL,
  hash text NOT NULL,
  salt text NOT NULL,*/
 access.user = function utilizador(username, email, hash, salt)
@@ -42,9 +38,7 @@ access.user = function utilizador(username, email, hash, salt)
     this.salt = salt;
 }
 
-/*
-* CREATE TABLE Comentario
- (
+/*CREATE TABLE Comentario(
  id_comentario int NOT NULL DEFAULT nextval('"Comentario_Id_seq"'::regclass),
  id_anuncio int NOT NULL DEFAULT nextval('"Comentario_Id_anuncio_seq"'::regclass),
  comentario char(140) NOT NULL,
@@ -57,8 +51,7 @@ access.comment = function comentario(id_an, coment, username, idc)
     this.idc = idc;
 }
 
-/*CREATE TABLE Categoria
- (
+/*CREATE TABLE Categoria(
  designacao char(20) NOT NULL,
  CONSTRAINT "pkCat" PRIMARY KEY (designacao)
  )*/
@@ -66,8 +59,8 @@ access.categoria = function categoria(desig)
 {
 	this.desig = desig;
 }
-/*CREATE TABLE AnuncioUtilizadorFavorito
-(
+
+/*CREATE TABLE AnuncioUtilizadorFavorito(
     username char(50) NOT NULL,
     id_anuncio int NOT NULL DEFAULT nextval('"Comentario_Id_anuncio_seq"'::regclass),
 )*/
@@ -77,28 +70,15 @@ access.favorito = function (user, id_an){
 }
 
 /*CREATE TABLE PontuacaoUtilizador(
-    id integer NOT NULL DEFAULT nextval('PontuacaoUtilizador_ID_seq'::regclass),
+id integer NOT NULL DEFAULT nextval('PontuacaoUtilizador_ID_seq'::regclass),
 username char(50) not null,
-    pontacao int not null,
-    CONSTRAINT "fkUsername_PontuacaoUtilizador"
-FOREIGN KEY (username) REFERENCES Utilizador (username)
-MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
-)*/
+pontacao int not null)*/
 access.pontuacaoUtil = function(username, pontuacao, id){
     this.username = username;
     this.pontuacao = pontuacao;
     this.id = id;
 }
-/*CREATE TABLE Anuncio
- (
- titulo char(140) NOT NULL,
- descricao char(140),
- username char(50) NOT NULL,
- pontuacao_anuncio int,
- id int NOT NULL DEFAULT nextval('"anuncio_ID_seq"'::regclass),
- fechado boolean NOT NULL,
- categoria char(20)
- ) function anuncio(titulo, desc, vendedor, categoria, fechado, preco, id)*/
+
 access.getAnnouncs = function (page, cb){
 	//return lista de anuncios, pagina page
     var offset = (page-1) * 10;
@@ -134,6 +114,13 @@ access.getAnnouncFavoriteUser = function(username, cb){
                 "AnuncioUtilizadorFavorito on Anuncio.id = id_anuncio Where AnuncioUtilizadorFavorito.username = $1", [username] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado,row.preco, row.localizacao, row.id);
+        }, cb);
+};
+
+access.getAnnouncFavoriteUserAnn = function(username,id, cb){
+    db.SelectSome("SELECT id_anuncio, username FROM AnuncioUtilizadorFavorito Where AnuncioUtilizadorFavorito.username = $1 AND id_anuncio = $2", [username,id] ,
+        function (row) {
+            return new access.favorito( row.username, row.id_anuncio);
         }, cb);
 };
 
@@ -229,7 +216,6 @@ access.newAnnouncFavorite = function(announc, user, cb){
 };
 
 access.newUser = function(user, cb){
-
     var params = [user.username, user.hash, user.salt, user.email];
     db.ExecuteQuery("INSERT into utilizador(username, hash, salt, email) values($1, $2, $3, $4)",
         params,
