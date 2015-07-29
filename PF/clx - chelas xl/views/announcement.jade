@@ -10,38 +10,62 @@ block content
             div.col-md-5
                 div.row
                     h4 Título
-                    p(style='clear: both') #{Announ.titulo}
+                    p.announcement-Paragraph #{Announ.titulo}
                     h4 Descrição
-                    p(style='clear: both') #{Announ.desc}
+                    p.announcement-Paragraph #{Announ.desc}
                     h4 Preço
-                    p(style='clear: both') #{Announ.preco}
+                    p.announcement-Paragraph #{Announ.preco}
                     h4 Categoria
-                    p(style='clear: both') #{Announ.categoria}
+                    p.announcement-Paragraph #{Announ.categoria}
                     h4 Cidade
-                    p(style='clear: both') #{Announ.localizacao}
+                    p.announcement-Paragraph #{Announ.localizacao}
                     h4 Vendedor:
-                    p #{Announ.vendedor)
-                        if user && user.username
-                            div
-                                if user.username != Announ.vendedor
-                                    if subscribed
-                                        form.buttons(action='/announcements/#{Announ.id}/unsubscribe', method='post')
-                                            button.btn.btn-default Cancelar Subscricao
-                                    else
-                                        form.buttons(action='/announcements/#{Announ.id}/subscribe', method='post')
-                                            button.btn.btn-default Subscrever
-                                if user.username === Announ.vendedor
-                                    form.buttons(action='/announcements/#{Announ.id}/edit', method='get')
-                                        button.btn.btn-default.inline Editar
+                    p.announcement-paragraph #{Announ.vendedor}
+                    if user.username != Announ.vendedor
+                        h4 Classificao do utilizador:
+                        p.announcement-paragraph #{classification}
+                                if user && user.username
+                                    h4 Classifique este anunciante:
+                                    div.input-group
+                                        form(action="\classification", method = "post")
+                                            div.divs
+                                                label 0
+                                                input.checkboxes(type='radio', name ='class-btn', label='0', value=0)
+                                            div.divs
+                                                label 1
+                                                input.checkboxes(type='radio', name ='class-btn', label='1', value=1)
+                                            div.divs
+                                                label 2
+                                                input.checkboxes(type='radio', name ='class-btn', label='2', value=2)
+                                            div.divs
+                                                label 3
+                                                input.checkboxes(type='radio', name ='class-btn', label='3', value=3)
+                                            div.divs
+                                                label 4
+                                                input.checkboxes(type='radio', name ='class-btn', label='4', value=4)
+                                            div.divs
+                                                label 5
+                                                input.checkboxes(type='radio', name ='class-btn', label='5', value=4)
+                                            button.btn.btn-default Classificar
+                        if subscribed
+                            form.buttons(action='/announcements/#{Announ.id}/unsubscribe', method='post')
+                                button.btn.btn-default Cancelar Subscricao
+                        else
+                            form.buttons(action='/announcements/#{Announ.id}/subscribe', method='post')
+                                button.btn.btn-default Subscrever
+                            if user.username === Announ.vendedor
+                                form.buttons(action='/announcements/#{Announ.id}/edit', method='get')
+                                    button.btn.btn-default.inline Editar
 
             div.col-md-1
+                    h2 Comentários:
             div.col-md-5
                 div.panel.panel-default
                     each cm in comments
                         div.panel-heading
-                            h5 #{cm.username}
+                            h5 #{cm.username}:
                         div.panel-body
-                           h5 #{cm.coment}
+                            p #{cm.coment}
                 if user && user.username
                     div.row
                         form(action='/announcements/#{Announ.id}/comment', method='post')
