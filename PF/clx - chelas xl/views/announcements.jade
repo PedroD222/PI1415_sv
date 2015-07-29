@@ -4,7 +4,7 @@ include ./utils.jade
 block content
 
     div.container-fluid(id='announcementsFilter-containerFluid-div')
-        form(action='/announcements/find', method='get')
+        form(action='/announcements/find', method='post')
             div.form-group
                 input.form-control(type='text', placeholder='Qual a categoria?', name='searchCat')
             div.form-group
@@ -13,7 +13,7 @@ block content
                 input.form-control(type='text', placeholder='Onde procura?', name='searchPlace')
             button(class='btn btn-default', type='submit') Procurar
 
-    div.container-float
+    div.container-fuid
         div.row(id='annoucements-margin-top')
             div.col-md-5(id='annoucements-table-col')
                 +lista(list)

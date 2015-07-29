@@ -90,6 +90,7 @@ router.get('/:id', function(req, res, next) {
                     if (err){
                         if (err.message !== 'RECORD NOT FOUND')
                             return next(err);
+                        cmts = [];
                     }
                     if (ann.vendedor !== req.user.username){
                         db.getAnnouncFavoriteUser( req.user.username, function(err, favorites){
@@ -97,8 +98,6 @@ router.get('/:id', function(req, res, next) {
                                 if (err.message !== 'RECORD NOT FOUND')
                                     return next(err);
                             }
-                            //TODO favorites
-                            //&& favorites.username === req.user.username && favorites.id_anuncio === ann.id
                             if (favorites)
                                 return res.render('announcement', {Announ: ann, user: req.user, comments : cmts, subscribed : true});
                             else
@@ -183,10 +182,12 @@ router.post('/:id/unsubscribe', function(req, res, next) {
 });
 
 router.post('/find', function(req, res, next){
+    //req.query.searchPlace, req.query.searchTitle, req.query.searchCat
+    console.log("params"+req.body.searchPlace);
     db.getAnnounByFilter(req.body.searchPlace, req.body.searchTitle, req.body.searchCat, function(err, ann) {
         if (err) return next(err);
-        console.log("lista"+ list);
-        return res.render('announcements',{list : ann, user : req.user});
+        console.log("lista"+ ann[0]);
+        return res.render('announcements',{list : ann, user : req.user, page : 1, total : ann.length});
     });
 });
 
