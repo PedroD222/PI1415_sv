@@ -91,9 +91,11 @@ router.get('/:id', function(req, res, next) {
                         return next(err);
                     ponts = [];
                 }
-                var classificaton = 0;
+                var classification = 0;
                 ponts.forEach(function(p){classificaton += p.pontuacao});
-                classificaton = classificaton/ponts.length;
+                if (classification!==0)
+                    classification = classification/ponts.length;
+
                 db.getComentAnnounc(req.params.id, function (err, cmts) {
                     if (err) {
                         if (err.message !== 'RECORD NOT FOUND')
@@ -107,12 +109,12 @@ router.get('/:id', function(req, res, next) {
                                     return next(err);
                             }
                             if (favorites)
-                                return res.render('announcement', { Announ: ann, user: req.user, comments: cmts, subscribed: true, classification : classificaton});
+                                return res.render('announcement', { Announ: ann, user: req.user, comments: cmts, subscribed: true, classification : classification});
                             else
-                                return res.render('announcement', {Announ: ann, user: req.user, comments: cmts, subscribed: false,classification : classificaton});
+                                return res.render('announcement', {Announ: ann, user: req.user, comments: cmts, subscribed: false,classification : classification});
                         });
                     } else
-                        return res.render('announcement', { Announ: ann, user: req.user, comments: cmts, subscribed: false, classification : classificaton});
+                        return res.render('announcement', { Announ: ann, user: req.user, comments: cmts, subscribed: false, classification : classification});
                 });
             });
         });
