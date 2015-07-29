@@ -91,19 +91,21 @@ router.get('/:id', function(req, res, next) {
                         if (err.message !== 'RECORD NOT FOUND')
                             return next(err);
                     }
-                    if (ann.vendedor !== req.user.username)
+                    if (ann.vendedor !== req.user.username){
                         db.getAnnouncFavoriteUser( req.user.username, function(err, favorites){
                             if (err) {
                                 if (err.message !== 'RECORD NOT FOUND')
                                     return next(err);
                             }
                             //TODO favorites
-                            if (favorites && favorites.username && favorites.id_anuncio)
+                            //&& favorites.username === req.user.username && favorites.id_anuncio === ann.id
+                            if (favorites)
                                 return res.render('announcement', {Announ: ann, user: req.user, comments : cmts, subscribed : true});
                             else
                                 return res.render('announcement', {Announ: ann, user: req.user, comments : cmts, subscribed : false});
                         });
-                    return res.render('announcement', {Announ: ann, user: req.user, comments : cmts, subscribed : false});
+                    }else
+                        return res.render('announcement', {Announ: ann, user: req.user, comments : cmts, subscribed : false});
             });
         });
     });
@@ -111,18 +113,16 @@ router.get('/:id', function(req, res, next) {
 
 
 router.get('/:id/edit', function(req, res, next) {
-    db.getAnnounc(req.params.id, function(err, ann){
+    db.getUser(req.user.username, function(err, user){
         if(err) return next(err);
-        if(ann.vendedor !== req.user.username)	return res.redirect('/announcements/' + req.params.id);
-
-        db.getUser(req.user.username, function(err, user){
+        db.getAnnounc(req.params.id, function(err, ann){
             if(err) return next(err);
+            if(ann.vendedor !== req.user.username)	return res.redirect('/announcements/' + req.params.id);
             return res.render('edit', { Announ : ann, user : user});
         });
     });
 });
 
-//redirect para a pagina do anuncio cm fzr
 router.post('/:id/edit', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann) {
         if(err) return next(err);
@@ -149,7 +149,8 @@ router.post('/:id/edit', function(req, res, next) {
                 anuncioEdit.fechado = false;
             db.updateAnn(anuncioEdit,  function(err, a) {
                 if (err) return next(err);
-                return res.redirect('/announcements');
+
+                return res.redirect('/announcements/'+anuncioEdit.id);
             });
         });
     });
@@ -162,7 +163,7 @@ router.post('/:id/subscribe', function(req, res, next) {
             if (err) return next(err);
             db.newAnnouncFavorite(ann, u, function(err, fav) {
                 if (err) return next(err);
-                return res.redirect('/'+ann.id);
+                return res.redirect('/announcements/'+ann.id);
             });
         });
     });
@@ -175,7 +176,7 @@ router.post('/:id/unsubscribe', function(req, res, next) {
             if (err) return next(err);
             db.delAnnounFavorite(ann, u, function(err, f) {
                 if (err) return next(err);
-
+                return res.redirect('/announcements/'+req.params.id);
             });
         });
     });
