@@ -63,7 +63,7 @@ h3{
 }
 
 #annoucements-margin-top{
-    margin-top: 2%
+    margin-top: 5%
 }
 
 #newannouncement-div{
@@ -72,7 +72,6 @@ h3{
 
 #register-containerFluid-div{
     margin-top: 2%;
-    margin-left: 25%;
     margin-right: 10%;
 }
 
@@ -111,6 +110,7 @@ h3{
 
 .buttons,.divs{
     display:inline-block;
+    margin-left: 1%;
 }
 
 .announcement-paragraph{

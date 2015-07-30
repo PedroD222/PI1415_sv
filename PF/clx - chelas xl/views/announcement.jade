@@ -57,7 +57,7 @@ block content
                                             form.buttons(action='/announcements/#{Announ.id}/edit', method='get')
                                                 button.btn.btn-default.inline Editar
 
-            div.col-md-1
+            div.col-md-5
                     h2 Comentários:
             div.col-md-5
                 div.panel.panel-default
@@ -66,8 +66,8 @@ block content
                             h5 #{cm.username}:
                         div.panel-body
                             p #{cm.coment}
-                if user && user.username
-                    div.row
-                        form(action='/announcements/#{Announ.id}/comment', method='post')
-                            textarea.form-control(id='announcement-comment', type='text', placeholder='Comentário', name='comment', required)
-                            button.btn.btn-default.mybutton(style='float: right') +Comentar
+                    if user && user.username
+                        div.row
+                            form(action='/announcements/#{Announ.id}/comment', method='post')
+                                textarea.form-control(id='announcement-comment', type='text', placeholder='Comentário', name='comment', required)
+                                button.btn.btn-default.mybutton(style='float: right') +Comentar
