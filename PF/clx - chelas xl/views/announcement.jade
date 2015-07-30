@@ -25,28 +25,29 @@ block content
                         h4 Classificao do utilizador:
                         p.announcement-paragraph #{classification}
                                 if user && user.username
-                                    h4 Classifique este anunciante:
-                                    div.input-group
-                                        form(action="/announcements/#{Announ.id}/classification", method = "post")
-                                            div.divs
-                                                label 0
-                                                input.checkboxes(type='radio', name ='classbtn', label='0', value=0)
-                                            div.divs
-                                                label 1
-                                                input.checkboxes(type='radio', name ='classbtn', label='1', value=1)
-                                            div.divs
-                                                label 2
-                                                input.checkboxes(type='radio', name ='classbtn', label='2', value=2)
-                                            div.divs
-                                                label 3
-                                                input.checkboxes(type='radio', name ='classbtn', label='3', value=3)
-                                            div.divs
-                                                label 4
-                                                input.checkboxes(type='radio', name ='classbtn', label='4', value=4)
-                                            div.divs
-                                                label 5
-                                                input.checkboxes(type='radio', name ='classbtn', label='5', value=4)
-                                            button.btn.btn-default Classificar
+                                    if allowClassification
+                                        h4 Classifique este anunciante:
+                                        div.input-group
+                                            form(action="/announcements/#{Announ.id}/classification", method = "post")
+                                                div.divs
+                                                    label 0
+                                                    input.checkboxes(type='radio', name ='classbtn', label='0', value=0)
+                                                div.divs
+                                                    label 1
+                                                    input.checkboxes(type='radio', name ='classbtn', label='1', value=1)
+                                                div.divs
+                                                    label 2
+                                                    input.checkboxes(type='radio', name ='classbtn', label='2', value=2)
+                                                div.divs
+                                                    label 3
+                                                    input.checkboxes(type='radio', name ='classbtn', label='3', value=3)
+                                                div.divs
+                                                    label 4
+                                                    input.checkboxes(type='radio', name ='classbtn', label='4', value=4)
+                                                div.divs
+                                                    label 5
+                                                    input.checkboxes(type='radio', name ='classbtn', label='5', value=4)
+                                                button.btn.btn-default Classificar
                                     if subscribed
                                         form.buttons(action='/announcements/#{Announ.id}/unsubscribe', method='post')
                                             button.btn.btn-default Cancelar Subscricao

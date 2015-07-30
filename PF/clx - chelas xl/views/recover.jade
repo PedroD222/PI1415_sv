@@ -11,7 +11,7 @@ block content
             +TopicInfo("Sera enviada a password para o seu email.")
 
     div.container-fluid(class='loginReg-containerFluid-div')
-        div.panel.panel-info
+        div.col-md-5
             form(action='/recover', method='post')
                 div
                     input.form-control(type='text', placeholder='Nome', name='username', required)
