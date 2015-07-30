@@ -208,8 +208,7 @@ router.post('/:id/classification', function(req, res, next) {
         if(err) return next(err);
         db.getUser(ann.vendedor, function(err, u) {
             if (err) return next(err);
-            console.log("Valor "+req.body.classbtn);
-            db.newPontuser(u, req.body.classbtn,ann.vendedor, function(err, u) {
+            db.newPontuser(req.user, req.body.classbtn, ann.vendedor, function(err, u) {
                 if (err) return next(err);
                 return res.redirect('/announcements/'+req.params.id);
             });
