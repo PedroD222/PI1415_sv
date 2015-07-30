@@ -13,7 +13,7 @@ block content
             +TopicInfo("Pode fazer login caso ja tenha conta registada.")
 
     div.container-fluid(class='loginReg-containerFluid-div')
-      div.panel.panel-info
+      div.col-md-5
             if !user || !user.username
                      form(action='/login', method='post')
                         div.form-group
