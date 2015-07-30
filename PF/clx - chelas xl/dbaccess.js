@@ -73,10 +73,11 @@ access.favorito = function (user, id_an){
 id integer NOT NULL DEFAULT nextval('PontuacaoUtilizador_ID_seq'::regclass),
 username char(50) not null,
 pontacao int not null)*/
-access.pontuacaoUtil = function(username, pontuacao, id){
+access.pontuacaoUtil = function(username, pontuacao, id, classif){
     this.username = username;
     this.pontuacao = pontuacao;
     this.id = id;
+    this.classif = classif;
 }
 
 access.getAnnouncs = function (page, cb){
@@ -158,6 +159,14 @@ access.getPontuacaoUtil = function (username, cb){
         return new access.pontuacaoUtil(row.username, row.pontacao);
     }, cb);
 }
+
+access.getClassifUtil = function (username,classif, cb){
+    db.SelectSome("SELECT username, pontacao FROM PontuacaoUtilizador where username = $1 AND  ", [username, classif],
+        function (row) {
+            return new access.pontuacaoUtil(row.username, row.pontacao);
+        }, cb);
+}
+
 //TODO
 access.getAnnounByFilter = function (localizacao, titulo, categoria,  cb){
  /*   db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao " +
