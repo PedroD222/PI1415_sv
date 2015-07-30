@@ -71,16 +71,16 @@ router.post('/new', function(req, res, next) {
     if(anuncio.titulo === '') {
         return res.redirect('back');
     }
-    fs.readFile(req.body.imagem, function(err, data) {
+    /*TODO fs.readFile(req.body.imagem, function(err, data) {
         if (err) return next(err);
-        console.log(data.toString());
+        console.log(data.toString());*/
         //anuncio.foto = data.toString('ascii');
         db.newAnnounc(anuncio, function (err, an) {
             if (err) return next(err);
             console.log(an);
             return res.redirect('/announcements/' + an.id);
         });
-    });
+    //});
 });
 
 router.get('/:id', function(req, res, next) {
@@ -112,10 +112,20 @@ router.get('/:id', function(req, res, next) {
                             if (err.message !== 'RECORD NOT FOUND')
                                 return next(err);
                         }
+                        var favorite = false;
                         if (favorites)
-                            return res.render('announcement', { Announ: ann, user: req.user, comments: cmts, subscribed: true, classification : valponts});
-                        else
-                            return res.render('announcement', {Announ: ann, user: req.user, comments: cmts, subscribed: false,classification : valponts});
+                            favorite =true;
+                        db.getClassifUtil(ann.vendedor, req.user.username, function (err, v) {
+                            if (err) {
+                                if (err.message !== 'RECORD NOT FOUND')
+                                    return next(err);
+                            }
+                            console.log("votantes"+v);
+                            var allow = false;
+                            if (v)
+                                allow = true;
+                            return res.render('announcement', { Announ: ann, user: req.user, comments: cmts, subscribed: favorite, classification : valponts, allowclassification : allow});
+                        });
                     });
                 });
             });
@@ -199,7 +209,7 @@ router.post('/:id/classification', function(req, res, next) {
         db.getUser(ann.vendedor, function(err, u) {
             if (err) return next(err);
             console.log("Valor "+req.body.classbtn);
-            db.newPontuser(u, req.body.classbtn, function(err, u) {
+            db.newPontuser(u, req.body.classbtn,ann.vendedor, function(err, u) {
                 if (err) return next(err);
                 return res.redirect('/announcements/'+req.params.id);
             });

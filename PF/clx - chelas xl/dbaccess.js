@@ -160,8 +160,8 @@ access.getPontuacaoUtil = function (username, cb){
     }, cb);
 }
 
-access.getClassifUtil = function (username,classif, cb){
-    db.SelectSome("SELECT username, pontacao FROM PontuacaoUtilizador where username = $1 AND  ", [username, classif],
+access.getClassifUtil = function (username,vot, cb){
+    db.SelectOne("SELECT username, pontacao FROM PontuacaoUtilizador where username = $1 AND votante = $2 ", [username, vot],
         function (row) {
             return new access.pontuacaoUtil(row.username, row.pontacao);
         }, cb);
@@ -205,17 +205,17 @@ access.newAnnounc = function(announc, cb){
         });
 };
 
-access.newPontuser = function(user, pont, cb){
-    var params = [user.username, pont];
+access.newPontuser = function(user, pont, vend, cb){
+    var params = [vend, pont, user.username];
 
-    db.ExecuteQuery("INSERT into pontuacaoutilizador (username, pontacao) values($1, $2) returning id",
+    db.ExecuteQuery("INSERT into pontuacaoutilizador (username, pontacao, votante) values($1, $2, $3) returning id",
         params,
         cb);
 };
 
 
 access.newAnnouncFavorite = function(announc, user, cb){
-    var params = [announc.id, user.username];
+    var params = [announc.id, ann.vendedor,user.username];
 
     db.ExecuteQuery("INSERT into anuncioutilizadorfavorito (id_anuncio, username) values($1, $2)",
         params,
