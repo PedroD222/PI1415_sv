@@ -21,7 +21,7 @@ h3{
 
 #layout-nav-bar {
     background-color: lightblue;
-    height:9vh;
+    height:12%;
 }
 
 #layout-nav-bar-space{
@@ -54,12 +54,12 @@ h3{
 
 #announcementsFilter-containerFluid-div{
     margin-top: 5%;
-    margin-left: 35%;
-    margin-right: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 #annoucements-table-col{
-    left: 25%;
+    left: 10%;
 }
 
 #annoucements-margin-top{

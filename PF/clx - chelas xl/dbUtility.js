@@ -39,7 +39,6 @@ function dbSelectOne(query, queryParams, createElem, cb)
                 console.log("SelectOne "+query + err);
                 return cb(err);
             }
-
             if(result.rowCount == 0) 
                 return cb(new Error("RECORD NOT FOUND"), null);
             if(result.rowCount > 1)  

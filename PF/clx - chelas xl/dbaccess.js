@@ -96,7 +96,7 @@ access.getAnnounc = function (id, cb) {
 };
 
 access.getCountAnnounc = function ( cb) {
-    db.SelectOne("SELECT Count(id) as contagem FROM Anuncio ", [],
+    db.SelectOne("SELECT Count(id) as contagem FROM Anuncio where fechado = false ", [],
         function (row) {
             return row.contagem;
         }, cb);

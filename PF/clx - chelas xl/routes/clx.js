@@ -23,7 +23,7 @@ router.use(function(req, res, next) {
 router.get('/', function(req, res, next) {
     var page = 1;
     if(req.query.page){
-        if(req.user.username)
+        //if(req.user.username)
             page = req.query.page;
     }
     db.getAnnouncs(page, function(err, listann){
@@ -32,29 +32,29 @@ router.get('/', function(req, res, next) {
         db.getCountAnnounc(function(err, c) {
             if (err)
                 return next(err);
-            return res.render('announcements', {user: req.user, list : listann, total : c, page : page});
+            var total = Math.ceil(c/10);
+            return res.render('announcements', {user: req.user, list : listann, total : total, page : page});
         });
     });
 });
 
 router.get('/dashboard', function(req, res, next) {
-
-        db.getAnnouncUser(req.user.username, function(err, annUser){
-            console.log("User dash" + req.user);
+    db.getAnnouncUser(req.user.username, function(err, annUser){
+        console.log("User dash" + req.user);
+        if(err) {
+            if(err.message !== 'RECORD NOT FOUND')
+                return next(err);
+        }
+        db.getAnnouncFavoriteUser(req.user.username, function(err, favorite){
             if(err) {
                 if(err.message !== 'RECORD NOT FOUND')
                     return next(err);
             }
-            db.getAnnouncFavoriteUser(req.user.username, function(err, favorite){
-                if(err) {
-                    if(err.message !== 'RECORD NOT FOUND')
-                        return next(err);
-                }
-                console.log("annUser "+annUser);
-                console.log("annFavor "+favorite);
-                return res.render('dashboard', {user: req.user, annUser : annUser, annFavorite : favorite});
-            });
+            console.log("annUser "+annUser);
+            console.log("annFavor "+favorite);
+            return res.render('dashboard', {user: req.user, annUser : annUser, annFavorite : favorite});
         });
+    });
 });
 
 
@@ -161,7 +161,6 @@ router.post('/:id/edit', function(req, res, next) {
                 anuncioEdit.fechado = false;
             db.updateAnn(anuncioEdit,  function(err, a) {
                 if (err) return next(err);
-
                 return res.redirect('/announcements/'+anuncioEdit.id);
             });
         });
