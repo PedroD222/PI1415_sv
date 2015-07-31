@@ -4,15 +4,15 @@ var usernamec = "PedroMJD";
 var myJSONObject = {'username' : usernamec,
                     'password': 'ola',
                     'email': 'pedroduarte222@gmail.com' };
-var uri = "http://localhost:3000/register";
+var uri = "http://localhost:3005/register";
 request.post({url : uri, form: myJSONObject}, function (error, response, body){
     console.log(error);
     console.log(response);
 });
 console.log("LOGIN username");
 var login = {'username' : usernamec, 'password' : myJSONObject.password}
-var uriLogin = "http://localhost:3000/loginReg";
-request.get( uriLogin).auth( login.username, login.password, false);
+var uriLogin = "http://localhost:3005/login";
+request.post( uriLogin).auth( login.username, login.password, false);
 /*function (error, response, body){
     console.log("Login "+error);
     console.log("Login "+response);
@@ -28,9 +28,9 @@ var ann = { 'titulo' : 'Cooler',
             'desc' : 'Bom estado',
             'localizacao': 'Lisboa',
             'categoria' :  'informática',
-            'preco' : 100};
-
-var uriann = "http://localhost:3000/announcements/new";
+            'preco' : 100,
+            'vendedor': login.username};
+var uriann = "http://localhost:3005/announcements/new";
 request.post({url : uriann, form: ann}, function (error, response, body){
     console.log("Login"+error);
     console.log("Login"+response);
