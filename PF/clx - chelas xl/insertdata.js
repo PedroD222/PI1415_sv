@@ -18,8 +18,7 @@ request.get( uriLogin).auth( login.username, login.password, false);
     console.log("Login "+response);
 });*/
 
-/*
- titulo char(140) NOT NULL,
+/*titulo char(140) NOT NULL,
  descricao char(140),
  username char(50) NOT NULL,
  fechado boolean NOT NULL,

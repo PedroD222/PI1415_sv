@@ -7,14 +7,16 @@ block content
             li #{text}
         ul#information
             +TopicInfo("Coloque o nome de utilizador com que se registou.")
-            +TopicInfo("Coloque o email cde registo.")
+            +TopicInfo("Coloque o email de registo.")
             +TopicInfo("Sera enviada a password para o seu email.")
-
     div.container-fluid(class='loginReg-containerFluid-div')
         div.col-md-5
-            form(action='/recover', method='post')
-                div
-                    input.form-control(type='text', placeholder='Nome', name='username', required)
-                div
-                    input.form-control(type='email', placeholder='Email', name='email', required)
-                button(class='btn btn-success', type='submit') Confirmar
+            if completed
+                p Foi enviada a password para o e-mail: #{email}.
+            else
+                form(action='/recover', method='post')
+                    div
+                        input.form-control(type='text', placeholder='Nome', name='username', required)
+                    div
+                        input.form-control(type='email', placeholder='Email', name='email', required)
+                    button(class='btn btn-success', type='submit') Confirmar

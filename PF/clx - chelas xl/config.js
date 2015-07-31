@@ -1,17 +1,15 @@
 var configs = {
     "development": {
-        getConnString: function()
-        {
+        getConnString: function () {
             return "postgres://ClxSuperUser:clx@localhost/PF - PI";
-        }
-    },
-    getEmailInfo: function()
-    {
-        return {
-            service: '',
-            auth: {
-                user: '@.com ',
-                pass: ''
+        },
+        "getEmailInfo": function () {
+            return {
+                service: 'yahoo',
+                auth: {
+                    user: 'grupo_18@yahoo.com ',
+                    pass: 'pi1415sv'
+                }
             }
         }
     }
