@@ -23,7 +23,6 @@ router.use(function(req, res, next) {
 router.get('/', function(req, res, next) {
     var page = 1;
     if(req.query.page){
-        //if(req.user.username)
             page = req.query.page;
     }
     db.getAnnouncs(page, function(err, listann){
@@ -71,7 +70,8 @@ router.post('/new', function(req, res, next) {
     if(anuncio.titulo === '') {
         return res.redirect('back');
     }
-    /*TODO fs.readFile(req.body.imagem, function(err, data) {
+    /*TODO
+    fs.readFile(req.body.imagem, function(err, data) {
         if (err) return next(err);
         console.log(data.toString());*/
         //anuncio.foto = data.toString('ascii');
@@ -81,6 +81,20 @@ router.post('/new', function(req, res, next) {
             return res.redirect('/announcements/' + an.id);
         });
     //});
+});
+
+//TODO find
+/*
+router.post('/find', function(req, res, next){
+ db.getAnnounByFilter(req.body.searchPlace, req.body.searchTitle, req.body.searchCat, function(err, ann) {
+ if (err) return next(err);
+ console.log("lista"+ ann[0]);
+ return res.render({list : ann, user : req.user, page : 1, total : ann.length});
+ });
+ });*/
+
+router.get('/search', function(req, res, next){
+    return res.render('Search',{user : req.user});
 });
 
 router.get('/:id', function(req, res, next) {
@@ -100,7 +114,12 @@ router.get('/:id', function(req, res, next) {
                 ponts.forEach(function(p){valponts += p.pontuacao});
                 if (valponts!==0)
                     valponts = valponts/ponts.length;
-
+                if (usr)
+                    db.updateNotifFalse(ann.id, usr.username, function (err, cmts) {
+                        if (err) {
+                                return next(err);
+                        }
+                    });
                 db.getComentAnnounc(req.params.id, function (err, cmts) {
                     if (err) {
                         if (err.message !== 'RECORD NOT FOUND')
@@ -120,7 +139,6 @@ router.get('/:id', function(req, res, next) {
                                 if (err.message !== 'RECORD NOT FOUND')
                                     return next(err);
                             }
-                            console.log("votantes"+v);
                             var allow = false;
                             if (v)
                                 allow = true;
@@ -149,29 +167,33 @@ router.post('/:id/edit', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann) {
         if(err) return next(err);
         db.getUser(req.user.username, function(err, user) {
-            if(!user.username && ann.vendedor !== req.user.username) return res.redirect('back');
+            if (!user.username && ann.vendedor !== req.user.username) return res.redirect('back');
 
             var anuncioEdit = {
-                id          : req.params.id,
-                titulo      : req.body.titulo,
-                desc        : req.body.desc,
-                preco       : req.body.preco,
-                localizacao : req.body.localizacao,
-                categoria   : req.body.categoria,
-                fechado     : req.body.closed
+                id: req.params.id,
+                titulo: req.body.titulo,
+                desc: req.body.desc,
+                preco: req.body.preco,
+                localizacao: req.body.localizacao,
+                categoria: req.body.categoria,
+                fechado: req.body.closed
             };
             console.log(anuncioEdit);
-            if(anuncioEdit.titulo == "" && anuncioEdit.desc == "" && anuncioEdit.categoria == ""
+            if (anuncioEdit.titulo == "" && anuncioEdit.desc == "" && anuncioEdit.categoria == ""
                 && anuncioEdit.localizacao == "" && anuncioEdit.preco == "") {
                 return res.render('back');
             }
-            if(anuncioEdit.fechado === 'on')
+            if (anuncioEdit.fechado === 'on')
                 anuncioEdit.fechado = true;
             else
                 anuncioEdit.fechado = false;
-            db.updateAnn(anuncioEdit,  function(err, a) {
+            db.updateAnn(anuncioEdit, function (err, a) {
                 if (err) return next(err);
-                return res.redirect('/announcements/'+anuncioEdit.id);
+
+                db.updateNotifTrue(anuncioEdit.id, req.user.username, function (err, a) {
+                    if (err) return next(err);
+                    return res.redirect('/announcements/' + anuncioEdit.id);
+                });
             });
         });
     });
@@ -215,16 +237,6 @@ router.post('/:id/classification', function(req, res, next) {
         });
     });
 });
-//TODO find
-router.post('/find', function(req, res, next){
-    //req.query.searchPlace, req.query.searchTitle, req.query.searchCat
-    console.log("params"+req.body.searchPlace);
-    db.getAnnounByFilter(req.body.searchPlace, req.body.searchTitle, req.body.searchCat, function(err, ann) {
-        if (err) return next(err);
-        console.log("lista"+ ann[0]);
-        return res.render('announcements',{list : ann, user : req.user, page : 1, total : ann.length});
-    });
-});
 
 router.post('/:id/comment', function(req, res, next) {
     db.getAnnounc(req.params.id, function(err, ann) {
@@ -236,7 +248,9 @@ router.post('/:id/comment', function(req, res, next) {
             db.newComment(comment, function(err){
                 if(err)
                     return next(err);
-                console.log(usercmt);
+                db.updateNotifTrue(comment.id_an, user.username, function (err, a) {
+                        if (err) return next(err);
+                    });
             });
             return res.redirect('/announcements');
         });

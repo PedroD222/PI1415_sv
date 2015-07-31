@@ -169,13 +169,13 @@ access.getClassifUtil = function (username,vot, cb){
 
 //TODO
 access.getAnnounByFilter = function (localizacao, titulo, categoria,  cb){
- /*   db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao " +
+/*db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao " +
                   "FROM anuncio " +
                   "WHERE localizacao = $1 AND (titulo like _$2_ or titulo like $3%) AND categoria = $4", [localizacao, titulo, titulo, categoria],
         function (row) {
             return new access.anuncio(row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.preco, row.localizacao, row.id);
         }, cb);*/
-    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio WHERE localizacao = $1 ", [localizacao],
+    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio WHERE localizacao = $1 AND categoria = $2", [localizacao, categoria],
         function (row) {
             return new access.anuncio(row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.preco, row.localizacao, row.id);
         }, cb);
@@ -215,7 +215,7 @@ access.newPontuser = function(user, pont, vend, cb){
 
 
 access.newAnnouncFavorite = function(announc, user, cb){
-    var params = [announc.id, ann.vendedor,user.username];
+    var params = [announc.id,user.username];
 
     db.ExecuteQuery("INSERT into anuncioutilizadorfavorito (id_anuncio, username) values($1, $2)",
         params,
@@ -267,6 +267,34 @@ access.updateAnn = function(ann, cb){
         params,
         cb);
 };
+
+access.updatepass = function(u, cb){
+    var params = [u.hash, u.salt, u.username];
+    db.ExecuteQuery("UPDATE utilizador SET hash = $1, salt = $2 WHERE username = $3",
+        params,
+        cb);
+};
+
+access.updateNotifFalse = function(id_an,username, cb){
+    var params = [id_an, username];
+    db.ExecuteQuery("UPDATE anuncioutilizadorfavorito SET notificacao = false WHERE id_anuncio= $1 AND username = $2",
+        params,
+        cb);
+};
+
+access.updateNotifTrue = function(id,username, cb){
+    var params = [id, username];
+    db.ExecuteQuery("UPDATE anuncioutilizadorfavorito SET notificacao = true WHERE id_anuncio= $1 AND NOT(username = $2)",
+        params,
+        cb);
+};
+/*TODO
+access.updateNotifAn = function(id, notif, cb){
+    var params = [notif, id];
+    db.ExecuteQuery("UPDATE anuncioutilizadorfavorito SET notificacao = $1 WHERE id_anuncio= $2 ",
+        params,
+        cb);
+};*/
 
 access.delAnnounFavorite = function(announc, user, cb){
     var params = [announc.id, user.username];

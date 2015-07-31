@@ -4,6 +4,16 @@ var configs = {
         {
             return "postgres://ClxSuperUser:clx@localhost/PF - PI";
         }
+    },
+    getEmailInfo: function()
+    {
+        return {
+            service: '',
+            auth: {
+                user: '@.com ',
+                pass: ''
+            }
+        }
     }
 }
 

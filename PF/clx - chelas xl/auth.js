@@ -2,9 +2,9 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var db = require('./dbaccess');
 var pass = require('pwd');
-//var mailer = require('nodemailer');
+var mailer = require('nodemailer');
 var mailInfo = require('./config').getConnString();
-//var crypto = require('crypto');
+var crypto = require('crypto');
 
 passport.use(new LocalStrategy(function(username, password, done){
     db.getUser(username, function(err, user) {
@@ -69,7 +69,7 @@ module.exports = function(app)
 			user.salt = salt;
 			user.hash = hash;
 			user.email = req.body.email;
-			//user.gestor = false;
+
 			console.log(user);
 			db.newUser(user, function(err) {
 				if(err) return res.render('error', {error : err});
@@ -89,8 +89,8 @@ module.exports = function(app)
 		if(req.user.username) return res.redirect('/');
 		return res.render('recover');
 	});
-	/*
-	app.post('/recover', function(req, res, next) {
+
+	/*TODO app.post('/recover', function(req, res, next) {
 		if(req.user.username) return res.redirect('/');
 		if(req.body.email === '' || req.body.username === ''){
 			return res.render('recover', {error: 'email and username cannot be null'});
