@@ -3,6 +3,7 @@
  */
 var fs = require('fs');
 var express = require('express');
+var multipart = require('connect-multiparty');
 var router = express.Router();
 var db = require('.././dbaccess');
 var regex_single = /^\/\d+$/;
@@ -62,22 +63,26 @@ router.get('/dashboard', function(req, res, next) {
 
 router.get('/new', function(req, res, next) {
     console.log('GOT TO NEW');
-    return res.render('newannouncement', { user: req.user});
+    db.getUser(req.user.username, function(err, data) {
+        if (err) return res.redirect('/announcements');
+        return res.render('newannouncement', { user: req.user});
+    });
 });
 
 // TODO falta guardar foto
 router.post('/new', function(req, res, next) {
     var anuncio = new db.anuncio(req.body.titulo, req.body.desc,
         req.user.username,req.body.categoria, false, req.body.preco, req.body.localizacao);
-
+    console.log('Titulo'+anuncio.titulo);
     if(anuncio.titulo === '') {
         return res.redirect('back');
     }
-    /*TODO
-    fs.readFile(req.body.imagem, function(err, data) {
+    /*console.log(req.files);
+    console.log(req.files.imagem);
+    fs.readFile(req.files.imagem.path, function(err, data) {
         if (err) return next(err);
-        console.log(data.toString());*/
-        //anuncio.foto = data.toString('ascii');
+        console.log(data);
+        anuncio.foto = data;*/
         db.newAnnounc(anuncio, function (err, an) {
             if (err) return next(err);
             console.log(an);
@@ -257,7 +262,7 @@ router.post('/:id/comment', function(req, res, next) {
                     if (err) return next(err);
                 });
             });
-            return res.redirect('/announcements');
+            return res.redirect('/announcements/'+ann.id);
         });
     });
 });

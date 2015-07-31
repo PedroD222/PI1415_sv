@@ -176,9 +176,11 @@ access.getClassifUtil = function (username,vot, cb){
         }, cb);
 }
 
-//TODO
+//TODO titulo not done
 access.getAnnounByFilter = function (localizacao, titulo, categoria,  cb){
-    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio WHERE localizacao = $1 AND categoria = $2 AND titulo LIKE %$3%", [localizacao, categoria, titulo],
+    // AND titulo LIKE (\'%'/$3\'%'/)
+    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao " +
+        "FROM anuncio WHERE localizacao = $1 AND categoria = $2", [localizacao, categoria],
         function (row) {
             return new access.anuncio(row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.preco, row.localizacao, row.id);
         }, cb);
