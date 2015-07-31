@@ -36,7 +36,7 @@ router.get('/', function(req, res, next) {
         });
     });
 });
-
+//TODO show notifi
 router.get('/dashboard', function(req, res, next) {
     db.getAnnouncUser(req.user.username, function(err, annUser){
         console.log("User dash" + req.user);
@@ -115,8 +115,9 @@ router.get('/:id', function(req, res, next) {
                 if (valponts!==0)
                     valponts = valponts/ponts.length;
                 if (usr)
-                    db.updateNotifFalse(ann.id, usr.username, function (err, cmts) {
+                    db.updateNotifFalse(ann.id, usr.username, function (err, notif) {
                         if (err) {
+                            if (err.message !=='Cannot executeQuery')
                                 return next(err);
                         }
                     });
