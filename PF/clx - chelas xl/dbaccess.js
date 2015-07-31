@@ -64,9 +64,10 @@ access.categoria = function categoria(desig)
     username char(50) NOT NULL,
     id_anuncio int NOT NULL DEFAULT nextval('"Comentario_Id_anuncio_seq"'::regclass),
 )*/
-access.favorito = function (user, id_an){
+access.favorito = function (user, id_an, notif){
     this.username = user;
     this.id_an = id_an;
+    this.notif = notif;
 }
 
 /*CREATE TABLE PontuacaoUtilizador(
@@ -112,16 +113,24 @@ access.getAnnouncUser = function(username, cb){
 
 access.getAnnouncFavoriteUser = function(username, cb){
     db.SelectSome("SELECT id, titulo, descricao, Anuncio.username, fechado, categoria, preco, localizacao, notificacao FROM Anuncio inner join " +
-                "AnuncioUtilizadorFavorito on Anuncio.id = id_anuncio Where AnuncioUtilizadorFavorito.username = $1", [username] ,
+                "AnuncioUtilizadorFavorito on Anuncio.id = id_anuncio Where AnuncioUtilizadorFavorito.username = $1 and notificacao = false", [username] ,
+        function (row) {
+            return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado,row.preco, row.localizacao, row.id);
+        }, cb);
+};
+
+access.getAnnouncFavoriteUserNotif = function(username, cb){
+    db.SelectSome("SELECT id, titulo, descricao, Anuncio.username, fechado, categoria, preco, localizacao FROM Anuncio inner join " +
+        "AnuncioUtilizadorFavorito on Anuncio.id = id_anuncio Where AnuncioUtilizadorFavorito.username = $1 AND notificacao = true", [username] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado,row.preco, row.localizacao, row.id);
         }, cb);
 };
 
 access.getAnnouncFavoriteUserAnn = function(username,id, cb){
-    db.SelectSome("SELECT id_anuncio, username FROM AnuncioUtilizadorFavorito Where AnuncioUtilizadorFavorito.username = $1 AND id_anuncio = $2", [username,id] ,
+    db.SelectSome("SELECT id_anuncio, username,notificacao FROM AnuncioUtilizadorFavorito Where AnuncioUtilizadorFavorito.username = $1 AND id_anuncio = $2", [username,id] ,
         function (row) {
-            return new access.favorito( row.username, row.id_anuncio);
+            return new access.favorito( row.username, row.id_anuncio, row.notificacao);
         }, cb);
 };
 
@@ -169,13 +178,7 @@ access.getClassifUtil = function (username,vot, cb){
 
 //TODO
 access.getAnnounByFilter = function (localizacao, titulo, categoria,  cb){
-/*db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao " +
-                  "FROM anuncio " +
-                  "WHERE localizacao = $1 AND (titulo like _$2_ or titulo like $3%) AND categoria = $4", [localizacao, titulo, titulo, categoria],
-        function (row) {
-            return new access.anuncio(row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.preco, row.localizacao, row.id);
-        }, cb);*/
-    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio WHERE localizacao = $1 AND categoria = $2", [localizacao, categoria],
+    db.SelectSome("SELECT id, titulo, descricao, username, fechado, categoria, preco, localizacao FROM anuncio WHERE localizacao = $1 AND categoria = $2 AND titulo LIKE %$3%", [localizacao, categoria, titulo],
         function (row) {
             return new access.anuncio(row.titulo, row.descricao, row.username, row.categoria, row.fechado, row.preco, row.localizacao, row.id);
         }, cb);
@@ -193,7 +196,7 @@ access.newAnnounc = function(announc, cb){
                         function (err, c){
                             if (err)
                                 return cb(err, null);
-                            //TODO
+
                             if (c == undefined)
                                 newCategoria(announc.categoria, function(err) {
                                     if (err)
@@ -207,7 +210,6 @@ access.newAnnounc = function(announc, cb){
 
 access.newPontuser = function(user, pont, vend, cb){
     var params = [vend, pont, user.username];
-
     db.ExecuteQuery("INSERT into pontuacaoutilizador (username, pontacao, votante) values($1, $2, $3) returning id",
         params,
         cb);
@@ -216,7 +218,6 @@ access.newPontuser = function(user, pont, vend, cb){
 
 access.newAnnouncFavorite = function(announc, user, cb){
     var params = [announc.id,user.username];
-
     db.ExecuteQuery("INSERT into anuncioutilizadorfavorito (id_anuncio, username) values($1, $2)",
         params,
          cb);
@@ -243,13 +244,11 @@ access.newComment = function(comment, cb){
         function(err, id) {
             if (err)
                 return cb(err, null);
-
             access.getAnnounc(comment.id_an,
                     function (err, c){
                         if (err)
                             return cb(err, null);
                     });
-
             comment.idc = id.id;
             return cb(null, comment);
         });
@@ -288,17 +287,9 @@ access.updateNotifTrue = function(id,username, cb){
         params,
         cb);
 };
-/*TODO
-access.updateNotifAn = function(id, notif, cb){
-    var params = [notif, id];
-    db.ExecuteQuery("UPDATE anuncioutilizadorfavorito SET notificacao = $1 WHERE id_anuncio= $2 ",
-        params,
-        cb);
-};*/
 
 access.delAnnounFavorite = function(announc, user, cb){
     var params = [announc.id, user.username];
-
     db.ExecuteQuery("delete from anuncioutilizadorfavorito where id_anuncio = $1 and username = $2",
         params,
         cb);

@@ -10,12 +10,11 @@ var regex_list = /^\/(\?page=\d*|$)$/;
 
 router.use(function(req, res, next) {
     console.log('serving ' + req.url + ' to ' + req.user);
-
     if(!regex_single.test(req.url) && !regex_list.test(req.url)){
-        if(!req.user.username){
+        /*if(!req.user.username){
             console.log('REDIRECTING');
             return res.redirect('/announcements');
-        }
+        }*/
     }
     return next();
 });
@@ -36,7 +35,7 @@ router.get('/', function(req, res, next) {
         });
     });
 });
-//TODO show notifi
+
 router.get('/dashboard', function(req, res, next) {
     db.getAnnouncUser(req.user.username, function(err, annUser){
         console.log("User dash" + req.user);
@@ -49,13 +48,17 @@ router.get('/dashboard', function(req, res, next) {
                 if(err.message !== 'RECORD NOT FOUND')
                     return next(err);
             }
-            console.log("annUser "+annUser);
-            console.log("annFavor "+favorite);
-            return res.render('dashboard', {user: req.user, annUser : annUser, annFavorite : favorite});
+            db.getAnnouncFavoriteUserNotif(req.user.username, function(err, favnotif) {
+                if (err) {
+                    if (err.message !== 'RECORD NOT FOUND')
+                        return next(err);
+                }
+                console.log("annUser "+favnotif);
+                return res.render('dashboard', {user: req.user, annUser : annUser, annFavorite : favorite, annFavNotif: favnotif});
+            });
         });
     });
 });
-
 
 router.get('/new', function(req, res, next) {
     console.log('GOT TO NEW');
@@ -83,18 +86,15 @@ router.post('/new', function(req, res, next) {
     //});
 });
 
-//TODO find
-/*
 router.post('/find', function(req, res, next){
- db.getAnnounByFilter(req.body.searchPlace, req.body.searchTitle, req.body.searchCat, function(err, ann) {
- if (err) return next(err);
- console.log("lista"+ ann[0]);
- return res.render({list : ann, user : req.user, page : 1, total : ann.length});
- });
- });*/
-
-router.get('/search', function(req, res, next){
-    return res.render('Search',{user : req.user});
+     db.getAnnounByFilter(req.body.searchPlace, req.body.searchTitle, req.body.searchCat, function(err, ann) {
+         if (err){
+             if (err.message ==='RECORD NOT FOUND')
+                return res.redirect('/announcements');
+             return next(err);
+         }
+         return res.render('announcements',{list : ann, user : req.user, page : 1, total : ann.length});
+     });
 });
 
 router.get('/:id', function(req, res, next) {
@@ -155,7 +155,11 @@ router.get('/:id', function(req, res, next) {
 
 router.get('/:id/edit', function(req, res, next) {
     db.getUser(req.user.username, function(err, user){
-        if(err) return next(err);
+        if(err) {
+            if (err.message === 'RECORD NOT FOUND')
+                return res.redirect('/announcements/'+req.params.id);
+            return next(err);
+        }
         db.getAnnounc(req.params.id, function(err, ann){
             if(err) return next(err);
             if(ann.vendedor !== req.user.username)	return res.redirect('/announcements/' + req.params.id);
@@ -250,8 +254,8 @@ router.post('/:id/comment', function(req, res, next) {
                 if(err)
                     return next(err);
                 db.updateNotifTrue(comment.id_an, user.username, function (err, a) {
-                        if (err) return next(err);
-                    });
+                    if (err) return next(err);
+                });
             });
             return res.redirect('/announcements');
         });

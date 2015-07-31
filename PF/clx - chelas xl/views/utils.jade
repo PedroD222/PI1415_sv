@@ -1,23 +1,29 @@
 mixin lista(announc, listtitle)
-	div.container-fluid(style='height: 30px; weight: 100%; background-color: #CCA300')
-		h5(style='float: right; padding-right: 5px') #{listtitle}
-	div(style='clear: both; border: 1px solid #CCA300')
-		ul(style='list-style-type: none; padding-left: 0px; margin-right: 0px')
-			if announc
-				for a in announc
-					li(style='margin-bottom: 10px; border: 1px solid #CCA300')
-							a(href='/announcements/#{a.id}') #{a.titulo}
-							//+likes(a)
-			else
-				li(style='color: gray') Não Há Anúncios
-				
-				
-mixin likes(a)
-	div(style='float: right')
-		form(name='voteform', method='/post')
-			button.btn.minivotebtn(type='button', style='background-color: green', onclick='upvotebtn(#{a.id}, #{a.pont})') #{a.pont}
-			button.btn.minivotebtn(type='button', style='background-color: red', onclick='downvotebtn(#{a.id}, #{a.pont})') #{a.pont}
+    div.container-fluid(style='height: 30px; weight: 100%; background-color: #CCA300')
+        h5(style='float: right; padding-right: 5px') #{listtitle}
+    div(style='clear: both; border: 1px solid #CCA300')
+        ul(style='list-style-type: none; padding-left: 0px; margin-right: 0px')
+            if announc
+                for a in announc
+                    li(style='margin-bottom: 10px; border: 1px solid #CCA300')
+                            a(href='/announcements/#{a.id}') #{a.titulo}
+            else
+                li(style='color: gray') Não Há Anúncios
 
-				
-				
-//falta subscribe
+mixin listafav(announc, fav, listtitle)
+    div.container-fluid(style='height: 30px; weight: 100%; background-color: #CCA300')
+        h5(style='float: right; padding-right: 5px') #{listtitle}
+    div(style='clear: both; border: 1px solid #CCA300')
+        ul(style='list-style-type: none; padding-left: 0px; margin-right: 0px')
+            if fav
+                for a in fav
+                    li(style='margin-bottom: 10px; border: 1px solid #CCA300')
+                        span.label.label-info
+                            a(href='/announcements/#{a.id}') #{a.titulo}
+
+            if announc
+                for a in announc
+                    li(style='margin-bottom: 10px; border: 1px solid #CCA300')
+                        a(href='/announcements/#{a.id}') #{a.titulo}
+            if !announc && !fav
+                li(style='color: gray') Não Há Anúncios
