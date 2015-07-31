@@ -21,13 +21,12 @@ block content
                     p.announcement-Paragraph #{Announ.localizacao}
                     h4 Vendedor:
                     p.announcement-paragraph #{Announ.vendedor}
-                    if user.username != Announ.vendedor
-                        h4 Classificação do utilizador:
-                        p.announcement-paragraph #{classification}
-                                if user && user.username
-                                    if allowClassification
-                                        h4 Classifique este anunciante:
-                                        div.input-group
+                    h4 Classificação do utilizador:
+                    p.announcement-paragraph #{classification}
+                        if user && user.username
+                            if user.username != Announ.vendedor && allowClassification
+                                h4 Classifique este anunciante:
+                                    div.input-group
                                             form(action="/announcements/#{Announ.id}/classification", method = "post")
                                                 div.divs
                                                     label 0
@@ -48,15 +47,15 @@ block content
                                                     label 5
                                                     input.checkboxes(type='radio', name ='classbtn', label='5', value=4)
                                                 button.btn.btn-default Classificar
-                                    if subscribed
+                            if subscribed
                                         form.buttons(action='/announcements/#{Announ.id}/unsubscribe', method='post')
                                             button.btn.btn-default Cancelar Subscricao
-                                    else
+                            else
                                         form.buttons(action='/announcements/#{Announ.id}/subscribe', method='post')
                                             button.btn.btn-default Subscrever
-                                        if user.username === Announ.vendedor
-                                            form.buttons(action='/announcements/#{Announ.id}/edit', method='get')
-                                                button.btn.btn-default.inline Editar
+                            if user.username === Announ.vendedor
+                                        form.buttons(action='/announcements/#{Announ.id}/edit', method='get')
+                                            button.btn.btn-default.inline Editar
 
             div.col-md-5
                     h2 Comentários:

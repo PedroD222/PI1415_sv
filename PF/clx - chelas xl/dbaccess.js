@@ -111,7 +111,7 @@ access.getAnnouncUser = function(username, cb){
 };
 
 access.getAnnouncFavoriteUser = function(username, cb){
-    db.SelectSome("SELECT id, titulo, descricao, Anuncio.username, fechado, categoria, preco, localizacao FROM Anuncio inner join " +
+    db.SelectSome("SELECT id, titulo, descricao, Anuncio.username, fechado, categoria, preco, localizacao, notificacao FROM Anuncio inner join " +
                 "AnuncioUtilizadorFavorito on Anuncio.id = id_anuncio Where AnuncioUtilizadorFavorito.username = $1", [username] ,
         function (row) {
             return new access.anuncio( row.titulo, row.descricao, row.username, row.categoria, row.fechado,row.preco, row.localizacao, row.id);
